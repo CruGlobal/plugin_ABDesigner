@@ -210,8 +210,7 @@ export default function(AB) {
             values.deleteSecrets = this.deleteSecrets;
             delete this.deleteSecrets;
          }
-         console.log("VALUES", values);
-
+         
          return values;
       }
 
