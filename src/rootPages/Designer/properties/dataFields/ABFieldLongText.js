@@ -104,6 +104,12 @@ export default function (AB) {
          ]);
       }
 
+      /**
+       * @method FieldClass()
+       * Call our Parent's _FieldClass() helper with the proper key to return
+       * the ABFieldXXX class represented by this Property Editor.
+       * @return {ABFieldXXX Class}
+       */
       FieldClass() {
          return super._FieldClass("LongText");
       }
