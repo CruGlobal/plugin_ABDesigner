@@ -147,10 +147,10 @@ export default function (AB) {
                         </div>`,
                      apiOnly: true,
                      inputName: "file",
-                     multiple: true, // 修改为支持多文件上传
+                     multiple: true, // Modified to support multiple file uploads
                      name: "defaultImageUrl",
                      height: 105,
-                     width: 350, // 增加宽度以容纳多张图片
+                     width: 350, // Increase width to accommodate multiple images
                      on: {
                         // when a file is added to the uploader
                         onBeforeFileAdd: function (item) {
@@ -227,7 +227,7 @@ export default function (AB) {
          }
 
          if (value && isUseDefaultImage) {
-            // 处理多个UUID值（用逗号分隔）
+            // Handle multiple UUID values (separated by commas)
             const uuids = value.split(',').filter(uuid => uuid.trim());
             
             uploader.attachEvent("onAfterRender", () => {
@@ -243,10 +243,10 @@ export default function (AB) {
                );
                imagesContainer.style.display = uuids.length ? "flex" : "none";
                
-               // 清空现有图片
+               // Clear existing images
                imagesContainer.innerHTML = '';
                
-               // 添加所有图片
+               // add all images
                uuids.forEach(uuid => {
                   if (!uuid) return;
                   
@@ -287,17 +287,17 @@ export default function (AB) {
                   deleteBtn.addEventListener('click', (e) => {
                      e.stopPropagation();
                      
-                     // 从数组中移除UUID
+                     // Remove a UUID from an array
                      const index = uuids.indexOf(uuid);
                      if (index !== -1) {
                         uuids.splice(index, 1);
                         $$(ids.defaultImageUrl).setValue(uuids.join(','));
                      }
                      
-                     // 从DOM中移除
+                     // Remove from DOM
                      imageDiv.remove();
                      
-                     // 如果没有图片了，显示上传提示
+                     // If there are no pictures, show the upload prompt
                      if (uuids.length === 0) {
                         parentContainer.querySelector(
                            ".image-data-field-icon"
@@ -311,11 +311,11 @@ export default function (AB) {
                });
             });
 
-            // 添加点击事件处理
+            // Add click event handling
             uploader.$view.addEventListener("click", (e) => {
                if (e.target.className.indexOf("delete-image") > -1 || 
                    e.target.parentElement.className.indexOf("ab-delete-photo") > -1) {
-                  // 事件已在图片元素上处理
+                  // Event handled on image element
                   return;
                }
             });
@@ -349,7 +349,7 @@ export default function (AB) {
             );
             imagesContainer.style.display = "flex";
             
-            // 创建新图片元素
+            // Used to store the UUID of the currently uploaded image
             const imageDiv = document.createElement('div');
             imageDiv.className = 'image-data-field-image';
             imageDiv.style.cssText = `
