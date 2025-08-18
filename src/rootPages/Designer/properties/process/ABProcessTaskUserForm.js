@@ -93,6 +93,8 @@ export default function (AB) {
                body: {
                   id: ids.formBuilder,
                   view: "formiobuilder",
+                  dataFields: this.dataFields,
+                  isCommonForm: true,
                   formComponents: this.formIOComponents,
                },
             };
@@ -170,6 +172,7 @@ export default function (AB) {
        */
       processComponents() {
          const ids = this.ids;
+         this.dataFields = this.element.process.processDataFields(this.element);
          this.formIOComponents = this.formBuilder;
 
          const $preview = $$(ids.formPreview).getParentView();
