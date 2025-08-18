@@ -173,7 +173,7 @@ export default function (AB) {
                this.emit("cancel");
             });
             plugin.on("save", (values) => {
-               this.save(values, k);
+               this.save(values, key);
             });
          });
 
@@ -240,6 +240,20 @@ export default function (AB) {
          this.emit("save", obj, this.selectNew);
       }
 
+      getTab(tabKey) {
+         if (this[tabKey]) {
+            return this[tabKey];
+         }
+         if (this._plugins[tabKey]) {
+            return this._plugins[tabKey];
+         }
+         webix.message({
+            type: "error",
+            text: L("Tab not found: {0}", tabKey),
+         });
+         return null;
+      }
+
       /**
        * @method save
        * take the data gathered by our child creation tabs, and
@@ -250,13 +264,22 @@ export default function (AB) {
        * @return {Promise}
        */
       async save(values, tabKey) {
+         let tab = this.getTab(tabKey);
+         if (!tab) {
+            webix.message({
+               type: "error",
+               text: L("Tab not found: {0}", tabKey),
+            });
+            return false;
+         }
+
          // must have an application set.
          if (!this.CurrentApplicationID) {
             webix.alert({
                title: L("Shoot!"),
                test: L("No Application Set!  Why?"),
             });
-            this[tabKey].emit("save.error", true);
+            tab.emit("save.error", true);
             return false;
          }
 
@@ -266,7 +289,7 @@ export default function (AB) {
          // have newObject validate it's values.
          var validator = newObject.isValid();
          if (validator.fail()) {
-            this[tabKey].emit("save.error", validator);
+            tab.emit("save.error", validator);
             // cb(validator); // tell current Tab component the errors
             return false; // stop here.
          }
@@ -284,7 +307,7 @@ export default function (AB) {
          try {
             var obj = await newObject.save();
             await application.objectInsert(obj);
-            this[tabKey].emit("save.successful", obj);
+            tab.emit("save.successful", obj);
             this.done(obj);
          } catch (err) {
             // hide progress
@@ -296,7 +319,7 @@ export default function (AB) {
             await application.objectRemove(newObject);
 
             // tell current Tab component there was an error
-            this[tabKey].emit("save.error", err);
+            tab.emit("save.error", err);
          }
       }
 
