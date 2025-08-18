@@ -111,7 +111,7 @@ export default function (AB) {
                                  select: 1,
                                  height: 400,
                                  on: {
-                                    onItemClick: (id, e) => {
+                                    onItemClick: (id /*, e */) => {
                                        if (id != this.lastSelectedTable) {
                                           this.lastSelectedTable = id;
                                           this.emit("table.selected", id);
