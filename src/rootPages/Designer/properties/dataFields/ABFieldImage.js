@@ -147,7 +147,7 @@ export default function (AB) {
                         </div>`,
                      apiOnly: true,
                      inputName: "file",
-                     multiple: true, // Modified to support multiple file uploads
+                     multiple: true, // Modified to support multiple file uploads, test ok
                      name: "defaultImageUrl",
                      height: 105,
                      width: 350, // Increase width to accommodate multiple images
