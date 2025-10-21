@@ -81,6 +81,10 @@ export default function (AB) {
          init(AB) {
             var Dashboard = $$(this.ids.component);
             if (Dashboard) {
+               // Clear out any existing child views
+               Dashboard.getChildViews().forEach((childView) => {
+                  Dashboard.removeView(childView);
+               });
                webix.extend(Dashboard, webix.OverlayBox);
                webix.extend(Dashboard, webix.ProgressBar);
             }
