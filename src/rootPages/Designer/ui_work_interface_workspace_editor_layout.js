@@ -263,7 +263,18 @@ export default function (AB) {
          }
          // editorComponent.ui.id = ids.editArea;
          // webix.ui(editorComponent.ui, $$(ids.editArea));
-         $$(ids.editArea).addView(editorComponent.ui());
+         const editorUI = editorComponent.ui();
+         editorUI.id = `${ids.editArea}_dashboard_layout`;
+
+         // clear out widgets in our dashboard area
+         const idDashboard = editorUI.rows[0].id;
+         const $dashboard = $$(idDashboard);
+         if ($dashboard) $dashboard.clearAll();
+
+         // add the editorUI if it is not already added
+         if ($$(ids.editArea).queryView({ id: editorUI.id }) == null)
+            $$(ids.editArea).addView(editorUI);
+
          editorComponent.init(this.AB, 2);
          // note: parentAccessLevel = 2 here in our Designer
 
