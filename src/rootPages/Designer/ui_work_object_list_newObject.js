@@ -22,7 +22,6 @@ import UIBlankObject from "./ui_work_object_list_newObject_blank";
 import UICsvObject from "./ui_work_object_list_newObject_csv";
 import UIApiObject from "./ui_work_object_list_newObject_api";
 import UIImportObject from "./ui_work_object_list_newObject_import";
-import UINetsuiteObject from "./ui_work_object_list_newObject_netsuite";
 // const ABImportExternal = require("./ab_work_object_list_newObject_external");
 export default function (AB) {
    const UIClass = UI_Class(AB);
@@ -43,7 +42,6 @@ export default function (AB) {
          this.CsvTab = UICsvObject(AB);
          this.ApiTab = UIApiObject(AB);
          this.ImportTab = UIImportObject(AB);
-         this.NetsuiteTab = UINetsuiteObject(AB);
 
          // Find any Plugin Properties for Objects:
          this._plugins = {};
@@ -102,7 +100,6 @@ export default function (AB) {
                   this.CsvTab.ui(),
                   this.ApiTab.ui(),
                   this.ImportTab.ui(),
-                  this.NetsuiteTab.ui(),
                ],
                tabbar: {
                   on: {
@@ -153,7 +150,6 @@ export default function (AB) {
             "CsvTab",
             "ApiTab",
             "ImportTab",
-            "NetsuiteTab",
             /*, "ExternalTab"*/
          ].forEach((k) => {
             allInits.push(this[k].init(AB));
@@ -198,7 +194,6 @@ export default function (AB) {
          this.CsvTab.applicationLoad(application);
          this.ApiTab.applicationLoad(application);
          this.ImportTab.applicationLoad(application);
-         this.NetsuiteTab.applicationLoad(application);
 
          Object.keys(this._plugins).forEach((key) => {
             let plugin = this._plugins[key];
@@ -350,9 +345,6 @@ export default function (AB) {
                break;
             case this.ExternalTab?.ids.form:
                this.ExternalTab?.onShow?.(this.CurrentApplicationID);
-               break;
-            case this.NetsuiteTab?.ids.form:
-               this.NetsuiteTab?.onShow?.(this.CurrentApplicationID);
                break;
 
             default:
