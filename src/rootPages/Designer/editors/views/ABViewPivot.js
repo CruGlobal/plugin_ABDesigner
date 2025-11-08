@@ -36,7 +36,9 @@ export default function (AB) {
 
             pivot.readonly = false;
 
-            return pivot;
+            // NOTE: ui_work_interface_workspace_editor_layout is expecting a { rows:[] }
+            // type of response from this.
+            return pivotContainer;
          }
 
          init(AB) {
@@ -44,7 +46,7 @@ export default function (AB) {
 
             this.component?.init?.();
 
-            const pivotId = this.ui().id;
+            const pivotId = this.ui().rows[0].id;
             const $pivot = $$(pivotId);
             $pivot.getState().$observe("structure", (structure) => {
                this._saveStructure(structure);

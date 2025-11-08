@@ -75,6 +75,7 @@ export default function (AB) {
                   {
                      cols: [
                         {
+                           id: `${this.base}_name`,
                            view: "label",
                            label: L("Field Name:"),
                            align: "left",

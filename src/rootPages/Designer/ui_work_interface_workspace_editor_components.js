@@ -91,8 +91,8 @@ export default function (AB) {
                },
                on: {
                   onItemClick: function (id /*, e, node */) {
-                     var component = this.getItem(id);
-                     _this.addWidget(component);
+                     var item = this.getItem(id);
+                     _this.addWidget(item.component || item);
                   },
                },
             },
@@ -160,6 +160,8 @@ export default function (AB) {
        * compile the template for each item in the list.
        */
       template(obj /* , common */) {
+         return `<div class='ab-component-in-page'><i class='fa fa-2x fa-${obj.icon}' aria-hidden='true'></i><br/>${obj.label}</div>`;
+         /*
          // if this is one of our ABViews:
          if (obj.common) {
             // see if a .label field is present
@@ -177,6 +179,7 @@ export default function (AB) {
             // maybe this is simply the "No Components" placeholder
             return obj.label;
          }
+         */
       }
 
       /*
@@ -194,6 +197,16 @@ export default function (AB) {
 
          var components = this.CurrentView.componentList();
 
+         components = components.map((c) => {
+            let label = c.name;
+            let icon = "cubes";
+            if (c.common) {
+               label = c.common().label || L(c.common().labelKey);
+               icon = c.common().icon || "cubes";
+            }
+            // preserve the original component so its methods (e.g., .newInstance()) remain available
+            return { label, icon, component: c };
+         });
          List.clearAll();
 
          if (components && components.length > 0) {

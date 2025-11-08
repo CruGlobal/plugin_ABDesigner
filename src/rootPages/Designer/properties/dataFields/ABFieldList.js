@@ -272,7 +272,10 @@ export default function (AB) {
       }
 
       clear() {
+         // NOTE: don't call super.clear() here
+
          const ids = this.ids;
+         $$(ids.label).setValue("");
          $$(ids.isMultiple).setValue(0);
          $$(ids.hasColors).setValue(0);
          $$(ids.options).clearAll();

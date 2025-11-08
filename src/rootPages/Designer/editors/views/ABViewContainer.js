@@ -66,6 +66,7 @@ export default function (AB) {
             let Defaults =
                AB.Class.ABViewManager.viewClass(key).defaultValues();
             return {
+               _dashboardID: this.ids.component,
                rows: [
                   {
                      id: this.ids.component,
@@ -383,11 +384,13 @@ export default function (AB) {
                      let Dashboard = $$(this.ids.component);
 
                      // Update UI
-                     var deletedElem = Dashboard.queryView({ name: id });
-                     if (deletedElem) {
-                        Dashboard.blockEvent();
-                        Dashboard.removeView(deletedElem);
-                        Dashboard.unblockEvent();
+                     if (Dashboard) {
+                        var deletedElem = Dashboard.queryView({ name: id });
+                        if (deletedElem) {
+                           Dashboard.blockEvent();
+                           Dashboard.removeView(deletedElem);
+                           Dashboard.unblockEvent();
+                        }
                      }
 
                      this.showEmptyPlaceholder();

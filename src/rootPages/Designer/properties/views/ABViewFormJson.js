@@ -71,7 +71,7 @@ export default function (AB) {
                placeholder: L("Select a field to filter by"),
                // options: look at populate
                on: {
-                  onChange: (newValue) => {
+                  onChange: (/* newValue */) => {
                      this.onChange();
                   },
                },

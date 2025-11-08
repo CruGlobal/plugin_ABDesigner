@@ -267,9 +267,14 @@ export default function (AB) {
          editorUI.id = `${ids.editArea}_dashboard_layout`;
 
          // clear out widgets in our dashboard area
-         const idDashboard = editorUI.rows[0].id;
-         const $dashboard = $$(idDashboard);
-         if ($dashboard) $dashboard.clearAll();
+         let idDashboard = editorUI._dashboardID;
+         if (!idDashboard) {
+            idDashboard = (editorUI.rows?.[0] ?? editorUI).id;
+         }
+         if (idDashboard) {
+            const $dashboard = $$(idDashboard);
+            if ($dashboard) $dashboard.clearAll();
+         }
 
          // add the editorUI if it is not already added
          if ($$(ids.editArea).queryView({ id: editorUI.id }) == null)
