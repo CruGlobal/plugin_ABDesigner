@@ -27,8 +27,9 @@ export default function (AB) {
    );
 
    class ABViewFormProperty extends ABViewContainer {
-      constructor() {
-         super(base, {
+      constructor(b = null, id = null) {
+         b = b || base;
+         id = Object.assign(id || {}, {
             // Put our ids here
             datacollection: "",
             fields: "",
@@ -42,6 +43,7 @@ export default function (AB) {
             buttonSubmitRules: "",
             buttonRecordRules: "",
          });
+         super(b, id);
 
          this.AB = AB;
          ABViewFormPropertyComponentDefaults =
@@ -52,220 +54,224 @@ export default function (AB) {
          return "form";
       }
 
-      ui() {
+      ui(elements = null) {
          let ids = this.ids;
 
-         return super.ui([
-            {
-               id: ids.datacollection,
-               view: "richselect",
-               name: "datacollection",
-               label: L("Datacollection"),
-               labelWidth: uiConfig.labelWidthLarge,
-               skipAutoSave: true,
-               on: {
-                  onChange: (newId, oldId) => {
-                     this.selectSource(newId, oldId);
-                  },
-               },
-            },
+         elements = elements || [];
 
-            {
-               view: "fieldset",
-               label: L("Form Fields:"),
-               labelWidth: uiConfig.labelWidthLarge,
-               body: {
-                  type: "clean",
-                  padding: 10,
-                  rows: [
-                     {
-                        id: ids.fields,
-                        view: "list",
-                        name: "fields",
-
-                        select: false,
-                        minHeight: 200,
-                        template: (...params) => {
-                           return this.listTemplate(...params);
-                        },
-                        type: {
-                           markCheckbox: function (item) {
-                              return (
-                                 "<span class='check webix_icon fa fa-" +
-                                 (item.selected ? "check-" : "") +
-                                 "square-o'></span>"
-                              );
-                           },
-                        },
-                        onClick: {
-                           check: (...params) => {
-                              return this.check(...params);
-                           },
-                        },
+         return super.ui(
+            [
+               {
+                  id: ids.datacollection,
+                  view: "richselect",
+                  name: "datacollection",
+                  label: L("Datacollection"),
+                  labelWidth: uiConfig.labelWidthLarge,
+                  skipAutoSave: true,
+                  on: {
+                     onChange: (newId, oldId) => {
+                        this.selectSource(newId, oldId);
                      },
-                  ],
+                  },
                },
-            },
-            {
-               id: ids.showLabel,
-               name: "showLabel",
-               view: "checkbox",
-               label: L("Display Label"),
-               labelWidth: uiConfig.labelWidthLarge,
-               click: () => {
-                  this.onChange();
-               },
-            },
-            {
-               id: ids.labelPosition,
-               view: "richselect",
-               name: "labelPosition",
 
-               label: L("Label Position"),
-               labelWidth: uiConfig.labelWidthLarge,
-               options: [
-                  {
-                     id: "left",
-                     value: L("Left"),
-                  },
-                  {
-                     id: "top",
-                     value: L("Top"),
-                  },
-               ],
-               on: {
-                  onChange: () => {
-                     this.onChange();
-                  },
-               },
-            },
-            {
-               id: ids.labelWidth,
-               view: "counter",
-               name: "labelWidth",
+               {
+                  view: "fieldset",
+                  label: L("Form Fields:"),
+                  labelWidth: uiConfig.labelWidthLarge,
+                  body: {
+                     type: "clean",
+                     padding: 10,
+                     rows: [
+                        {
+                           id: ids.fields,
+                           view: "list",
+                           name: "fields",
 
-               label: L("Label Width"),
-               labelWidth: uiConfig.labelWidthLarge,
-               on: {
-                  onChange: () => {
-                     this.onChange();
-                  },
-               },
-            },
-            {
-               id: ids.height,
-               view: "counter",
-               name: "height",
-               label: L("Height"),
-               labelWidth: uiConfig.labelWidthLarge,
-               on: {
-                  onChange: () => {
-                     this.onChange();
-                  },
-               },
-            },
-            {
-               id: ids.clearOnLoad,
-               view: "checkbox",
-               name: "clearOnLoad",
-
-               label: L("Clear on load"),
-               labelWidth: uiConfig.labelWidthLarge,
-               on: {
-                  onChange: () => {
-                     this.onChange();
-                  },
-               },
-            },
-            {
-               id: ids.clearOnSave,
-               view: "checkbox",
-               name: "clearOnSave",
-               label: L("Clear on save"),
-               labelWidth: uiConfig.labelWidthLarge,
-               on: {
-                  onChange: () => {
-                     this.onChange();
-                  },
-               },
-            },
-            {
-               view: "fieldset",
-               label: L("Rules:"),
-               labelWidth: uiConfig.labelWidthLarge,
-               body: {
-                  type: "clean",
-                  padding: 10,
-                  rows: [
-                     {
-                        cols: [
-                           {
-                              view: "label",
-                              label: L("Submit Rules:"),
-                              width: uiConfig.labelWidthLarge,
+                           select: false,
+                           minHeight: 200,
+                           template: (...params) => {
+                              return this.listTemplate(...params);
                            },
-                           {
-                              id: ids.buttonSubmitRules,
-                              view: "button",
-                              css: "webix_primary",
-                              name: "buttonSubmitRules",
-                              label: L("Settings"),
-                              icon: "fa fa-gear",
-                              type: "icon",
-                              badge: 0,
-                              click: () => {
-                                 this.submitRuleShow();
+                           type: {
+                              markCheckbox: function (item) {
+                                 return (
+                                    "<span class='check webix_icon fa fa-" +
+                                    (item.selected ? "check-" : "") +
+                                    "square-o'></span>"
+                                 );
                               },
                            },
-                        ],
-                     },
-                     // {
-                     //    cols: [
-                     //       {
-                     //          view: "label",
-                     //          label: L("Display Rules:"),
-                     //          width: uiConfig.labelWidthLarge,
-                     //       },
-                     //       {
-                     //          view: "button",
-                     //          name: "buttonDisplayRules",
-                     //          css: "webix_primary",
-                     //          label: L("Settings"),
-                     //          icon: "fa fa-gear",
-                     //          type: "icon",
-                     //          badge: 0,
-                     //          click: () => {
-                     //             this.displayRuleShow();
-                     //          },
-                     //       },
-                     //    ],
-                     // },
-                     {
-                        cols: [
-                           {
-                              view: "label",
-                              label: L("Record Rules:"),
-                              width: uiConfig.labelWidthLarge,
-                           },
-                           {
-                              id: ids.buttonRecordRules,
-                              view: "button",
-                              name: "buttonRecordRules",
-                              css: "webix_primary",
-                              label: L("Settings"),
-                              icon: "fa fa-gear",
-                              type: "icon",
-                              badge: 0,
-                              click: () => {
-                                 this.recordRuleShow();
+                           onClick: {
+                              check: (...params) => {
+                                 return this.check(...params);
                               },
                            },
-                        ],
+                        },
+                     ],
+                  },
+               },
+               {
+                  id: ids.showLabel,
+                  name: "showLabel",
+                  view: "checkbox",
+                  label: L("Display Label"),
+                  labelWidth: uiConfig.labelWidthLarge,
+                  click: () => {
+                     this.onChange();
+                  },
+               },
+               {
+                  id: ids.labelPosition,
+                  view: "richselect",
+                  name: "labelPosition",
+
+                  label: L("Label Position"),
+                  labelWidth: uiConfig.labelWidthLarge,
+                  options: [
+                     {
+                        id: "left",
+                        value: L("Left"),
+                     },
+                     {
+                        id: "top",
+                        value: L("Top"),
                      },
                   ],
+                  on: {
+                     onChange: () => {
+                        this.onChange();
+                     },
+                  },
                },
-            },
-         ]);
+               {
+                  id: ids.labelWidth,
+                  view: "counter",
+                  name: "labelWidth",
+
+                  label: L("Label Width"),
+                  labelWidth: uiConfig.labelWidthLarge,
+                  on: {
+                     onChange: () => {
+                        this.onChange();
+                     },
+                  },
+               },
+               {
+                  id: ids.height,
+                  view: "counter",
+                  name: "height",
+                  label: L("Height"),
+                  labelWidth: uiConfig.labelWidthLarge,
+                  on: {
+                     onChange: () => {
+                        this.onChange();
+                     },
+                  },
+               },
+               {
+                  id: ids.clearOnLoad,
+                  view: "checkbox",
+                  name: "clearOnLoad",
+
+                  label: L("Clear on load"),
+                  labelWidth: uiConfig.labelWidthLarge,
+                  on: {
+                     onChange: () => {
+                        this.onChange();
+                     },
+                  },
+               },
+               {
+                  id: ids.clearOnSave,
+                  view: "checkbox",
+                  name: "clearOnSave",
+                  label: L("Clear on save"),
+                  labelWidth: uiConfig.labelWidthLarge,
+                  on: {
+                     onChange: () => {
+                        this.onChange();
+                     },
+                  },
+               },
+               {
+                  view: "fieldset",
+                  label: L("Rules:"),
+                  labelWidth: uiConfig.labelWidthLarge,
+                  body: {
+                     type: "clean",
+                     padding: 10,
+                     rows: [
+                        {
+                           cols: [
+                              {
+                                 view: "label",
+                                 label: L("Submit Rules:"),
+                                 width: uiConfig.labelWidthLarge,
+                              },
+                              {
+                                 id: ids.buttonSubmitRules,
+                                 view: "button",
+                                 css: "webix_primary",
+                                 name: "buttonSubmitRules",
+                                 label: L("Settings"),
+                                 icon: "fa fa-gear",
+                                 type: "icon",
+                                 badge: 0,
+                                 click: () => {
+                                    this.submitRuleShow();
+                                 },
+                              },
+                           ],
+                        },
+                        // {
+                        //    cols: [
+                        //       {
+                        //          view: "label",
+                        //          label: L("Display Rules:"),
+                        //          width: uiConfig.labelWidthLarge,
+                        //       },
+                        //       {
+                        //          view: "button",
+                        //          name: "buttonDisplayRules",
+                        //          css: "webix_primary",
+                        //          label: L("Settings"),
+                        //          icon: "fa fa-gear",
+                        //          type: "icon",
+                        //          badge: 0,
+                        //          click: () => {
+                        //             this.displayRuleShow();
+                        //          },
+                        //       },
+                        //    ],
+                        // },
+                        {
+                           cols: [
+                              {
+                                 view: "label",
+                                 label: L("Record Rules:"),
+                                 width: uiConfig.labelWidthLarge,
+                              },
+                              {
+                                 id: ids.buttonRecordRules,
+                                 view: "button",
+                                 name: "buttonRecordRules",
+                                 css: "webix_primary",
+                                 label: L("Settings"),
+                                 icon: "fa fa-gear",
+                                 type: "icon",
+                                 badge: 0,
+                                 click: () => {
+                                    this.recordRuleShow();
+                                 },
+                              },
+                           ],
+                        },
+                     ],
+                  },
+               },
+            ].concat(elements)
+         );
       }
 
       async init(AB) {
