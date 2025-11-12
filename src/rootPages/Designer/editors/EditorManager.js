@@ -51,6 +51,13 @@ export default function (AB) {
       if (p.editor) Editors.push(p.editor(AB, _ABViewDefault));
    });
 
+   // Load editors from ClassManager
+   if (AB.ClassManager && AB.ClassManager.viewEditorAll) {
+      AB.ClassManager.viewEditorAll()?.forEach((EditorClass) => {
+         Editors.push(EditorClass);
+      });
+   }
+
    return {
       /*
        * @function editors
