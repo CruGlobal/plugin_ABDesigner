@@ -94,7 +94,7 @@ export default function (AB) {
 
             // NOTE: need to sorting before .addView because there is a render position bug in webix 5.1.7
             // https://webix.com/snippet/404cf0c7
-            var childViews = this.CurrentView.viewsSortByPosition();
+            var childViews = this.CurrentView?.viewsSortByPosition() || [];
 
             // attach all the .UI views:
             childViews.forEach((child) => {
@@ -226,7 +226,7 @@ export default function (AB) {
             var allViewUpdates = [];
 
             // save view position state to views
-            this.CurrentView.views().forEach((v) => {
+            (this.CurrentView?.views() || []).forEach((v) => {
                var state = viewState.filter((vs) => vs.name == v.id)[0];
                if (state) {
                   v.position.x = state.x;
@@ -245,13 +245,17 @@ export default function (AB) {
                // this.saveReorder()
                await Promise.all(allViewUpdates);
 
-               await this.CurrentView.save();
+               if (this.CurrentView) {
+                  await this.CurrentView.save();
+               }
 
                this.ready();
             } catch (err) {
                this.AB.notify.developer(err, {
                   message: "Error trying to save selected View:",
-                  view: this.CurrentView.toObj(),
+                  view: this.CurrentView?.toObj() || {
+                     currentView: "not found",
+                  },
                });
                this.ready();
             }
@@ -259,17 +263,19 @@ export default function (AB) {
 
          onShow() {
             let hasTextComponent = false;
-            this.CurrentView.views().forEach((v) => {
-               if (v.key === "text") hasTextComponent = true;
-               var component = this.subComponents[v.id];
-               component?.onShow?.();
-            });
-            if (hasTextComponent) this.initTinyMCE();
+            if (this.CurrentView) {
+               this.CurrentView.views().forEach((v) => {
+                  if (v.key === "text") hasTextComponent = true;
+                  var component = this.subComponents[v.id];
+                  component?.onShow?.();
+               });
+               if (hasTextComponent) this.initTinyMCE();
 
-            let dc = this.CurrentView.datacollection;
-            if (dc && dc.dataStatus == dc.dataStatusFlag.notInitial) {
-               // load data when a widget is showing
-               dc.loadData();
+               let dc = this.CurrentView.datacollection;
+               if (dc && dc.dataStatus == dc.dataStatusFlag.notInitial) {
+                  // load data when a widget is showing
+                  dc.loadData();
+               }
             }
          }
 
@@ -345,7 +351,8 @@ export default function (AB) {
           * @param {obj} trg  Webix provided object
           */
          viewDelete(e, id /*, trg */) {
-            var deletedView = this.CurrentView.views((v) => v.id == id)[0];
+            var deletedView =
+               this.CurrentView?.views((v) => v.id == id)[0] || null;
             if (!deletedView) return false;
 
             webix.confirm({
@@ -415,7 +422,7 @@ export default function (AB) {
           * @param {obj} trg  Webix provided object
           */
          viewEdit(e, id /*, trg */) {
-            var view = this.CurrentView.views((v) => v.id == id)[0];
+            var view = this.CurrentView?.views((v) => v.id == id)[0] || null;
 
             if (!view) return false;
 
