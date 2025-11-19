@@ -35,30 +35,34 @@ export default function (AB) {
             const baseView = this.view;
 
             return {
-               id: ids.component,
-               view: "tinymce-editor",
-               value: baseView.text,
-               config: {
-                  plugins: [
-                     "advlist autolink lists link image charmap print preview anchor",
-                     "searchreplace visualblocks code fullscreen",
-                     "insertdatetime media table contextmenu paste imagetools wordcount",
-                  ],
-                  toolbar:
-                     "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-                  // menu: {
-                  // 	file: { title: 'File', items: 'newdocument' },
-                  // 	edit: { title: 'Edit', items: 'undo redo | cut copy paste pastetext | selectall' },
-                  // 	format: { title: 'Format', items: 'formats | removeformat' }
-                  // },
-                  init_instance_callback: (editor) => {
-                     const eventHandlerOnChange = () => {
-                        this.onChange();
-                     };
+               rows: [
+                  {
+                     id: ids.component,
+                     view: "tinymce-editor",
+                     value: baseView.text,
+                     config: {
+                        plugins: [
+                           "advlist autolink lists link image charmap print preview anchor",
+                           "searchreplace visualblocks code fullscreen",
+                           "insertdatetime media table contextmenu paste imagetools wordcount",
+                        ],
+                        toolbar:
+                           "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                        // menu: {
+                        // 	file: { title: 'File', items: 'newdocument' },
+                        // 	edit: { title: 'Edit', items: 'undo redo | cut copy paste pastetext | selectall' },
+                        // 	format: { title: 'Format', items: 'formats | removeformat' }
+                        // },
+                        init_instance_callback: (editor) => {
+                           const eventHandlerOnChange = () => {
+                              this.onChange();
+                           };
 
-                     editor.on("Change", eventHandlerOnChange);
+                           editor.on("Change", eventHandlerOnChange);
+                        },
+                     },
                   },
-               },
+               ],
             };
          }
 
