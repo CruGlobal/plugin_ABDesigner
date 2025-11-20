@@ -261,7 +261,7 @@ export default function (AB) {
          editorUI.id = `${ids.editArea}_dashboard_layout`;
 
          // clear out widgets in our dashboard area
-         const idDashboard = editorUI.rows[0].id;
+         const idDashboard = (editorUI.rows?.[0] ?? editorUI).id;
          const $dashboard = $$(idDashboard);
          if ($dashboard) $dashboard.clearAll();
 
