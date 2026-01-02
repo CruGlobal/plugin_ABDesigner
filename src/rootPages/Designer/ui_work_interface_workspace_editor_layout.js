@@ -267,9 +267,23 @@ export default function (AB) {
          editorUI.id = `${ids.editArea}_dashboard_layout`;
 
          // clear out widgets in our dashboard area
+
          let idDashboard = editorUI._dashboardID;
          if (!idDashboard) {
-            idDashboard = (editorUI.rows?.[0] ?? editorUI).id;
+            var subWidgets = editorUI.rows ?? editorUI.cols;
+            if (!subWidgets || subWidgets.length === 0) {
+               if (editorUI.body) {
+                  subWidgets = editorUI.body.rows ?? editorUI.body.cols;
+               }
+               if (!subWidgets || subWidgets.length === 0) {
+                  console.error(
+                     "Tell Johnny: No sub widgets found in editor UI"
+                  );
+                  console.error(editorUI);
+                  return;
+               }
+            }
+            idDashboard = subWidgets[0].id;
          }
          if (idDashboard) {
             const $dashboard = $$(idDashboard);
