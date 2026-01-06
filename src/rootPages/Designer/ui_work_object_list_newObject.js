@@ -22,7 +22,6 @@ import UIBlankObject from "./ui_work_object_list_newObject_blank";
 import UICsvObject from "./ui_work_object_list_newObject_csv";
 import UIApiObject from "./ui_work_object_list_newObject_api";
 import UIImportObject from "./ui_work_object_list_newObject_import";
-import UINetsuiteObject from "./ui_work_object_list_newObject_netsuite";
 // const ABImportExternal = require("./ab_work_object_list_newObject_external");
 export default function (AB) {
    const UIClass = UI_Class(AB);
@@ -43,7 +42,16 @@ export default function (AB) {
          this.CsvTab = UICsvObject(AB);
          this.ApiTab = UIApiObject(AB);
          this.ImportTab = UIImportObject(AB);
-         this.NetsuiteTab = UINetsuiteObject(AB);
+
+         // Find any Plugin Properties for Objects:
+         this._plugins = {};
+         this.AB.ClassManager.allObjectProperties().forEach((plugin) => {
+            this._plugins[plugin.getPluginKey()] = new plugin(
+               null,
+               {},
+               this.AB
+            );
+         });
          /*
          this.ExternalTab = new ABImportExternal(AB);
          */
@@ -51,7 +59,7 @@ export default function (AB) {
 
       ui() {
          // Our webix UI definition:
-         return {
+         let myUI = {
             view: "window",
             id: this.ids.component,
             // width: 400,
@@ -92,7 +100,6 @@ export default function (AB) {
                   this.CsvTab.ui(),
                   this.ApiTab.ui(),
                   this.ImportTab.ui(),
-                  this.NetsuiteTab.ui(),
                ],
                tabbar: {
                   on: {
@@ -117,6 +124,16 @@ export default function (AB) {
                },
             },
          };
+
+         // load any Plugin Properties for Objects:
+         Object.keys(this._plugins).forEach((key) => {
+            var plugin = this._plugins[key];
+            if (plugin.ui) {
+               myUI.body.cells.push(plugin.ui());
+            }
+         });
+
+         return myUI;
       }
 
       async init(AB) {
@@ -133,7 +150,6 @@ export default function (AB) {
             "CsvTab",
             "ApiTab",
             "ImportTab",
-            "NetsuiteTab",
             /*, "ExternalTab"*/
          ].forEach((k) => {
             allInits.push(this[k].init(AB));
@@ -142,6 +158,18 @@ export default function (AB) {
             });
             this[k].on("save", (values) => {
                this.save(values, k);
+            });
+         });
+
+         // load any Plugin Properties for Objects:
+         Object.keys(this._plugins).forEach((key) => {
+            var plugin = this._plugins[key];
+            allInits.push(plugin.init(AB));
+            plugin.on("cancel", () => {
+               this.emit("cancel");
+            });
+            plugin.on("save", (values) => {
+               this.save(values, key);
             });
          });
 
@@ -166,7 +194,11 @@ export default function (AB) {
          this.CsvTab.applicationLoad(application);
          this.ApiTab.applicationLoad(application);
          this.ImportTab.applicationLoad(application);
-         this.NetsuiteTab.applicationLoad(application);
+
+         Object.keys(this._plugins).forEach((key) => {
+            let plugin = this._plugins[key];
+            plugin.applicationLoad(application);
+         });
       }
 
       /**
@@ -203,6 +235,20 @@ export default function (AB) {
          this.emit("save", obj, this.selectNew);
       }
 
+      getTab(tabKey) {
+         if (this[tabKey]) {
+            return this[tabKey];
+         }
+         if (this._plugins[tabKey]) {
+            return this._plugins[tabKey];
+         }
+         webix.message({
+            type: "error",
+            text: L("Tab not found: {0}", tabKey),
+         });
+         return null;
+      }
+
       /**
        * @method save
        * take the data gathered by our child creation tabs, and
@@ -213,13 +259,22 @@ export default function (AB) {
        * @return {Promise}
        */
       async save(values, tabKey) {
+         let tab = this.getTab(tabKey);
+         if (!tab) {
+            webix.message({
+               type: "error",
+               text: L("Tab not found: {0}", tabKey),
+            });
+            return false;
+         }
+
          // must have an application set.
          if (!this.CurrentApplicationID) {
             webix.alert({
                title: L("Shoot!"),
                test: L("No Application Set!  Why?"),
             });
-            this[tabKey].emit("save.error", true);
+            tab.emit("save.error", true);
             return false;
          }
 
@@ -229,7 +284,7 @@ export default function (AB) {
          // have newObject validate it's values.
          var validator = newObject.isValid();
          if (validator.fail()) {
-            this[tabKey].emit("save.error", validator);
+            tab.emit("save.error", validator);
             // cb(validator); // tell current Tab component the errors
             return false; // stop here.
          }
@@ -247,7 +302,7 @@ export default function (AB) {
          try {
             var obj = await newObject.save();
             await application.objectInsert(obj);
-            this[tabKey].emit("save.successful", obj);
+            tab.emit("save.successful", obj);
             this.done(obj);
          } catch (err) {
             // hide progress
@@ -259,7 +314,7 @@ export default function (AB) {
             await application.objectRemove(newObject);
 
             // tell current Tab component there was an error
-            this[tabKey].emit("save.error", err);
+            tab.emit("save.error", err);
          }
       }
 
@@ -291,8 +346,14 @@ export default function (AB) {
             case this.ExternalTab?.ids.form:
                this.ExternalTab?.onShow?.(this.CurrentApplicationID);
                break;
-            case this.NetsuiteTab?.ids.form:
-               this.NetsuiteTab?.onShow?.(this.CurrentApplicationID);
+
+            default:
+               Object.keys(this._plugins).forEach((key) => {
+                  let plugin = this._plugins[key];
+                  if (plugin.ids.form == tabId) {
+                     plugin.onShow?.(this.CurrentApplicationID);
+                  }
+               });
                break;
          }
       }

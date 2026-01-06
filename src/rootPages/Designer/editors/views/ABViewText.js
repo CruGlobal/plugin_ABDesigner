@@ -35,6 +35,7 @@ export default function (AB) {
             const baseView = this.view;
 
             return {
+               _dashboardID: ids.component,
                rows: [
                   {
                      id: ids.component,

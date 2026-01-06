@@ -104,6 +104,7 @@ export default function (AB) {
          require("./views/ABViewFormSelectSingle"),
          require("./views/ABViewFormTextbox"),
          require("./views/ABViewFormTree"),
+         require("./views/ABViewFormUrl"),
          require("./views/ABViewGantt"),
          require("./views/ABViewGrid"),
          require("./views/ABViewImage"),
@@ -126,6 +127,15 @@ export default function (AB) {
       AB.plugins().forEach((p) => {
          if (p.viewProperty) Views.push(p.viewProperty(AB, ABView));
       });
+
+      // Include view properties from ClassManager
+      const Plugins = [];
+      if (AB.ClassManager && AB.ClassManager.viewPropertiesAll) {
+         const classManagerViewProperties = AB.ClassManager.viewPropertiesAll();
+         classManagerViewProperties.forEach((ViewPropertyClass) => {
+            Plugins.push(ViewPropertyClass);
+         });
+      }
 
       var MobileViews = [];
       // {array}
@@ -168,11 +178,11 @@ export default function (AB) {
          },
 
          processElements: function (f = () => true) {
-            return Processes.filter(f);
+            return Plugins.concat(Processes).filter(f);
          },
 
          views: function (v = () => true) {
-            return Views.filter(v);
+            return Plugins.concat(Views).filter(v);
          },
 
          mobileViews: function (v = () => true) {

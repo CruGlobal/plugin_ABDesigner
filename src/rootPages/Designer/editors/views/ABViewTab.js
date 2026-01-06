@@ -168,6 +168,7 @@ export default function (AB) {
             }
 
             return {
+               _dashboardID: ids.component,
                rows: [componentUI],
             };
          }

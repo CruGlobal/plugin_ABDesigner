@@ -132,11 +132,17 @@ export default function (AB) {
          let ids = this.ids;
 
          // clear edit area
-         $$(ids.editArea)
-            .getChildViews()
-            .forEach((childView) => {
-               $$(ids.editArea)?.removeView(childView);
-            });
+         $$(ids.editArea).define("rows", []);
+         $$(ids.editArea).define("cols", []);
+         $$(ids.editArea).reconstruct();
+         // let removeViews = $$(ids.editArea).getChildViews();
+         // while (removeViews.length > 0) {
+         //    let childView = removeViews.shift();
+         //    $$(ids.editArea)?.removeView(childView);
+         // }
+         // // removeViews.forEach((childView) => {
+         // //    $$(ids.editArea)?.removeView(childView);
+         // // });
 
          // load the component's editor in our editArea
          var editorComponent;
@@ -261,20 +267,28 @@ export default function (AB) {
          editorUI.id = `${ids.editArea}_dashboard_layout`;
 
          // clear out widgets in our dashboard area
-         var subWidgets = editorUI.rows ?? editorUI.cols;
-         if (!subWidgets || subWidgets.length === 0) {
-            if (editorUI.body) {
-               subWidgets = editorUI.body.rows ?? editorUI.body.cols;
-            }
+
+         let idDashboard = editorUI._dashboardID;
+         if (!idDashboard) {
+            var subWidgets = editorUI.rows ?? editorUI.cols;
             if (!subWidgets || subWidgets.length === 0) {
-               console.error("Tell Johnny: No sub widgets found in editor UI");
-               console.error(editorUI);
-               return;
+               if (editorUI.body) {
+                  subWidgets = editorUI.body.rows ?? editorUI.body.cols;
+               }
+               if (!subWidgets || subWidgets.length === 0) {
+                  console.error(
+                     "Tell Johnny: No sub widgets found in editor UI"
+                  );
+                  console.error(editorUI);
+                  return;
+               }
             }
+            idDashboard = subWidgets[0].id;
          }
-         const idDashboard = subWidgets[0].id;
-         const $dashboard = $$(idDashboard);
-         if ($dashboard) $dashboard.clearAll();
+         if (idDashboard) {
+            const $dashboard = $$(idDashboard);
+            if ($dashboard) $dashboard.clearAll();
+         }
 
          // add the editorUI if it is not already added
          if ($$(ids.editArea).queryView({ id: editorUI.id }) == null)
