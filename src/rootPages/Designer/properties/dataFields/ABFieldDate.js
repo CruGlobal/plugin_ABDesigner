@@ -459,13 +459,13 @@ export default function (AB) {
          let formatString = "";
          switch (dateFormat) {
             //Ignore Date
-            case (2, 3):
+            case (2 || 3):
                {
                   formatString = "%d/%m/%Y";
                }
                break;
             //dd/mm/yyyy
-            case (4, 5):
+            case (4 || 5):
                {
                   formatString = "%M %d, %Y";
                }
