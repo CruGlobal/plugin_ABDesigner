@@ -17,9 +17,8 @@ jobs:
     # Only run if the PR closed by merging and we have a label
     if: ${{ needs.call-get-label.outputs.valid == 'true' }}
     uses: ./.github/workflows/e2e-test.yml
-    with:
-      app_id: ${{ secrets.GS_DEV_APP_ID }}
     secrets:
+      app_id: ${{ secrets.GS_DEV_APP_ID }}
       app_secret: ${{ secrets.GS_DEV_APP_PK }}
   call-bump-version:
     name: Version
