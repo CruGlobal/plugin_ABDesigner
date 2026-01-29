@@ -1,24 +1,33 @@
-/*
- * ABViewList
- * A Property manager for our ABViewList definitions
- */
-
-import FABView from "./ABView";
-
-export default function (AB) {
+// FNAbviewlist Properties
+// A properties side import for an ABView.
+//
+export default function FNAbviewlistProperties({
+   AB,
+   ABViewPropertiesPlugin,
+   // ABUIPlugin,
+}) {
    const BASE_ID = "properties_abview_list";
 
-   const ABView = FABView(AB);
-   const L = ABView.L();
    const uiConfig = AB.UISettings.config();
+   const L = AB.Label();
 
-   class ABViewListProperty extends ABView {
+   return class ABAbviewlistProperties extends ABViewPropertiesPlugin {
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+         // properties-view : will display in the properties panel of the ABDesigner
+      }
+
       constructor() {
          super(BASE_ID, {
             datacollection: "",
             field: "",
             height: "",
          });
+         this.AB = AB;
       }
 
       static get key() {
@@ -168,7 +177,5 @@ export default function (AB) {
       ViewClass() {
          return super._ViewClass("list");
       }
-   }
-
-   return ABViewListProperty;
+   };
 }
