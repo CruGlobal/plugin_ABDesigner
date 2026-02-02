@@ -111,14 +111,14 @@ export default function (AB) {
          require("./views/ABViewKanban"),
          require("./views/ABViewLabel"),
          require("./views/ABViewLayout"),
-         require("./views/ABViewList"),
+         // require("./views/ABViewList"),
          require("./views/ABViewMenu"),
          require("./views/ABViewPage"),
          require("./views/ABViewPDFImporter"),
          require("./views/ABViewPivot"),
          require("./views/ABViewReportsManager"),
          require("./views/ABViewScheduler"),
-         require("./views/ABViewTab"),
+         // require("./views/ABViewTab"),
          require("./views/ABViewText"),
       ].forEach((V) => {
          Views.push(V.default(AB));
