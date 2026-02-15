@@ -41,7 +41,7 @@ export default function FNAbviewtabEditor({ AB, ABViewEditorPlugin }) {
 
       constructor(view, base = BASE_ID) {
          // base: {string} unique base id reference
-         super(base, {
+         super(view, base, {
             view: "",
          });
 
