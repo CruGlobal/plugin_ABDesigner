@@ -47,7 +47,7 @@ export default function (AB) {
 
          this.AB = AB;
          ABViewFormPropertyComponentDefaults =
-            this.AB.Class.ABViewManager.viewClass("form").defaultValues();
+            this.AB.ClassManager.viewClass("form").defaultValues();
       }
 
       static get key() {
@@ -600,7 +600,7 @@ export default function (AB) {
       refreshDefaultButton() {
          const ids = this.ids;
          const ABViewFormButton =
-            this.AB.Class.ABViewManager.viewClass("button");
+            this.AB.ClassManager.viewClass("button");
 
          // If default button is not exists, then skip this
          let defaultButton = this.views(

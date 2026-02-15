@@ -35,7 +35,7 @@ export default function (AB) {
 
          this.AB = AB;
          ABViewMenuPropertyComponentDefaults =
-            this.AB.Class.ABViewManager.viewClass("menu").defaultValues();
+            this.AB.ClassManager.viewClass("menu").defaultValues();
       }
 
       static get key() {
