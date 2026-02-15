@@ -44,10 +44,6 @@ export default function FNAbviewtabEditor({ AB, ABViewEditorPlugin }) {
          super(view, base, {
             view: "",
          });
-
-         this.AB = AB;
-         this.view = view;
-         this.component = this.view.component();
       }
 
       ui() {
