@@ -32,7 +32,7 @@ export default function (AB) {
       require("./views/ABViewGantt"),
       require("./views/ABViewGrid"),
       require("./views/ABViewKanban"),
-      require("./views/ABViewLabel"),
+      // require("./views/ABViewLabel"),
       require("./views/ABViewLayout"),
       require("./views/ABViewMenu"),
       require("./views/ABViewPage"),
