@@ -325,10 +325,13 @@ export default function (AB) {
       check(e, fieldId) {
          const ids = this.ids;
          const currView = this.CurrentView;
-         const detailView = currView.parentDetailComponent();
+         if (!currView) return;
+
+         const detailView = currView.parentDetailComponent?.() ?? currView;
 
          // update UI list
          const item = $$(ids.fields).getItem(fieldId);
+         if (!item) return;
          item.selected = item.selected ? 0 : 1;
          $$(ids.fields).updateItem(fieldId, item);
 
@@ -340,6 +343,17 @@ export default function (AB) {
 
          // add a field to the form
          if (item.selected) {
+            if (typeof currView.addFieldToDetail !== "function") {
+               this.AB?.message?.({
+                  text: L(
+                     "This detail view does not support adding fields. Try re-opening the page or use a new detail page."
+                  ),
+                  type: "error",
+               });
+               item.selected = 0;
+               $$(ids.fields).updateItem(fieldId, item);
+               return;
+            }
             const fieldView = currView.addFieldToDetail(item);
             if (fieldView) {
                fieldView.save().then(() => {
