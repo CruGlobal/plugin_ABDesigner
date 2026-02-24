@@ -589,7 +589,7 @@ export default function (AB) {
       refreshDefaultButton() {
          const ids = this.ids;
          const ABViewFormButton =
-            this.AB.Class.ABViewManager.viewClass("button");
+            this.AB.ClassManager.viewClass("button");
 
          // If default button is not exists, then skip this
          let defaultButton = this.views(

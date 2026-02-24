@@ -30,7 +30,7 @@ export default function (AB) {
 
          this.AB = AB;
          ABViewDocxBuilderPropertyComponentDefaults =
-            this.AB.Class.ABViewManager.viewClass(
+            this.AB.ClassManager.viewClass(
                "docxBuilder"
             ).defaultValues();
       }

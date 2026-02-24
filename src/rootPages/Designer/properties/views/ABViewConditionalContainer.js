@@ -22,7 +22,7 @@ export default function (AB) {
          });
 
          this.AB = AB;
-         ABViewPropertyDefaults = this.AB.Class.ABViewManager.viewClass(
+         ABViewPropertyDefaults = this.AB.ClassManager.viewClass(
             "conditionalcontainer"
          ).defaultValues();
       }
