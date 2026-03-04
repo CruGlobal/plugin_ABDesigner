@@ -109,7 +109,7 @@ export default function (AB) {
          require("./views/ABViewGrid"),
          require("./views/ABViewImage"),
          require("./views/ABViewKanban"),
-         require("./views/ABViewLabel"),
+         // require("./views/ABViewLabel"),
          require("./views/ABViewLayout"),
          // require("./views/ABViewList"),
          require("./views/ABViewMenu"),
