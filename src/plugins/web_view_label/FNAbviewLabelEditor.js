@@ -26,6 +26,9 @@ export default function FNViewLabelEditor({ AB, ABViewEditorPlugin }) {
          return "label";
       }
 
+      static get key() {
+         return "label";
+      }
       /**
        * @method getPluginType
        * return the plugin type for this editor.

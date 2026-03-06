@@ -20,6 +20,10 @@ export default function FNViewLabelProperties({
          return "label";
       }
 
+      static get key() {
+         return "label";
+      }
+
       static getPluginType() {
          return "properties-view";
          // properties-view : will display in the properties panel of the ABDesigner
