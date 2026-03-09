@@ -8,7 +8,6 @@ import ListProperties from "./web_view_list/FNAbviewlist.js";
 import TabEditor from "./web_view_tab/FNAbviewtabEditor.js";
 import TabProperties from "./web_view_tab/FNAbviewtab.js";
 
-
 const AllPlugins = [TabProperties,
    CsvExporterEditor,
    CsvExporterProperties,
@@ -16,6 +15,7 @@ const AllPlugins = [TabProperties,
    CsvImporterProperties,
    LabelEditor,
    TabEditor,
+   TabProperties,
    LabelProperties,
    ListProperties,
 ];

@@ -21,7 +21,6 @@ export default function (AB) {
       require("./views/ABViewComment"),
       require("./views/ABViewConditionalContainer"),
       require("./views/ABViewContainer"),
-      // // require("./views/ABViewCSVImporter"),
       require("./views/ABViewDataSelect"),
       require("./views/ABViewDataview"),
       require("./views/ABViewDetail"),
