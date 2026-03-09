@@ -30,19 +30,19 @@ jobs:
                - branch: master
                  webpack: update
       steps:
-         - uses: actions/checkout@v4
+         - uses: actions/checkout@v6
            with:
               path: plugins/plugin_ABDesigner
               ref: ${{ inputs.ref }}
          - name: Generate a token
            id: generate-token
-           uses: actions/create-github-app-token@v2
+           uses: actions/create-github-app-token@v3
            with:
-              app-id: ${{ inputs.app_id }}
+              client-id: ${{ inputs.app_id }}
               private-key: ${{ secrets.app_secret }}
               repositories: ab_service_web
 
-         - uses: actions/checkout@v4
+         - uses: actions/checkout@v6
            with:
               path: web
               repository: CruGlobal/ab_service_web
@@ -64,7 +64,7 @@ jobs:
               repository: CruGlobal/ab_service_web
               
          - name: Check out kitchen-sink tests
-           uses: actions/checkout@v4
+           uses: actions/checkout@v6
            with:
               repository: CruGlobal/kitchensink_app
               path: ab/test/e2e/cypress/e2e/kitchensink_app
@@ -87,13 +87,13 @@ jobs:
            run: npm run test:e2e:ab-designer -- --browser chrome
            working-directory: ./ab
               
-         - uses: actions/upload-artifact@v4
+         - uses: actions/upload-artifact@v6
            if: failure()
            with:
               name: cypress-screenshots
               path: ./ab/test/e2e/cypress/screenshots
 
-         - uses: actions/upload-artifact@v4
+         - uses: actions/upload-artifact@v6
            if: failure()
            with:
               name: ABServices.log

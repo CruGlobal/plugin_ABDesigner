@@ -1,4 +1,4 @@
-const EventEmitter = require("events").EventEmitter;
+import { EventEmitter } from "events";
 
 export default class AB {
    constructor(definitions) {
@@ -18,6 +18,10 @@ export default class AB {
       this.ClassUI = ClassUI;
       this.Config = new Config();
       this.Multilingual = Multilingual;
+   }
+
+   getPluginAPI() {
+      return { AB: this };
    }
 }
 
