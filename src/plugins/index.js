@@ -1,10 +1,24 @@
-import viewListProperties from "./web_view_list/FNAbviewlist.js";
-import TabProperties from "./web_view_tab/FNAbviewtab.js";
-import TabEditor from "./web_view_tab/FNAbviewtabEditor.js";
-import viewLabelProperties from "./web_view_label/FNAbviewLabel.js";
+import CsvExporterEditor from "./web_view_csvExporter/FNAbviewcsvexporterEditor.js";
+import CsvExporterProperties from "./web_view_csvExporter/FNAbviewcsvexporter.js";
+import CsvImporterEditor from "./web_view_csvImporter/FNAbviewcsvimporterEditor.js";
+import CsvImporterProperties from "./web_view_csvImporter/FNAbviewcsvimporter.js";
 import LabelEditor from "./web_view_label/FNAbviewLabelEditor.js";
+import LabelProperties from "./web_view_label/FNAbviewLabel.js";
+import ListProperties from "./web_view_list/FNAbviewlist.js";
+import TabEditor from "./web_view_tab/FNAbviewtabEditor.js";
+import TabProperties from "./web_view_tab/FNAbviewtab.js";
 
-const AllPlugins = [TabProperties, TabEditor, viewListProperties, viewLabelProperties, LabelEditor];
+const AllPlugins = [TabProperties,
+   CsvExporterEditor,
+   CsvExporterProperties,
+   CsvImporterEditor,
+   CsvImporterProperties,
+   LabelEditor,
+   TabEditor,
+   TabProperties,
+   LabelProperties,
+   ListProperties,
+];
 
 export default {
    load: (AB) => {
