@@ -1,21 +1,33 @@
-/*
- * ABViewCSVImporter
- * A Property manager for our ABViewCSVImporter widget
- */
-
-import FViewClass from "./ABView";
-import ABRecordRule from "../rules/ABViewRuleListFormRecordRules";
-
-let PopupRecordRule = null;
-
-export default function (AB) {
+// FNAbviewcsvimporter Properties
+// A properties side import for an ABView.
+//
+export default function FNAbviewcsvimporterProperties({
+   AB,
+   ABViewPropertiesPlugin,
+   // ABUIPlugin,
+}) {
    const BASE_ID = "properties_abview_csvimporter";
 
    const ABViewClassProperty = FViewClass(AB);
    const uiConfig = AB.Config.uiSettings();
    const L = ABViewClassProperty.L();
 
-   class ABViewCSVImporterProperty extends ABViewClassProperty {
+
+
+   return class ABAbviewcsvimporterProperties extends ABViewPropertiesPlugin {
+
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+         // properties-view : will display in the properties panel of the ABDesigner
+      }
+
+
+
+
       constructor(baseID) {
          super(baseID ?? BASE_ID, {
             datacollection: "",
@@ -71,9 +83,8 @@ export default function (AB) {
                         template: this.listTemplate.bind(this),
                         type: {
                            markCheckbox: function (item) {
-                              return `<span class='check webix_icon fa fa-${
-                                 item.selected ? "check-" : ""
-                              }square-o'></span>`;
+                              return `<span class='check webix_icon fa fa-${item.selected ? "check-" : ""
+                                 }square-o'></span>`;
                            },
                         },
                         onClick: {
@@ -198,7 +209,7 @@ export default function (AB) {
             f.selected = options.selectAll
                ? true
                : availableFields.filter((fieldId) => f.id == fieldId).length >
-                 0;
+               0;
 
             return f;
          });
@@ -229,13 +240,10 @@ export default function (AB) {
             (v) => v.common().key == componentKey
          )[0];
 
-         return `${$common.markCheckbox(field)} ${
-            field.label
-         } <div class='ab-component-form-fields-component-info'> <i class='fa fa-${
-            formComponent?.common()?.icon ?? "fw"
-         }'></i> ${
-            formComponent ? L(formComponent.common().labelKey ?? "Label") : ""
-         } </div>`;
+         return `${$common.markCheckbox(field)} ${field.label
+            } <div class='ab-component-form-fields-component-info'> <i class='fa fa-${formComponent?.common()?.icon ?? "fw"
+            }'></i> ${formComponent ? L(formComponent.common().labelKey ?? "Label") : ""
+            } </div>`;
       }
 
       check(e, fieldId) {
@@ -359,5 +367,8 @@ export default function (AB) {
       }
    }
 
-   return ABViewCSVImporterProperty;
+
+
+
 }
+
