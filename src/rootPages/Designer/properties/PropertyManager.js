@@ -109,17 +109,17 @@ export default function (AB) {
          require("./views/ABViewGrid"),
          // require("./views/ABViewImage"),
          require("./views/ABViewKanban"),
-         require("./views/ABViewLabel"),
+         // require("./views/ABViewLabel"),
          // require("./views/ABViewLayout"),
-         require("./views/ABViewList"),
+         // require("./views/ABViewList"),
          require("./views/ABViewMenu"),
          require("./views/ABViewPage"),
          // require("./views/ABViewPDFImporter"),
          require("./views/ABViewPivot"),
          require("./views/ABViewReportsManager"),
          require("./views/ABViewScheduler"),
-         require("./views/ABViewTab"),
          // require("./views/ABViewText"),
+         // require("./views/ABViewTab"),
       ].forEach((V) => {
          Views.push(V.default(AB));
       });

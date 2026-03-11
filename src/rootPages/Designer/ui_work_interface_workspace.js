@@ -29,7 +29,7 @@ export default function (AB) {
          this.ColumnEditor = ABWorkspaceEditor(AB);
          this.ColumnDetails = ABWorkspaceDetails(AB);
 
-         this.classABViewPage = AB.Class.ABViewManager.viewClass("page");
+         this.classABViewPage = AB.ClassManager.viewClass("page");
       }
 
       // webix UI definition:

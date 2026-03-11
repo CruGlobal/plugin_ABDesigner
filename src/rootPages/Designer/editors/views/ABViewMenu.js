@@ -33,10 +33,19 @@ export default function (AB) {
          ui() {
             const menu = this.component.ui();
 
+            // NOTE: we want our editors to have a { layout .rows[0]=component } structure
+            // the menu already has a layout around it, so just use that one
+            // and prepare it for the ABDesigner editor format:
+            menu._dashboardID = this.component.ids.menu;
+
+            return menu;
+            /*
             return {
+               _dashboardID: this.component.ids.menu,
                type: "space",
                rows: [menu, {}],
             };
+            */
          }
 
          init(AB) {

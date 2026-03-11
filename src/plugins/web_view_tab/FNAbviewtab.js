@@ -1,21 +1,30 @@
-/*
- * ABViewTab
- * A Property manager for our ABViewTab definitions
- */
+// FNAbviewtab Properties
+// A properties side import for an ABView.
+//
+import FTabPopup from "../../rootPages/Designer/interface_common/ui_tab_form_popup";
 
-import FABView from "./ABView";
-import FTabPopup from "../../interface_common/ui_tab_form_popup";
-
-export default function (AB) {
+export default function FNAbviewtabProperties({
+   AB,
+   ABViewPropertiesPlugin,
+   // ABUIPlugin,
+}) {
    const BASE_ID = "properties_abview_tab";
 
-   const ABView = FABView(AB);
    const uiConfig = AB.Config.uiSettings();
-   const L = ABView.L();
+   const L = AB.Label();
 
    const TabPopup = FTabPopup(AB);
 
-   class ABViewTabProperty extends ABView {
+   return class ABAbviewtabProperties extends ABViewPropertiesPlugin {
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+         // properties-view : will display in the properties panel of the ABDesigner
+      }
+
       constructor() {
          super(BASE_ID, {
             sidebarWidth: "",
@@ -26,6 +35,7 @@ export default function (AB) {
             stackTabs: "",
             darkTheme: "",
          });
+         this.AB = AB;
       }
 
       static get key() {
@@ -209,7 +219,5 @@ export default function (AB) {
       ViewClass() {
          return super._ViewClass("tab");
       }
-   }
-
-   return ABViewTabProperty;
+   };
 }

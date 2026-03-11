@@ -35,7 +35,7 @@ export default function (AB) {
 
          this.AB = AB;
          ABViewMenuPropertyComponentDefaults =
-            this.AB.Class.ABViewManager.viewClass("menu").defaultValues();
+            this.AB.ClassManager.viewClass("menu").defaultValues();
       }
 
       static get key() {
@@ -775,7 +775,9 @@ export default function (AB) {
          });
 
          // add tabs
-         const ABViewTab = this.AB.Class.ABViewManager.viewClass("tab");
+         // ABViewManager.viewClass() is depreciated.  Use ClassManager.viewClass() instead.
+         //const ABViewTab = this.AB.Class.ABViewManager.viewClass("tab");
+         const ABViewTab = this.AB.ClassManager.viewClass("tab");
          page
             .views((v) => v instanceof ABViewTab)
             .forEach((tab, tabIndex) => {

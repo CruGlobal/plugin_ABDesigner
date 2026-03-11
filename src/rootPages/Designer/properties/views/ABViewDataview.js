@@ -25,7 +25,7 @@ export default function (AB) {
 
          this.AB = AB;
          ABViewDataviewPropertyComponentDefaults =
-            this.AB.Class.ABViewManager.viewClass("dataview").defaultValues();
+            this.AB.ClassManager.viewClass("dataview").defaultValues();
 
          this.linkPageComponent = new LinkPageProperty(AB, base);
       }

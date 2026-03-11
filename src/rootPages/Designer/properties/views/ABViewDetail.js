@@ -34,7 +34,7 @@ export default function (AB) {
 
          this.AB = AB;
          ABViewDetailPropertyComponentDefaults =
-            this.AB.Class.ABViewManager.viewClass("detail").defaultValues();
+            this.AB.ClassManager.viewClass("detail").defaultValues();
       }
 
       static get key() {

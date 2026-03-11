@@ -19,6 +19,7 @@
 import definitions from "./src/definitions.js";
 import ApplicationFactory from "./src/application.js";
 import Labels from "./src/labels/labels.js";
+import LocalPlugins from "./src/plugins/index.js";
 
 // pull in our css we defined for our plugin
 // eslint-disable-next-line no-unused-vars
@@ -39,6 +40,9 @@ window.__AB_Plugins.push({
       // load any custom js or css
       AB.scriptLoadAll(this.scripts());
       AB.cssLoadAll(this.stylesheets());
+
+      // load any included plugins
+      LocalPlugins.load(AB);
 
       // At this point, the Plugin should already have loaded all it's definitions
       // into the AB Factory
