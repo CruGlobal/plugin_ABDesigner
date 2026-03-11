@@ -12,18 +12,18 @@ export default function (AB) {
    // All the ABField Component Inerfaces available.
    [
       require("./views/_ABViewDefault"),
-      require("./views/ABViewCarousel"),
+      // require("./views/ABViewCarousel"),
       require("./views/ABViewChart"),
       require("./views/ABViewChartArea"),
       require("./views/ABViewChartBar"),
       require("./views/ABViewChartLine"),
       require("./views/ABViewChartPie"),
-      require("./views/ABViewComment"),
+      // require("./views/ABViewComment"),
       require("./views/ABViewConditionalContainer"),
       require("./views/ABViewContainer"),
       require("./views/ABViewCSVExporter"),
       require("./views/ABViewCSVImporter"),
-      require("./views/ABViewDataSelect"),
+      // require("./views/ABViewDataSelect"),
       require("./views/ABViewDataview"),
       require("./views/ABViewDetail"),
       require("./views/ABViewDocxBuilder"),
@@ -33,13 +33,13 @@ export default function (AB) {
       require("./views/ABViewGrid"),
       require("./views/ABViewKanban"),
       require("./views/ABViewLabel"),
-      require("./views/ABViewLayout"),
+      // require("./views/ABViewLayout"),
       require("./views/ABViewMenu"),
       require("./views/ABViewPage"),
-      require("./views/ABViewPDFImporter"),
+      // require("./views/ABViewPDFImporter"),
       require("./views/ABViewPivot"),
       require("./views/ABViewTab"),
-      require("./views/ABViewText"),
+      // require("./views/ABViewText"),
    ].forEach((E) => {
       const Klass = E.default(AB);
 
