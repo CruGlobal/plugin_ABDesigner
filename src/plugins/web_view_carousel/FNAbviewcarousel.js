@@ -4,15 +4,15 @@
 export default function FNAbviewcarouselProperties({
    AB,
    ABViewPropertiesPlugin,
-   // ABUIPlugin,
+   ABViewPropertyFilterData,
+   ABViewPropertyLinkPage,
 }) {
-      const uiConfig = AB.Config.uiSettings();
+   const L = AB.Label();
+   const uiConfig = AB.Config.uiSettings();
 
    const base = "properties_abview_carousel";
-   const ABViewPropertyFilterData = FABViewPropertyFilterData(AB, base);
-   const PopupCarouselFilterMenu = new ABViewPropertyFilterData();
-
-   const LinkPageHelper = new FABViewPropertyLinkPage(AB, base);
+   const PopupCarouselFilterMenu = new ABViewPropertyFilterData(AB, base);
+   const PropertyLinkPage = new ABViewPropertyLinkPage(AB, base);
 
    
 
@@ -59,7 +59,7 @@ static getPluginType() {
          // display them.  We will use these values to undo any modifications
          // if the user clicks [cancel] or [close];
 
-         this.linkPageComponent = new LinkPageHelper();
+         this.linkPageComponent = PropertyLinkPage;
          this.linkPageComponent.on("changed", () => {
             this.onChange();
          });
@@ -315,7 +315,7 @@ static getPluginType() {
 
          this._handler_onCancel = () => {
             // we have to set the values BACK to what they were:
-            PopupCarouselFilterMenu.setSettings(this._preFilterSettings);
+            PopupCarouselFilterMenu.fromSettings(this._preFilterSettings);
             this.filter_property_popup.hide();
          };
 
@@ -395,12 +395,11 @@ static getPluginType() {
          var selectedDv = view.datacollection;
          if (selectedDv) {
             PopupCarouselFilterMenu.objectLoad(selectedDv.datasource);
-            PopupCarouselFilterMenu.setSettings(view.settings.filter);
+            PopupCarouselFilterMenu.fromSettings(view.settings.filter);
          }
 
          // Populate values to link page properties
-         this.linkPageComponent.viewLoad(view);
-         this.linkPageComponent.setSettings(view.settings);
+         this.linkPageComponent.fromSettings(view.settings);
       }
 
       defaultValues() {
@@ -415,7 +414,7 @@ static getPluginType() {
       filterMenuShow() {
          // var currView = _logic.currentEditObject();
 
-         this._preFilterSettings = PopupCarouselFilterMenu.getSettings();
+         this._preFilterSettings = PopupCarouselFilterMenu.toSettings();
 
          // show filter popup
          this.filter_property_popup.show();
@@ -444,10 +443,10 @@ static getPluginType() {
          vals.settings.navigationType = $$(ids.navigationType).getValue();
 
          // filter
-         vals.settings.filter = PopupCarouselFilterMenu.getSettings();
+         vals.settings.filter = PopupCarouselFilterMenu.toSettings();
 
          // link pages
-         let linkSettings = this.linkPageComponent.getSettings();
+         let linkSettings = this.linkPageComponent.toSettings();
          for (let key in linkSettings) {
             vals.settings[key] = linkSettings[key];
          }

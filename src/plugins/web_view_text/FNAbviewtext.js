@@ -9,6 +9,7 @@ export default function FNAbviewtextProperties({
       const BASE_ID = "properties_abview_text";
 
    const uiConfig = AB.Config.uiSettings();
+   const L = AB.Label();
 
    
 

@@ -8,6 +8,7 @@ export default function FNAbviewdataselectProperties({
 }) {
       const uiConfig = AB.Config.uiSettings();
    const BASE_ID = "properties_abview_data_filter";
+   const L = AB.Label();
 
 
    

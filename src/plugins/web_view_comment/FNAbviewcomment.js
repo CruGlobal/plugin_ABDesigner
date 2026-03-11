@@ -9,6 +9,7 @@ export default function FNAbviewcommentProperties({
       const BASE_ID = "properties_abview_comment";
 
    const uiConfig = AB.Config.uiSettings();
+   const L = AB.Label();
 
    
 

@@ -1,6 +1,8 @@
 // FNAbviewpdfimporter Properties
 // A properties side import for an ABView.
 //
+import FABViewRuleListFormSubmitRules from "../../rootPages/Designer/properties/rules/ABViewRuleListFormSubmitRules";
+
 export default function FNAbviewpdfimporterProperties({
    AB,
    ABViewPropertiesPlugin,
@@ -9,6 +11,7 @@ export default function FNAbviewpdfimporterProperties({
       const BASE_ID = "properties_abview_pdfImporter";
 
    const uiConfig = AB.UISettings.config();
+   const L = AB.Label();
 
    const PopupSubmitRule = FABViewRuleListFormSubmitRules(
       AB,

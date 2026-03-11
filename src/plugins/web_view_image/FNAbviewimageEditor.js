@@ -4,10 +4,12 @@
 // The Editor allows a widget to be moved and placed on the canvas.
 //
 export default function FNAbviewimageEditor({ AB, ABViewEditorPlugin }) {
-   return class ABAbviewimageEditor extends ABViewEditorPlugin {
-      constructor(view, base = "interface_editor_abviewimage", ids = {}) {
+   const BASE_ID = "interface_editor_viewimage";
+
+   return class ABViewImageEditor extends ABViewEditorPlugin {
+      constructor(view, base = BASE_ID, ids = {}) {
          // view: {ABView} The ABView instance this editor is for
-         // base: {string} unique base id reference
+         // BASE_ID: {string} unique base id reference
          // ids: {hash}  { key => '' }
          // this is provided by the Sub Class and has the keys
          // unique to the Sub Class' interface elements.
@@ -21,13 +23,13 @@ export default function FNAbviewimageEditor({ AB, ABViewEditorPlugin }) {
        * @return {string} plugin key
        */
       static getPluginKey() {
-         return "ab-view-abviewimage";
+         return "image";
       }
 
       /**
        * @method getPluginType
        * return the plugin type for this editor.
-       * plugin types are how our ClassManager knows how to store 
+       * plugin types are how our ClassManager knows how to store
        * the plugin.
        * @return {string} plugin type
        */

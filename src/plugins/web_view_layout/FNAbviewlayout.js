@@ -8,6 +8,7 @@ export default function FNAbviewlayoutProperties({
 }) {
    
    const base = "properties_abview_layout";
+   const L = AB.Label();
 
    
 

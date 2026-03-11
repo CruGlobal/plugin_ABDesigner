@@ -9,6 +9,7 @@ export default function FNAbviewimageProperties({
       const BASE_ID = "properties_abview_image";
 
    const uiConfig = AB.Config.uiSettings();
+   const L = AB.Label();
 
    
 
@@ -221,7 +222,7 @@ static getPluginType() {
        * NOTE: Must be overwritten by the Child Class
        */
       ViewClass() {
-         return super._ViewClass("label");
+         return super._ViewClass("image");
       }
    }
 
