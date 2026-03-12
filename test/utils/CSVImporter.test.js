@@ -3,7 +3,7 @@ import assert from "assert";
 import sinon from "sinon";
 
 import AB from "../_mock/AB.js";
-import CSVImporter from "../../src/utils/CSVImporter.js";
+import CSVImporter from "../../src/plugins/web_view_csvImporter/CSVImporter.js";
 
 function getMockAB() {
    return new AB();

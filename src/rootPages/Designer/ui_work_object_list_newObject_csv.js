@@ -5,7 +5,7 @@
  *
  */
 import UI_Class from "./ui_class";
-import CSVImporter from "../../utils/CSVImporter.js";
+import CSVImporter from "../../plugins/web_view_csvImporter/CSVImporter.js";
 
 export default function (AB) {
    const UIClass = UI_Class(AB);

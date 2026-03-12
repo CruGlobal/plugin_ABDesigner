@@ -1,6 +1,8 @@
 // FNAbviewcsvimporter Properties
 // A properties side import for an ABView.
 //
+import FABViewRuleListFormRecordRules from "../../rootPages/Designer/properties/rules/ABViewRuleListFormRecordRules.js";
+
 export default function FNAbviewcsvimporterProperties({
    AB,
    ABViewPropertiesPlugin,
@@ -8,10 +10,13 @@ export default function FNAbviewcsvimporterProperties({
 }) {
    const BASE_ID = "properties_abview_csvimporter";
 
-   const ABViewClassProperty = FViewClass(AB);
    const uiConfig = AB.Config.uiSettings();
-   const L = ABViewClassProperty.L();
+   const L = AB.Label();
 
+   const PopupRecordRule = FABViewRuleListFormRecordRules(
+      AB,
+      `${BASE_ID}_popupRecordRule`
+   );
 
 
    return class ABAbviewcsvimporterProperties extends ABViewPropertiesPlugin {
@@ -46,8 +51,6 @@ export default function FNAbviewcsvimporterProperties({
 
       ui() {
          const ids = this.ids;
-         PopupRecordRule = ABRecordRule(this.AB, this.base);
-         // PopupRecordRule.component(`${this.base}_recordrule`);
 
          return super.ui([
             {
