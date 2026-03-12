@@ -33,11 +33,7 @@ static getPluginKey() {
 
          constructor(view, base = BASE_ID) {
             // base: {string} unique base id reference
-            super(base);
-
-            this.AB = AB;
-            this.view = view;
-            this.component = this.view.component();
+            super(view, base);
          }
 
          ui() {
@@ -78,14 +74,8 @@ static getPluginKey() {
          }
 
          async init(AB) {
-            this.AB = AB;
-
             webix.codebase = "/js/webix/extras/";
-
-            await this.component.init(this.AB);
-
-            // this.component.onShow();
-            // in our editor, we provide accessLv = 2
+            await super.init(AB);
          }
 
          async viewLoad(view) {
@@ -112,12 +102,10 @@ static getPluginKey() {
             }, 400);
          }
 
-         detatch() {
-            this.component.detatch?.();
-         }
+
 
          onShow() {
-            this.component.onShow();
+            super.onShow();
          }
       };
    

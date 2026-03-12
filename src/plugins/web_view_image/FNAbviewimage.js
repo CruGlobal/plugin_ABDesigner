@@ -32,7 +32,7 @@ static getPluginType() {
             width: "",
             height: "",
          });
-         // this.AB = AB;
+         this.AB = AB;
       }
 
       static get key() {

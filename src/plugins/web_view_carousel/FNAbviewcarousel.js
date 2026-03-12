@@ -48,6 +48,8 @@ static getPluginType() {
             editPage: "",
          });
 
+         this.AB = AB;
+
          this.ABFieldImage = AB.Class.ABFieldManager.fieldByKey("image");
          // {ABFieldImage}  the Class reference
          // we use this later to help find which fields in an object

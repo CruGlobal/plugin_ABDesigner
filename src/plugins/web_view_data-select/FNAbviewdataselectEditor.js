@@ -33,11 +33,7 @@ static getPluginKey() {
 
          constructor(view, base = BASE_ID) {
             // base: {string} unique base id reference
-            super(base);
-
-            this.AB = AB;
-            this.view = view;
-            this.component = this.view.component();
+            super(view, base);
          }
 
          ui() {
