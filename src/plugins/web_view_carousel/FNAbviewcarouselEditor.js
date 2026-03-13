@@ -45,21 +45,20 @@ static getPluginKey() {
          }
 
          ui() {
-            return this.component.ui();
+            return super.ui();
          }
 
-         init(AB) {
+         async init(AB) {
             this.AB = AB;
-            return this.component.init(AB, 2);
-            // in our editor, we provide accessLv = 2
+            await super.init(AB);
          }
 
          detatch() {
-            this.component.detatch();
+            super.detatch();
          }
 
          onShow() {
-            this.component.onShow();
+            super.onShow();
          }
       };
    

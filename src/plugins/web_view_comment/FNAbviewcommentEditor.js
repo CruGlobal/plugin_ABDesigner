@@ -37,24 +37,20 @@ static getPluginKey() {
          }
 
          ui() {
-            return this.component.ui();
+            return super.ui();
          }
 
          async init(AB) {
             this.AB = AB;
-
-            await this.component.init(this.AB);
-
-            // this.component.onShow();
-            // in our editor, we provide accessLv = 2
+            await super.init(AB);
          }
 
          detatch() {
-            this.component.detatch?.();
+            super.detatch();
          }
 
          onShow() {
-            this.component.onShow();
+            super.onShow();
          }
       };
    
