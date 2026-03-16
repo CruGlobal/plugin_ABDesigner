@@ -1,5 +1,5 @@
-import viewCarouselProperties from "./web_view_carousel/FNAbviewcarousel.js";
-import viewCarouselEditor from "./web_view_carousel/FNAbviewcarouselEditor.js";
+// import viewCarouselProperties from "./web_view_carousel/FNAbviewcarousel.js";
+// import viewCarouselEditor from "./web_view_carousel/FNAbviewcarouselEditor.js";
 import viewCommentProperties from "./web_view_comment/FNAbviewcomment.js";
 import viewCommentEditor from "./web_view_comment/FNAbviewcommentEditor.js";
 import viewDataSelectProperties from "./web_view_data-select/FNAbviewdataselect.js";
@@ -19,8 +19,8 @@ import viewTextProperties from "./web_view_text/FNAbviewtext.js";
 import viewTextEditor from "./web_view_text/FNAbviewtextEditor.js";
 
 const AllPlugins = [
-   viewCarouselProperties,
-   viewCarouselEditor,
+   // viewCarouselProperties,
+   // viewCarouselEditor,
    viewCommentProperties,
    viewCommentEditor,
    viewDataSelectProperties,

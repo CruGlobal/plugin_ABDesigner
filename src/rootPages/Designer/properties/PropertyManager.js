@@ -70,7 +70,7 @@ export default function (AB) {
       // {array}
       // All the ABViewXXX Property Interfaces Available.
       [
-         // require("./views/ABViewCarousel"),
+         require("./views/ABViewCarousel"),
          require("./views/ABViewChart"),
          require("./views/ABViewChartArea"),
          require("./views/ABViewChartBar"),
