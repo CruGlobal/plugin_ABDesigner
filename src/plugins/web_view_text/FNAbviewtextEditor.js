@@ -48,13 +48,9 @@ static getPluginKey() {
                      view: "tinymce-editor",
                      value: baseView.text,
                      config: {
-                        plugins: [
-                           "advlist autolink lists link image charmap print preview anchor",
-                           "searchreplace visualblocks code fullscreen",
-                           "insertdatetime media table contextmenu paste imagetools wordcount",
-                        ],
+                        plugins: "advlist autolink lists link image charmap anchor searchreplace visualblocks code fullscreen insertdatetime media table wordcount",
                         toolbar:
-                           "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                           "insertfile undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
                         // menu: {
                         // 	file: { title: 'File', items: 'newdocument' },
                         // 	edit: { title: 'Edit', items: 'undo redo | cut copy paste pastetext | selectall' },
