@@ -5,14 +5,20 @@ export default function FNAbviewcarouselProperties({
    AB,
    ABViewPropertiesPlugin,
    ABViewPropertyFilterData,
-   ABViewPropertyLinkPage,
+   // ABViewPropertyLinkPage,
 }) {
    const L = AB.Label();
    const uiConfig = AB.Config.uiSettings();
 
    const base = "properties_abview_carousel";
    const PopupCarouselFilterMenu = new ABViewPropertyFilterData(AB, base);
-   const PropertyLinkPage = new ABViewPropertyLinkPage(AB, base);
+   // const PropertyLinkPage = new ABViewPropertyLinkPage(AB, base);
+
+   // To access the UI components for properties, we need the Designer's LinkPage,
+   // not the Core's LinkPage which is passed in via the Plugin API.
+   const FABViewPropertyLinkPage = require("../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyLinkPage").default;
+   const LinkPageHelper = FABViewPropertyLinkPage(AB, base);
+   const PropertyLinkPage = new LinkPageHelper();
 
    
 
@@ -401,7 +407,8 @@ static getPluginType() {
          }
 
          // Populate values to link page properties
-         this.linkPageComponent.fromSettings(view.settings);
+         this.linkPageComponent.viewLoad(view);
+         this.linkPageComponent.setSettings(view.settings);
       }
 
       defaultValues() {
@@ -448,7 +455,7 @@ static getPluginType() {
          vals.settings.filter = PopupCarouselFilterMenu.toSettings();
 
          // link pages
-         let linkSettings = this.linkPageComponent.toSettings();
+         let linkSettings = this.linkPageComponent.getSettings();
          for (let key in linkSettings) {
             vals.settings[key] = linkSettings[key];
          }
