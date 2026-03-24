@@ -8,7 +8,7 @@ export default function FNAbviewpdfimporterProperties({
    ABViewPropertiesPlugin,
    // ABUIPlugin,
 }) {
-      const BASE_ID = "properties_abview_pdfImporter";
+   const BASE_ID = "properties_abview_pdfImporter";
 
    const uiConfig = AB.UISettings.config();
    const L = AB.Label();
@@ -18,21 +18,15 @@ export default function FNAbviewpdfimporterProperties({
       `${BASE_ID}_popupSubmitRule`
    );
 
-   
-
-return class ABAbviewpdfimporterProperties extends ABViewPropertiesPlugin {
-
-static getPluginKey() {
+   return class ABAbviewpdfimporterProperties extends ABViewPropertiesPlugin {
+      static getPluginKey() {
          return this.key;
       }
 
-static getPluginType() {
+      static getPluginType() {
          return "properties-view";
          // properties-view : will display in the properties panel of the ABDesigner
       }
-
-
-
 
       constructor() {
          super(BASE_ID, {
@@ -237,10 +231,5 @@ static getPluginType() {
       ViewClass() {
          return super._ViewClass("pdfImporter");
       }
-   }
-
-   
-
-
+   };
 }
-

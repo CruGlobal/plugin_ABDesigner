@@ -4,37 +4,32 @@
 export default function FNAbviewcarouselProperties({
    AB,
    ABViewPropertiesPlugin,
-   ABViewPropertyFilterData,
+   // ABViewPropertyFilterData,
    // ABViewPropertyLinkPage,
 }) {
    const L = AB.Label();
    const uiConfig = AB.Config.uiSettings();
 
    const base = "properties_abview_carousel";
-   const PopupCarouselFilterMenu = new ABViewPropertyFilterData(AB, base);
-   // const PropertyLinkPage = new ABViewPropertyLinkPage(AB, base);
-
-   // To access the UI components for properties, we need the Designer's LinkPage,
-   // not the Core's LinkPage which is passed in via the Plugin API.
-   const FABViewPropertyLinkPage = require("../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyLinkPage").default;
+   const FABViewPropertyLinkPage =
+      require("../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyLinkPage").default;
    const LinkPageHelper = FABViewPropertyLinkPage(AB, base);
    const PropertyLinkPage = new LinkPageHelper();
 
-   
+   const FABViewPropertyFilterData =
+      require("../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyFilterData").default;
+   const FilterDataHelper = FABViewPropertyFilterData(AB, base);
+   const PopupCarouselFilterMenu = new FilterDataHelper();
 
-return class ABAbviewcarouselProperties extends ABViewPropertiesPlugin {
-
-static getPluginKey() {
+   return class ABAbviewcarouselProperties extends ABViewPropertiesPlugin {
+      static getPluginKey() {
          return this.key;
       }
 
-static getPluginType() {
+      static getPluginType() {
          return "properties-view";
          // properties-view : will display in the properties panel of the ABDesigner
       }
-
-
-
 
       constructor() {
          super(base, {
@@ -323,7 +318,7 @@ static getPluginType() {
 
          this._handler_onCancel = () => {
             // we have to set the values BACK to what they were:
-            PopupCarouselFilterMenu.fromSettings(this._preFilterSettings);
+            PopupCarouselFilterMenu.setSettings(this._preFilterSettings);
             this.filter_property_popup.hide();
          };
 
@@ -353,7 +348,7 @@ static getPluginType() {
                      click: this._handler_onCancel,
                      on: {
                         onAfterRender() {
-                           ABView.CYPRESS_REF(this);
+                           ABViewPropertiesPlugin.CYPRESS_REF(this);
                         },
                      },
                   },
@@ -403,7 +398,7 @@ static getPluginType() {
          var selectedDv = view.datacollection;
          if (selectedDv) {
             PopupCarouselFilterMenu.objectLoad(selectedDv.datasource);
-            PopupCarouselFilterMenu.fromSettings(view.settings.filter);
+            PopupCarouselFilterMenu.setSettings(view.settings.filter);
          }
 
          // Populate values to link page properties
@@ -423,7 +418,7 @@ static getPluginType() {
       filterMenuShow() {
          // var currView = _logic.currentEditObject();
 
-         this._preFilterSettings = PopupCarouselFilterMenu.toSettings();
+         this._preFilterSettings = PopupCarouselFilterMenu.getSettings();
 
          // show filter popup
          this.filter_property_popup.show();
@@ -452,7 +447,7 @@ static getPluginType() {
          vals.settings.navigationType = $$(ids.navigationType).getValue();
 
          // filter
-         vals.settings.filter = PopupCarouselFilterMenu.toSettings();
+         vals.settings.filter = PopupCarouselFilterMenu.getSettings();
 
          // link pages
          let linkSettings = this.linkPageComponent.getSettings();
@@ -471,10 +466,5 @@ static getPluginType() {
       ViewClass() {
          return super._ViewClass("carousel");
       }
-   }
-
-   
-
-
+   };
 }
-

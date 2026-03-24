@@ -6,26 +6,20 @@ export default function FNAbviewimageProperties({
    ABViewPropertiesPlugin,
    // ABUIPlugin,
 }) {
-      const BASE_ID = "properties_abview_image";
+   const BASE_ID = "properties_abview_image";
 
    const uiConfig = AB.Config.uiSettings();
    const L = AB.Label();
 
-   
-
-return class ABAbviewimageProperties extends ABViewPropertiesPlugin {
-
-static getPluginKey() {
+   return class ABAbviewimageProperties extends ABViewPropertiesPlugin {
+      static getPluginKey() {
          return this.key;
       }
 
-static getPluginType() {
+      static getPluginType() {
          return "properties-view";
          // properties-view : will display in the properties panel of the ABDesigner
       }
-
-
-
 
       constructor() {
          super(BASE_ID, {
@@ -104,7 +98,7 @@ static getPluginType() {
 
                            // get width & height of images
                            if (fileInfo.file) {
-                              let img = new Image();
+                              let img = new window.Image();
                               img.onload = function () {
                                  $$(ids.width).setValue(img.width);
                                  $$(ids.height).setValue(img.height);
@@ -116,7 +110,7 @@ static getPluginType() {
                            this.onChange();
                         },
 
-                        onFileUploadError: (file, response) => {},
+                        onFileUploadError: () => {},
                      },
                   },
                ],
@@ -224,10 +218,5 @@ static getPluginType() {
       ViewClass() {
          return super._ViewClass("image");
       }
-   }
-
-   
-
-
+   };
 }
-

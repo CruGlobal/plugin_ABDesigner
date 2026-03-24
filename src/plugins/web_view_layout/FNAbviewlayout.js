@@ -6,25 +6,18 @@ export default function FNAbviewlayoutProperties({
    ABViewPropertiesPlugin,
    // ABUIPlugin,
 }) {
-   
    const base = "properties_abview_layout";
    const L = AB.Label();
 
-   
-
-return class ABAbviewlayoutProperties extends ABViewPropertiesPlugin {
-
-static getPluginKey() {
+   return class ABAbviewlayoutProperties extends ABViewPropertiesPlugin {
+      static getPluginKey() {
          return this.key;
       }
 
-static getPluginType() {
+      static getPluginType() {
          return "properties-view";
          // properties-view : will display in the properties panel of the ABDesigner
       }
-
-
-
 
       constructor() {
          super(base, {
@@ -93,10 +86,5 @@ static getPluginType() {
 
          this.onChange();
       }
-   }
-
-   
-
-
+   };
 }
-

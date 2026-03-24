@@ -6,26 +6,20 @@ export default function FNAbviewcommentProperties({
    ABViewPropertiesPlugin,
    // ABUIPlugin,
 }) {
-      const BASE_ID = "properties_abview_comment";
+   const BASE_ID = "properties_abview_comment";
 
    const uiConfig = AB.Config.uiSettings();
    const L = AB.Label();
 
-   
-
-return class ABAbviewcommentProperties extends ABViewPropertiesPlugin {
-
-static getPluginKey() {
+   return class ABAbviewcommentProperties extends ABViewPropertiesPlugin {
+      static getPluginKey() {
          return this.key;
       }
 
-static getPluginType() {
+      static getPluginType() {
          return "properties-view";
          // properties-view : will display in the properties panel of the ABDesigner
       }
-
-
-
 
       constructor() {
          super(BASE_ID, {
@@ -292,10 +286,5 @@ static getPluginType() {
       ViewClass() {
          return super._ViewClass("comment");
       }
-   }
-
-   
-
-
+   };
 }
-

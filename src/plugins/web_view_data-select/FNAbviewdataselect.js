@@ -6,26 +6,19 @@ export default function FNAbviewdataselectProperties({
    ABViewPropertiesPlugin,
    // ABUIPlugin,
 }) {
-      const uiConfig = AB.Config.uiSettings();
+   const uiConfig = AB.Config.uiSettings();
    const BASE_ID = "properties_abview_data_filter";
    const L = AB.Label();
 
-
-   
-
-return class ABAbviewdataselectProperties extends ABViewPropertiesPlugin {
-
-static getPluginKey() {
+   return class ABAbviewdataselectProperties extends ABViewPropertiesPlugin {
+      static getPluginKey() {
          return this.key;
       }
 
-static getPluginType() {
+      static getPluginType() {
          return "properties-view";
          // properties-view : will display in the properties panel of the ABDesigner
       }
-
-
-
 
       constructor() {
          super(BASE_ID, {
@@ -176,10 +169,5 @@ static getPluginType() {
       ViewClass() {
          return super._ViewClass("data-select");
       }
-   }
-
-   
-
-
+   };
 }
-

@@ -3,7 +3,7 @@
 // The Editor is displayed in the ABDesigner as a view is worked on.
 // The Editor allows a widget to be moved and placed on the canvas.
 //
-export default function FNAbviewimageEditor({ AB, ABViewEditorPlugin }) {
+export default function FNAbviewimageEditor({ ABViewEditorPlugin }) {
    const BASE_ID = "interface_editor_viewimage";
 
    return class ABViewImageEditor extends ABViewEditorPlugin {
