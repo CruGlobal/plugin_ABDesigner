@@ -17,7 +17,7 @@ import FPopupExport from "./ui_work_object_workspace_popupExport";
 import FPopupFrozenColumns from "./ui_work_object_workspace_popupFrozenColumns";
 import FPopupHeaderEditMenu from "./ui_work_object_workspace_popupHeaderEditMenu";
 import FPopupHideFields from "./ui_work_object_workspace_popupHideFields";
-import FPopupImport from "./ui_work_object_workspace_popupImport";
+// import FPopupImport from "./ui_work_object_workspace_popupImport";
 import FPopupNewDataField from "./ui_work_object_workspace_popupNewDataField";
 import FPopupSortField from "./ui_work_object_workspace_popupSortFields";
 import FPopupViewSettings from "./ui_work_object_workspace_popupViewSettings";
@@ -234,10 +234,10 @@ export default function (AB, ibase, init_settings) {
             `${base}_export`
          );
 
-         this.PopupImportObjectComponent = new FPopupImport(
-            AB,
-            `${base}_import`
-         );
+         // this.PopupImportObjectComponent = new FPopupImport(
+         //    AB,
+         //    `${base}_import`
+         // );
          // this.PopupImportObjectComponent.on("done", () => {
          //    this.populateObjectWorkspace(this.CurrentObject);
          // });

@@ -1,18 +1,31 @@
-/*
- * ABViewCSVExporter
- * A Property manager for our ABViewCSVExporter widget
- */
-
-import FViewClass from "./ABView";
-
-export default function (AB) {
+// FNAbviewcsvexporter Properties
+// A properties side import for an ABView.
+//
+export default function FNAbviewcsvexporterProperties({
+   AB,
+   ABViewPropertiesPlugin,
+   // ABUIPlugin,
+}) {
    const BASE_ID = "properties_abview_csvexporter";
 
-   const ABViewClassProperty = FViewClass(AB);
    const uiConfig = AB.Config.uiSettings();
-   const L = ABViewClassProperty.L();
+   const L = AB.Label();
 
-   class ABViewCSVExporterProperty extends ABViewClassProperty {
+
+   return class ABAbviewcsvexporterProperties extends ABViewPropertiesPlugin {
+
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+         // properties-view : will display in the properties panel of the ABDesigner
+      }
+
+
+
+
       constructor(baseID) {
          super(baseID ?? BASE_ID, {
             datacollection: "",
@@ -22,6 +35,7 @@ export default function (AB) {
             width: "",
             buttonFilter: "",
             fields: "",
+            dataviewID: "",
          });
 
          this.AB = AB;
@@ -143,9 +157,8 @@ export default function (AB) {
                   autoheight: true,
                   select: false,
                   template: (item) => {
-                     return `<span style="min-width: 18px; display: inline-block;"><i class="fa ${
-                        item.isHidden ? "fa-square-o" : "fa-check-square-o"
-                     } ab-visible-field-icon"></i>&nbsp;</span> ${item.label}`;
+                     return `<span style="min-width: 18px; display: inline-block;"><i class="fa ${item.isHidden ? "fa-square-o" : "fa-check-square-o"
+                        } ab-visible-field-icon"></i>&nbsp;</span> ${item.label}`;
                   },
                   on: {
                      onItemClick: (id, e, node) => {
@@ -192,19 +205,19 @@ export default function (AB) {
 
          $$(ids.hasHeader).setValue(
             view.settings.hasHeader ??
-               ABViewCSVExporterPropertyComponentDefaults.hasHeader
+            ABViewCSVExporterPropertyComponentDefaults.hasHeader
          );
          $$(ids.buttonLabel).setValue(
             view.settings.buttonLabel ??
-               ABViewCSVExporterPropertyComponentDefaults.buttonLabel
+            ABViewCSVExporterPropertyComponentDefaults.buttonLabel
          );
          $$(ids.filename).setValue(
             view.settings.filename ??
-               ABViewCSVExporterPropertyComponentDefaults.filename
+            ABViewCSVExporterPropertyComponentDefaults.filename
          );
          $$(ids.width).setValue(
             view.settings.width ??
-               ABViewCSVExporterPropertyComponentDefaults.width
+            ABViewCSVExporterPropertyComponentDefaults.width
          );
 
          this.populateFilter();
@@ -341,6 +354,5 @@ export default function (AB) {
          return super._ViewClass("csvExporter");
       }
    }
-
-   return ABViewCSVExporterProperty;
 }
+
