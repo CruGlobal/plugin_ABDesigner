@@ -8,10 +8,8 @@ export default function FNAbviewcsvimporterProperties({
 }) {
    const BASE_ID = "properties_abview_csvimporter";
 
-   const ABViewClassProperty = FViewClass(AB);
    const uiConfig = AB.Config.uiSettings();
-   const L = ABViewClassProperty.L();
-
+   const L = AB.Label();
 
 
    return class ABAbviewcsvimporterProperties extends ABViewPropertiesPlugin {

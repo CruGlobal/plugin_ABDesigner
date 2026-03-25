@@ -8,9 +8,9 @@ export default function FNAbviewcsvexporterProperties({
 }) {
    const BASE_ID = "properties_abview_csvexporter";
 
-   const ABViewClassProperty = FViewClass(AB);
    const uiConfig = AB.Config.uiSettings();
-   const L = ABViewClassProperty.L();
+   const L = AB.Label();
+
 
    return class ABAbviewcsvexporterProperties extends ABViewPropertiesPlugin {
 
