@@ -92,7 +92,7 @@ export default function (AB) {
          require("./views/ABViewDetailText"),
          require("./views/ABViewDetailTree"),
          require("./views/ABViewDocxBuilder"),
-         require("./views/ABViewForm"),
+         // require("./views/ABViewForm"),
          require("./views/ABViewFormButton"),
          require("./views/ABViewFormCheckbox"),
          require("./views/ABViewFormConnect"),
