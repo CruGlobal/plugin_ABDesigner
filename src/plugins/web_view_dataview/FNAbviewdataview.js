@@ -1,21 +1,27 @@
 // FNAbviewdataview Properties
 // A properties side import for an ABView.
 //
+
+import FABViewDetail from "../web_view_detail/FNAbviewdetail";
+import ABViewPropertyLinkPage from "../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyLinkPage";
+
 export default function FNAbviewdataviewProperties({
    AB,
-   ABViewPropertiesPlugin,
+   // ABViewPropertiesPlugin,
    // ABUIPlugin,
 }) {
    const base = "properties_abview_dataview";
 
-   const ABViewDetail = FABViewDetail(AB);
+   const ABViewDetail = FABViewDetail({ AB });
+   // NOTE: this is another plugin, so pass in { AB }
+
    const LinkPageProperty = ABViewPropertyLinkPage(AB, base);
    const uiConfig = AB.Config.uiSettings();
    const L = ABViewDetail.L();
 
    let ABViewDataviewPropertyComponentDefaults = {};
 
-   return class ABAbviewdataviewProperties extends ABViewPropertiesPlugin {
+   return class ABAbviewdataviewProperties extends ABViewDetail {
       static getPluginKey() {
          return this.key;
       }
