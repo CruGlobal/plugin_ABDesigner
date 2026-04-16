@@ -84,7 +84,7 @@ export default function (AB) {
          require("./views/ABViewDataFilter"),
          // require("./views/ABViewDataSelect"),
          // require("./views/ABViewDataview"),
-         require("./views/ABViewDetail"),
+         // require("./views/ABViewDetail"),
          require("./views/ABViewDetailCheckbox"),
          require("./views/ABViewDetailCustom"),
          require("./views/ABViewDetailImage"),
