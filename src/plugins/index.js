@@ -4,6 +4,9 @@ import viewCommentProperties from "./web_view_comment/FNAbviewcomment.js";
 import viewCommentEditor from "./web_view_comment/FNAbviewcommentEditor.js";
 import viewDataSelectProperties from "./web_view_data-select/FNAbviewdataselect.js";
 import viewDataSelectEditor from "./web_view_data-select/FNAbviewdataselectEditor.js";
+import viewDataviewProperties from "./web_view_dataview/FNAbviewdataview.js";
+import viewDataviewEditor from "./web_view_dataview/FNAbviewdataviewEditor.js";
+import viewDetailProperties from "./web_view_detail/FNAbviewdetail.js";
 import viewImageProperties from "./web_view_image/FNAbviewimage.js";
 import viewImageEditor from "./web_view_image/FNAbviewimageEditor.js";
 import viewLabelProperties from "./web_view_label/FNAbviewLabel.js";
@@ -25,6 +28,9 @@ const AllPlugins = [
    viewCommentEditor,
    viewDataSelectProperties,
    viewDataSelectEditor,
+   viewDataviewProperties,
+   viewDataviewEditor,
+   viewDetailProperties,
    viewImageProperties,
    viewImageEditor,
    viewLabelProperties,

@@ -24,7 +24,7 @@ export default function (AB) {
       require("./views/ABViewCSVExporter"),
       require("./views/ABViewCSVImporter"),
       // require("./views/ABViewDataSelect"),
-      require("./views/ABViewDataview"),
+      // require("./views/ABViewDataview"),
       require("./views/ABViewDetail"),
       require("./views/ABViewDocxBuilder"),
       require("./views/ABViewForm"),
