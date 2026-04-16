@@ -63,8 +63,7 @@ export default function (AB) {
 
          ui() {
             let key = ABViewContainerEditor.key;
-            let Defaults =
-               AB.ClassManager.viewClass(key).defaultValues();
+            let Defaults = AB.ClassManager.viewClass(key).defaultValues();
             return {
                _dashboardID: this.ids.component,
                rows: [
