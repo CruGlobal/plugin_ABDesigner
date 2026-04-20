@@ -1,3 +1,5 @@
+import viewFormProperties from "./web_view_form/FNAbviewform.js";
+import viewFormEditor from "./web_view_form/FNAbviewformEditor.js";
 import viewCarouselProperties from "./web_view_carousel/FNAbviewcarousel.js";
 import viewCarouselEditor from "./web_view_carousel/FNAbviewcarouselEditor.js";
 import viewCommentProperties from "./web_view_comment/FNAbviewcomment.js";
@@ -38,6 +40,8 @@ const AllPlugins = [
    viewTabEditor,
    viewTextProperties,
    viewTextEditor,
+   viewFormProperties,
+   viewFormEditor,
 ];
 
 export default {
