@@ -350,7 +350,7 @@ static getPluginType() {
 
          // update properties when a field component is deleted
          view.views().forEach((v) => {
-            if (v instanceof this.AB.Class.ABViewFormItem)
+            if (v.isFormField)
                v.once("destroyed", () => this.populate(view));
          });
 
@@ -442,7 +442,7 @@ static getPluginType() {
        * NOTE: Must be overwritten by the Child Class
        */
       ViewClass() {
-         return super._ViewClass("carousel");
+         return super._ViewClass("form");
       }
 
       //
@@ -454,6 +454,9 @@ static getPluginType() {
       }
 
       check(e, fieldId) {
+         if (this._isBusy) return;
+         this._isBusy = true;
+         this.busy();
          const ids = this.ids;
          let currView = this.CurrentView;
          let formView = currView.parentFormComponent();
@@ -464,6 +467,7 @@ static getPluginType() {
          $$(ids.fields).updateItem(fieldId, item);
 
          let doneFn = () => {
+            this._isBusy = false;
             formView
                .refreshDefaultButton(ids)
                .save()
@@ -471,6 +475,7 @@ static getPluginType() {
                   // refresh UI
                   currView.emit("properties.updated", currView);
                   this.onChange();
+                  this.ready();
                });
 
             // // trigger a save()
@@ -479,14 +484,27 @@ static getPluginType() {
 
          // add a field to the form
          if (item.selected) {
-            let fieldView = currView.addFieldToForm(item);
+            // Check for duplication
+            let exists = formView
+               .fieldComponents()
+               .find((c) => c.settings.fieldId == fieldId);
+            if (exists) {
+               this._isBusy = false;
+               this.ready();
+               return;
+            }
+
+            let fieldView = formView.addFieldToForm(item);
             if (fieldView) {
                fieldView.save().then(() => {
                   fieldView.once("destroyed", () => this.populate(currView));
-                  currView.viewInsert(fieldView).then(() => {
+                  formView.viewInsert(fieldView).then(() => {
                      doneFn();
                   });
                });
+            } else {
+               this._isBusy = false;
+               this.ready();
             }
          }
          // remove field in the form
@@ -499,9 +517,12 @@ static getPluginType() {
                // formView._views = remainingViews;
 
                fieldView.destroy();
-               currView.viewRemove(fieldView).then(() => {
+               formView.viewRemove(fieldView).then(() => {
                   doneFn();
                });
+            } else {
+               this._isBusy = false;
+               this.ready();
             }
          }
       }

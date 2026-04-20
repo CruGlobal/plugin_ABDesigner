@@ -1,24 +1,24 @@
 export default function FNAbviewformEditor({ AB, ABViewEditorPlugin }) {
    const FABViewContainer =
-      require("../../rootPages/Designer/properties/views/ABViewContainer").default;
+      require("../../rootPages/Designer/editors/views/ABViewContainer").default;
 
    const ABViewContainer = FABViewContainer(AB);
-      // var L = UIClass.L();
-      // var L = ABViewContainer.L();
+   // var L = UIClass.L();
+   // var L = ABViewContainer.L();
 
-return class ABAbviewformEditor extends ABViewEditorPlugin {
+   return class ABAbviewformEditor extends ABViewContainer {
 
-static getPluginKey() {
+      static getPluginKey() {
          return this.key;
       }
 
-/**
-       * @method getPluginType
-       * return the plugin type for this editor.
-       * plugin types are how our ClassManager knows how to store 
-       * the plugin.
-       * @return {string} plugin type
-       */
+      /**
+             * @method getPluginType
+             * return the plugin type for this editor.
+             * plugin types are how our ClassManager knows how to store 
+             * the plugin.
+             * @return {string} plugin type
+             */
       static getPluginType() {
          return "editor-view";
          // editor-view : will display in the editor panel of the ABDesigner
@@ -27,37 +27,35 @@ static getPluginKey() {
 
 
 
-         static get key() {
-            return "form";
-         }
+      static get key() {
+         return "form";
+      }
 
-         constructor(view, base = "interface_editor_viewform") {
-            // base: {string} unique base id reference
+      constructor(view, base = "interface_editor_viewform") {
+         // base: {string} unique base id reference
 
-            super(view, base);
+         super(view, base);
 
-            // this.component = this.view.component();
-         }
+         // this.component = this.view.component();
+      }
 
-         ui() {
-            let _ui = super.ui();
-            _ui.rows[0].cellHeight = 75;
-            return _ui;
-         }
+      ui() {
+         let _ui = super.ui();
+         _ui.rows[0].cellHeight = 75;
+         return _ui;
+      }
 
-         init(AB) {
-            this.AB = AB;
-            return super.init(AB);
-         }
+      init(AB) {
+         this.AB = AB;
+         return super.init(AB);
+      }
 
-         detatch() {
-            this.component?.detatch?.();
-         }
+      detatch() {
+         this.component?.detatch?.();
+      }
 
-         onShow() {
-            this.component?.onShow?.();
-         }
-      };
-   
-
+      onShow() {
+         this.component?.onShow?.();
+      }
+   };
 }
