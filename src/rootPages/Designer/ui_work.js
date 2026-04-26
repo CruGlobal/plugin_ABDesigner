@@ -178,6 +178,62 @@ export default function (AB) {
          // NOTE: keep sidebarItems() AFTER this.expandMenu
          var sidebarItems = this.sidebarItems();
 
+         const AB = this.AB;
+         const chatAIPopup = webix.ui({
+            view:"popup",
+            height: 500,
+            width: 450,
+            body:{
+               rows: [
+                  {
+                     view: "comments",
+                     currentUser: 0,
+                     data: [],
+                     on: {
+                        onAfterAdd(recordID, userNumber) {
+                           (async () => {
+                              if (userNumber %2 !== 0) return;
+                              this.disable();
+                              const res = await new Promise((resolve, reject) => {
+                                 const jobID = AB.jobID();
+                                 AB.Network.once(jobID, (context, err, data) => {
+                                    if (err) {
+                                       reject(err);
+                                       return;
+                                    }
+                                    this.add({
+                                       date: new Date(),
+                                       id: webix.uid(),
+                                       text: [
+                                          data.message,
+                                          "SQL:",
+                                          data.sql,
+                                       ].join("\n"),
+                                       user_id: 1,
+                                    });
+                                    resolve(data);
+                                    this.enable();
+                                 });
+                                 AB.Network.post(
+                                    {
+                                       url: `/llminterface/generatedef`,
+                                       params: {
+                                          userMessage: this.getItem(recordID).text,
+                                       }
+                                    },
+                                    {
+                                       key: jobID,
+                                       // context: { resolve, reject },
+                                    }
+                                 );
+                              });
+                           })();
+                        }
+                     }
+                  },
+               ]
+            }
+         });
          return {
             id: this.ids.component,
             rows: [
@@ -217,7 +273,21 @@ export default function (AB) {
                         id: this.ids.labelAppName,
                         align: "center",
                      },
-                     {},
+                     {
+                        cols: [
+                           {},
+                           {
+                              view: "button",
+                              label: "AI Assistant",
+                              width: 150,
+                              on: {
+                                 onItemClick() {
+                                    chatAIPopup.show(this.$view);
+                                 }
+                              }
+                           }
+                        ]
+                     },
                   ],
                },
                //{ height: App.config.mediumSpacer },
