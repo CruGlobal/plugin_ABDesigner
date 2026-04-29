@@ -1,3 +1,5 @@
+import viewGridProperties from "./web_view_grid/FNAbviewgrid.js";
+import viewGridEditor from "./web_view_grid/FNAbviewgridEditor.js";
 import viewCarouselProperties from "./web_view_carousel/FNAbviewcarousel.js";
 import viewCarouselEditor from "./web_view_carousel/FNAbviewcarouselEditor.js";
 import viewCommentProperties from "./web_view_comment/FNAbviewcomment.js";
@@ -46,6 +48,8 @@ const AllPlugins = [
    viewTabEditor,
    viewTextProperties,
    viewTextEditor,
+   viewGridProperties,
+   viewGridEditor
 ];
 
 export default {
