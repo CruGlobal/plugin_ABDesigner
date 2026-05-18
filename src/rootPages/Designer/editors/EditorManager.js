@@ -31,7 +31,7 @@ export default function (AB) {
       require("./views/ABViewFormUrl"),
       // require("./views/ABViewGantt"),
       require("./views/ABViewGrid"),
-      require("./views/ABViewKanban"),
+      // require("./views/ABViewKanban"),
       // require("./views/ABViewLabel"),
       // require("./views/ABViewLayout"),
       require("./views/ABViewMenu"),
