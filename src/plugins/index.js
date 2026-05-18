@@ -1,9 +1,5 @@
-import viewGanttProperties from "./web_view_gantt/FNAbviewgantt.js";
-import viewGanttEditor from "./web_view_gantt/FNAbviewganttEditor.js";
 import viewPivotProperties from "./web_view_pivot/FNAbviewpivot.js";
 import viewPivotEditor from "./web_view_pivot/FNAbviewpivotEditor.js";
-import viewKanbanProperties from "./web_view_kanban/FNAbviewkanban.js";
-import viewKanbanEditor from "./web_view_kanban/FNAbviewkanbanEditor.js";
 import viewCarouselProperties from "./web_view_carousel/FNAbviewcarousel.js";
 import viewCarouselEditor from "./web_view_carousel/FNAbviewcarouselEditor.js";
 import viewCommentProperties from "./web_view_comment/FNAbviewcomment.js";
@@ -44,11 +40,9 @@ const AllPlugins = [
    viewTabEditor,
    viewTextProperties,
    viewTextEditor,
-   viewKanbanProperties,
-   viewKanbanEditor,
    viewPivotProperties,
    viewPivotEditor,
-, viewGanttProperties, viewGanttEditor];
+];
 
 export default {
    load: (AB) => {
