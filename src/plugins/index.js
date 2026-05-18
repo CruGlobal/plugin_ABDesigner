@@ -1,3 +1,5 @@
+import viewGanttProperties from "./web_view_gantt/FNAbviewgantt.js";
+import viewGanttEditor from "./web_view_gantt/FNAbviewganttEditor.js";
 import viewCarouselProperties from "./web_view_carousel/FNAbviewcarousel.js";
 import viewCarouselEditor from "./web_view_carousel/FNAbviewcarouselEditor.js";
 import viewCommentProperties from "./web_view_comment/FNAbviewcomment.js";
@@ -19,25 +21,27 @@ import viewTextProperties from "./web_view_text/FNAbviewtext.js";
 import viewTextEditor from "./web_view_text/FNAbviewtextEditor.js";
 
 const AllPlugins = [
-   viewCarouselProperties,
    viewCarouselEditor,
-   viewCommentProperties,
+   viewCarouselProperties,
    viewCommentEditor,
-   viewDataSelectProperties,
+   viewCommentProperties,
    viewDataSelectEditor,
-   viewImageProperties,
+   viewDataSelectProperties,
+   viewGanttEditor,
+   viewGanttProperties,
    viewImageEditor,
-   viewLabelProperties,
+   viewImageProperties,
    viewLabelEditor,
-   viewLayoutProperties,
+   viewLabelProperties,
    viewLayoutEditor,
+   viewLayoutProperties,
    viewListProperties,
-   viewPdfImporterProperties,
    viewPdfImporterEditor,
-   viewTabProperties,
+   viewPdfImporterProperties,
    viewTabEditor,
-   viewTextProperties,
+   viewTabProperties,
    viewTextEditor,
+   viewTextProperties,
 ];
 
 export default {
