@@ -18,7 +18,7 @@ import WorkspaceKanban from "./ui_work_object_workspace_view_kanban";
 
 import FViewGanttProperties from "./properties/workspaceViews/ABViewGantt";
 import FViewGridProperties from "./properties/workspaceViews/ABViewGrid";
-import FViewKanbanProperties from "./properties/workspaceViews/ABViewKanban";
+import FViewKanbanProperties from "../../plugins/web_view_kanban/Abkanbanworkspace.js";
 
 export default function (AB, ibase, isettings) {
    ibase = ibase || "ui_work_object_workspace_workspaceviews";

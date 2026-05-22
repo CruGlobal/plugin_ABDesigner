@@ -1,42 +1,37 @@
 // FNAbviewkanban Properties
 // A properties side import for an ABView.
 //
+import FABViewKanbanWorkspace from "./Abkanbanworkspace.js";
+import FPopupNewDataField from "../../rootPages/Designer/ui_work_object_workspace_popupNewDataField";
+
 export default function FNAbviewkanbanProperties({
    AB,
    ABViewPropertiesPlugin,
-   // ABUIPlugin,
+   ABViewPropertyLinkPage,
 }) {
-      const BASE_ID = "properties_abview_kanban";
+   const BASE_ID = "properties_abview_kanban";
 
-   const LinkPageProperty = ABViewPropertyLinkPage(AB, BASE_ID);
    const uiConfig = AB.UISettings.config();
+   const L = AB.Label();
 
-   const ViewKanbanProperties = FViewKanbanProperties(AB, `${BASE_ID}_prop`);
+   const LinkPagePropertyClass = ABViewPropertyLinkPage(AB, BASE_ID);
+   const ViewKanbanProperties = FABViewKanbanWorkspace(AB, `${BASE_ID}_prop`);
    var PopupNewDataFieldComponent = null;
-   // NOTE: this is the instance of the FPopupNewDataField.
-   // however we need to make the instance later to prevent an inifinite
-   // recursion upon loading.
 
-   
-
-return class ABAbviewkanbanProperties extends ABViewPropertiesPlugin {
-
-static getPluginKey() {
+   return class ABAbviewkanbanProperties extends ABViewPropertiesPlugin {
+      static getPluginKey() {
          return this.key;
       }
 
-static getPluginType() {
+      static getPluginType() {
          return "properties-view";
-         // properties-view : will display in the properties panel of the ABDesigner
       }
-
-
-
 
       constructor() {
          super(BASE_ID, { datacollection: "" });
 
-         this.linkPageComponent = new LinkPageProperty(AB, BASE_ID);
+         this.AB = AB;
+         this.linkPageComponent = new LinkPagePropertyClass();
       }
 
       static get key() {
@@ -97,8 +92,6 @@ static getPluginType() {
             this.onChange();
          });
 
-         // NOTE: keep this definition in the .init() routine
-         // to prevent an infinite recursion.
          PopupNewDataFieldComponent = FPopupNewDataField(
             AB,
             `${BASE_ID}_popupNewDataField`
@@ -119,7 +112,6 @@ static getPluginType() {
       populate(view) {
          super.populate(view);
 
-         // Load in all the Available Datacollections:
          var listDC = view.application.datacollectionsIncluded().map((d) => {
             return {
                id: d.id,
@@ -151,14 +143,9 @@ static getPluginType() {
 
          let obj = dc.datasource;
          ViewKanbanProperties.init(obj, this.CurrentView);
-         PopupNewDataFieldComponent.objectLoad(obj);
+         PopupNewDataFieldComponent?.objectLoad(obj);
       }
 
-      /**
-       * @method values
-       * return the values for this form.
-       * @return {obj}
-       */
       values() {
          const values = super.values();
 
@@ -167,10 +154,10 @@ static getPluginType() {
 
          values.settings = $component.getValues();
 
-         // let fields = ViewKanbanProperties.values();
-         // Object.keys(fields).forEach((f) => {
-         //    values.settings[f] = fields[f];
-         // });
+         let fields = ViewKanbanProperties.values();
+         Object.keys(fields).forEach((f) => {
+            values.settings[f] = fields[f];
+         });
 
          const linkSettings = this.linkPageComponent.getSettings();
          for (const key in linkSettings) {
@@ -180,18 +167,8 @@ static getPluginType() {
          return values;
       }
 
-      /**
-       * @method FieldClass()
-       * A method to return the proper ABViewXXX Definition.
-       * NOTE: Must be overwritten by the Child Class
-       */
       ViewClass() {
          return super._ViewClass("kanban");
       }
-   }
-
-   
-
-
+   };
 }
-

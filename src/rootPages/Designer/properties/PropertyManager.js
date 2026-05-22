@@ -105,7 +105,7 @@ export default function (AB) {
          require("./views/ABViewFormTextbox"),
          require("./views/ABViewFormTree"),
          require("./views/ABViewFormUrl"),
-         require("./views/ABViewGantt"),
+         // require("./views/ABViewGantt"),
          require("./views/ABViewGrid"),
          // require("./views/ABViewImage"),
          // require("./views/ABViewKanban"),

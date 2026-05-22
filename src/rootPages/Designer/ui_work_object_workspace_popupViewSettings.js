@@ -7,7 +7,7 @@
 import UI_Class from "./ui_class";
 import FormABViewGantt from "./properties/workspaceViews/ABViewGantt";
 import FormABViewGrid from "./properties/workspaceViews/ABViewGrid";
-import FormABViewKanBan from "./properties/workspaceViews/ABViewKanban";
+import FormABViewKanBan from "../../plugins/web_view_kanban/Abkanbanworkspace.js";
 
 export default function (AB, ibase, isettings) {
    ibase = ibase || "abd_work_object_workspace_popupAddView";

@@ -6,16 +6,15 @@
 export default function FNAbviewkanbanEditor({ AB, ABViewEditorPlugin }) {
    const BASE_ID = "interface_editor_viewkanban";
 
-return class ABAbviewkanbanEditor extends ABViewEditorPlugin {
-
-static getPluginKey() {
+   return class ABAbviewkanbanEditor extends ABViewEditorPlugin {
+      static getPluginKey() {
          return this.key;
       }
 
-/**
+      /**
        * @method getPluginType
        * return the plugin type for this editor.
-       * plugin types are how our ClassManager knows how to store 
+       * plugin types are how our ClassManager knows how to store
        * the plugin.
        * @return {string} plugin type
        */
@@ -24,43 +23,37 @@ static getPluginKey() {
          // editor-view : will display in the editor panel of the ABDesigner
       }
 
+      static get key() {
+         return "kanban";
+      }
 
+      constructor(view, base = BASE_ID) {
+         super(view, base);
+      }
 
+      ui() {
+         const component = this.component;
+         const _ui = component.ui();
+         _ui.minWidth = 400;
 
-         static get key() {
-            return "kanban";
-         }
+         return {
+            view: "layout",
+            cols: [_ui, { fillspace: true }],
+         };
+      }
 
-         constructor(view, base = BASE_ID) {
-            // base: {string} unique base id reference
-            super(view, base);
-         }
+      init(AB) {
+         this.AB = AB;
 
-         ui() {
-            const component = this.component;
-            const _ui = component.ui();
-            _ui.minWidth = 400;
+         this.component?.init?.(AB);
+      }
 
-            return {
-               view: "layout",
-               cols: [_ui, { fillspace: true }],
-            };
-         }
+      detatch() {
+         this.component?.detatch?.();
+      }
 
-         init(AB) {
-            this.AB = AB;
-
-            this.component?.init?.(AB);
-         }
-
-         detatch() {
-            this.component?.detatch?.();
-         }
-
-         onShow() {
-            this.component?.onShow?.();
-         }
-      };
-   
-
+      onShow() {
+         this.component?.onShow?.();
+      }
+   };
 }
