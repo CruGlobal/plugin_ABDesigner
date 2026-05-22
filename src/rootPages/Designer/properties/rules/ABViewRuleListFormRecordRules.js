@@ -15,7 +15,6 @@ import FRuleRemoveConnected from "./ruleActions/ABViewRuleActionFormRecordRuleRe
 export default function (AB, iBase) {
    const ABViewRuleList = FABViewRuleList(AB);
    const ABViewRule = FABViewRule(AB);
-   const L = ABViewRuleList.L();
 
    const RuleUpdate = FRuleUpdate(AB);
    const RuleInsertConnected = FRuleInsertConnected(AB);
@@ -27,8 +26,8 @@ export default function (AB, iBase) {
       constructor(base = `ABViewRuleListFormRecordRules`) {
          var settings = {
             labels: {
-               header: L("Record Rules"),
-               headerDefault: L("Record Rules"),
+               header: "Record Rules",
+               headerDefault: "Record Rules",
             },
          };
          super(base, settings);

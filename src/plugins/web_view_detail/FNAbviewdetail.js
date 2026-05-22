@@ -2,9 +2,9 @@
 // A properties side import for an ABView.
 //
 
-import FABViewContainer from "../../rootPages/Designer/properties/views/ABViewContainer";
+// import FABViewContainer from "../../rootPages/Designer/properties/views/ABViewContainer";
 
-export default function FNAbviewdetailProperties({ AB }) {
+export default function FNAbviewdetailProperties({ AB, FABViewContainer }) {
    const ABViewContainer = FABViewContainer(AB);
    const uiConfig = AB.Config.uiSettings();
    const L = ABViewContainer.L();
@@ -34,8 +34,8 @@ export default function FNAbviewdetailProperties({ AB }) {
                   labelWidth: "",
                   height: "",
                },
-               ids
-            )
+               ids,
+            ),
          );
 
          this.AB = AB;
@@ -180,20 +180,20 @@ export default function FNAbviewdetailProperties({ AB }) {
 
          $$(ids.showLabel).setValue(
             view.settings.showLabel ??
-               ABViewDetailPropertyComponentDefaults.showLabel
+               ABViewDetailPropertyComponentDefaults.showLabel,
          );
          $$(ids.labelPosition).setValue(
             view.settings.labelPosition ??
-               ABViewDetailPropertyComponentDefaults.labelPosition
+               ABViewDetailPropertyComponentDefaults.labelPosition,
          );
          $$(ids.labelWidth).setValue(
             parseInt(view.settings.labelWidth) ??
-               ABViewDetailPropertyComponentDefaults.labelWidth
+               ABViewDetailPropertyComponentDefaults.labelWidth,
          );
          $$(ids.height).setValue(
             view.settings.height >= 0
                ? view.settings.height
-               : ABViewDetailPropertyComponentDefaults.height
+               : ABViewDetailPropertyComponentDefaults.height,
          );
 
          // update properties when a field component is deleted
@@ -359,7 +359,7 @@ export default function FNAbviewdetailProperties({ AB }) {
          // remove field in the form
          else {
             const fieldView = detailView.views(
-               (c) => c.settings.fieldId == fieldId
+               (c) => c.settings.fieldId == fieldId,
             )[0];
 
             if (fieldView) {

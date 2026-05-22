@@ -3,14 +3,8 @@
 // The Editor is displayed in the ABDesigner as a view is worked on.
 // The Editor allows a widget to be moved and placed on the canvas.
 //
-import FABViewContainer from "../../rootPages/Designer/editors/views/ABViewContainer";
-
-export default function FNAbviewdataviewEditor({ AB /*ABViewEditorPlugin*/ }) {
-   const ABViewContainer = FABViewContainer(AB);
-   // var L = UIClass.L();
-   // var L = ABViewContainer.L();
-
-   return class ABAbviewdataviewEditor extends ABViewContainer {
+export default function FNAbviewdataviewEditor({ ABViewEditorPlugin }) {
+   return class ABAbviewdataviewEditor extends ABViewEditorPlugin {
       static getPluginKey() {
          return this.key;
       }
@@ -32,31 +26,28 @@ export default function FNAbviewdataviewEditor({ AB /*ABViewEditorPlugin*/ }) {
       }
 
       constructor(view, base = "interface_editor_viewdataview") {
-         // base: {string} unique base id reference
-
          super(view, base);
-
-         // this.component = this.view.component();
       }
 
       ui() {
          let _ui = super.ui();
-         _ui.rows[0].cellHeight = 75;
+         if (_ui?.rows?.[0]) {
+            _ui.rows[0].cellHeight = 75;
+         }
          return _ui;
       }
 
-      init(AB) {
+      async init(AB) {
          this.AB = AB;
-         return super.init(AB);
+         await super.init(AB);
       }
 
       detatch() {
-         this.component?.detatch?.();
+         super.detatch();
       }
 
       onShow() {
          super.onShow();
-         this.component?.onShow?.();
       }
    };
 }

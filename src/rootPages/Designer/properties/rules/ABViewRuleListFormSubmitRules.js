@@ -17,7 +17,6 @@ import FRuleEmail from "./ruleActions/ABViewRuleActionFormSubmitRuleEmail";
 export default function (AB, iBase) {
    const ABViewRuleList = FABViewRuleList(AB);
    const ABViewRule = FABViewRule(AB);
-   const L = ABViewRuleList.L();
 
    const RuleConfirmMessage = FRuleConfirmMessage(AB);
    const RuleExistPage = FRuleExistPage(AB);
@@ -30,8 +29,8 @@ export default function (AB, iBase) {
       constructor(base = `ABViewRuleListFormSubmitRules`) {
          var settings = {
             labels: {
-               header: L("Submit Rules"),
-               headerDefault: L("Submit Rules"),
+               header: "Submit Rules",
+               headerDefault: "Submit Rules",
             },
          };
          super(base, settings);

@@ -21,6 +21,20 @@ import ApplicationFactory from "./src/application.js";
 import Labels from "./src/labels/labels.js";
 import LocalPlugins from "./src/plugins/index.js";
 
+// build our plugin resources
+import FABViewPropertyLinkPage from "./src/rootPages/Designer/properties/views/viewProperties/ABViewPropertyLinkPage";
+import FABViewPropertyFilterData from "./src/rootPages/Designer/properties/views/viewProperties/ABViewPropertyFilterData";
+import FABViewContainer from "./src/rootPages/Designer/properties/views/ABViewContainer";
+import FABViewRuleListFormSubmitRules from "./src/rootPages/Designer/properties/rules/ABViewRuleListFormSubmitRules";
+import FTabPopup from "./src/rootPages/Designer/interface_common/ui_tab_form_popup";
+const ABDesignerResources = {
+   FABViewContainer,
+   FABViewPropertyLinkPage,
+   FABViewPropertyFilterData,
+   FABViewRuleListFormSubmitRules,
+   FTabPopup,
+};
+
 // pull in our css we defined for our plugin
 // eslint-disable-next-line no-unused-vars
 import designerCSS from "./styles/Designer.css";
@@ -74,6 +88,15 @@ window.__AB_Plugins.push({
     */
    labels: function (lang) {
       return Labels[lang] || Labels.en;
+   },
+
+   /**
+    * @function pluginResources
+    * @description Returns the resources for the ABDesigner plugin.
+    * @returns {Object} The resources object.
+    */
+   pluginResources: function () {
+      return ABDesignerResources;
    },
 
    /**

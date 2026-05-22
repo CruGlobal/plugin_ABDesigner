@@ -3,9 +3,9 @@
 // The Editor is displayed in the ABDesigner as a view is worked on.
 // The Editor allows a widget to be moved and placed on the canvas.
 //
-import FABViewContainer from "../../rootPages/Designer/editors/views/ABViewContainer";
+// import FABViewContainer from "../../rootPages/Designer/editors/views/ABViewContainer";
 
-export default function FNAbviewdetailEditor({ AB /*ABViewEditorPlugin*/ }) {
+export default function FNAbviewdetailEditor({ AB, FABViewContainer }) {
    const ABViewContainer = FABViewContainer(AB);
    // var L = UIClass.L();
    // var L = ABViewContainer.L();

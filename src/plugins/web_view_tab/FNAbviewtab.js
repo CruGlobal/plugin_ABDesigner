@@ -1,12 +1,12 @@
 // FNAbviewtab Properties
 // A properties side import for an ABView.
 //
-import FTabPopup from "../../rootPages/Designer/interface_common/ui_tab_form_popup";
+// import FTabPopup from "../../rootPages/Designer/interface_common/ui_tab_form_popup";
 
 export default function FNAbviewtabProperties({
    AB,
    ABViewPropertiesPlugin,
-   // ABUIPlugin,
+   FTabPopup,
 }) {
    const BASE_ID = "properties_abview_tab";
 

@@ -6,18 +6,20 @@ export default function FNAbviewcarouselProperties({
    ABViewPropertiesPlugin,
    // ABViewPropertyFilterData,
    // ABViewPropertyLinkPage,
+   FABViewPropertyLinkPage,
+   FABViewPropertyFilterData,
 }) {
    const L = AB.Label();
    const uiConfig = AB.Config.uiSettings();
 
    const base = "properties_abview_carousel";
-   const FABViewPropertyLinkPage =
-      require("../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyLinkPage").default;
+   // const FABViewPropertyLinkPage =
+   //    require("../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyLinkPage").default;
    const LinkPageHelper = FABViewPropertyLinkPage(AB, base);
    const PropertyLinkPage = new LinkPageHelper();
 
-   const FABViewPropertyFilterData =
-      require("../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyFilterData").default;
+   // const FABViewPropertyFilterData =
+   //    require("../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyFilterData").default;
    const FilterDataHelper = FABViewPropertyFilterData(AB, base);
    const PopupCarouselFilterMenu = new FilterDataHelper();
 
@@ -109,7 +111,7 @@ export default function FNAbviewcarouselProperties({
                                              .fields(
                                                 (f) =>
                                                    f instanceof
-                                                   this.ABFieldImage
+                                                   this.ABFieldImage,
                                              )
                                              .map((f) => {
                                                 return {

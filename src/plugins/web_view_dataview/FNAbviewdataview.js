@@ -2,26 +2,27 @@
 // A properties side import for an ABView.
 //
 
-import FABViewDetail from "../web_view_detail/FNAbviewdetail";
-import ABViewPropertyLinkPage from "../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyLinkPage";
+import FNAbviewdetailProperties from "../view_detail/FNAbviewdetail.js";
 
 export default function FNAbviewdataviewProperties({
    AB,
-   // ABViewPropertiesPlugin,
-   // ABUIPlugin,
+   FABViewContainer,
+   FABViewPropertyLinkPage,
 }) {
    const base = "properties_abview_dataview";
 
-   const ABViewDetail = FABViewDetail({ AB });
-   // NOTE: this is another plugin, so pass in { AB }
+   const ABViewDetailProperties = FNAbviewdetailProperties({
+      AB,
+      FABViewContainer,
+   });
 
-   const LinkPageProperty = ABViewPropertyLinkPage(AB, base);
+   const LinkPageHelper = FABViewPropertyLinkPage(AB, base);
    const uiConfig = AB.Config.uiSettings();
-   const L = ABViewDetail.L();
+   const L = ABViewDetailProperties.L();
 
    let ABViewDataviewPropertyComponentDefaults = {};
 
-   return class ABAbviewdataviewProperties extends ABViewDetail {
+   return class ABAbviewdataviewProperties extends ABViewDetailProperties {
       static getPluginKey() {
          return this.key;
       }
@@ -41,7 +42,7 @@ export default function FNAbviewdataviewProperties({
          ABViewDataviewPropertyComponentDefaults =
             this.AB.ClassManager.viewClass("dataview").defaultValues();
 
-         this.linkPageComponent = new LinkPageProperty(AB, base);
+         this.linkPageComponent = new LinkPageHelper();
       }
 
       static get key() {
@@ -70,10 +71,10 @@ export default function FNAbviewdataviewProperties({
          ]);
       }
 
-      init() {
-         super.init(this.AB);
+      async init(AB) {
+         await super.init(AB);
 
-         this.linkPageComponent.init();
+         await this.linkPageComponent.init(AB);
          this.linkPageComponent.on("changed", () => {
             this.onChange();
          });
@@ -87,7 +88,7 @@ export default function FNAbviewdataviewProperties({
 
          $$(ids.xCount).setValue(
             view.settings.xCount ||
-               ABViewDataviewPropertyComponentDefaults.xCount
+               ABViewDataviewPropertyComponentDefaults.xCount,
          );
 
          this.linkPageComponent.viewLoad(view);
