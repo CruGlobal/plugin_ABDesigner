@@ -1,7 +1,7 @@
-import FPopupCountFields from "../../rootPages/Designer/ui_work_object_workspace_popupCountColumns";
+import FPopupCountFields from "./popupCountColumns";
 import FPopupFrozenColumns from "../../rootPages/Designer/ui_work_object_workspace_popupFrozenColumns";
 import FPopupHideFields from "../../rootPages/Designer/ui_work_object_workspace_popupHideFields";
-import FPopupSummaryFields from "../../rootPages/Designer/ui_work_object_workspace_popupSummaryColumns";
+import FPopupSummaryFields from "./popupSummaryColumns";
 
 import FABViewPropertyFilterData from "../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyFilterData";
 import FABViewPropertyLinkPage from "../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyLinkPage";
@@ -20,21 +20,15 @@ export default function FNAbviewgridProperties({
 
    const LinkPageHelper = FABViewPropertyLinkPage(AB, base);
 
-   
-
-return class ABAbviewgridProperties extends ABViewPropertiesPlugin {
-
-static getPluginKey() {
+   return class ABAbviewgridProperties extends ABViewPropertiesPlugin {
+      static getPluginKey() {
          return this.key;
       }
 
-static getPluginType() {
+      static getPluginType() {
          return "properties-view";
          // properties-view : will display in the properties panel of the ABDesigner
       }
-
-
-
 
       constructor() {
          super(base, {
@@ -813,10 +807,5 @@ static getPluginType() {
       ViewClass() {
          return super._ViewClass("grid");
       }
-   }
-
-   
-
-
+   };
 }
-
