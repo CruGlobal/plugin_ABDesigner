@@ -1,3 +1,5 @@
+import viewPivotProperties from "./web_view_pivot/FNAbviewpivot.js";
+import viewPivotEditor from "./web_view_pivot/FNAbviewpivotEditor.js";
 import viewCarouselProperties from "./web_view_carousel/FNAbviewcarousel.js";
 import viewCarouselEditor from "./web_view_carousel/FNAbviewcarouselEditor.js";
 import viewCommentProperties from "./web_view_comment/FNAbviewcomment.js";
@@ -46,6 +48,8 @@ const AllPlugins = [
    viewTabEditor,
    viewTextProperties,
    viewTextEditor,
+   viewPivotProperties,
+   viewPivotEditor,
 ];
 
 export default {
