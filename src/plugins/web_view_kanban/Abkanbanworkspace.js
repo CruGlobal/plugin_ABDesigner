@@ -2,22 +2,13 @@
 //
 // Manages the settings for a KanBan View in the Object Workspace
 
-const defaultValues = {
-   name: "Default Kanban",
-   settings: {
-      verticalGroupingField: null,
-      horizontalGroupingField: null,
-      ownerField: null,
-   },
-};
-
-var classABViewKanban = null;
+let classABViewKanban = null;
 
 import UI_Class from "../../rootPages/Designer/ui_class";
 
 export default function (AB, ibase) {
    const UIClass = UI_Class(AB);
-   var L = UIClass.L();
+   const L = UIClass.L();
 
    const ABFieldConnect = AB.Class.ABFieldManager.fieldByKey("connectObject");
    const ABFieldList = AB.Class.ABFieldManager.fieldByKey("list");
@@ -61,26 +52,26 @@ export default function (AB, ibase) {
             ) => {
                if ($option == null || object == null) return;
 
-               var options = object
+               const fieldOptions = object
                   .fields()
                   .filter(filter)
                   .map(({ id, label }) => ({ id, value: label }));
-               if (!isRequired && options.length) {
-                  options.unshift({
+               if (!isRequired && fieldOptions.length) {
+                  fieldOptions.unshift({
                      id: "none",
                      value: L("None"),
                   });
                }
-               $option.define("options", options);
+               $option.define("options", fieldOptions);
 
                if (view) {
                   if (view.settings[attribute]) {
                      $option.define("value", view.settings[attribute]);
-                  } else if (!isRequired && options[0]) {
-                     $option.define("value", options[0].id);
+                  } else if (!isRequired && fieldOptions[0]) {
+                     $option.define("value", fieldOptions[0].id);
                   }
-               } else if (options.filter((o) => o.id).length === 1) {
-                  $option.define("value", options[0].id);
+               } else if (fieldOptions.filter((o) => o.id).length === 1) {
+                  $option.define("value", fieldOptions[0].id);
                }
 
                $option.refresh();
@@ -187,7 +178,9 @@ export default function (AB, ibase) {
                               "Cannot be the same as vertical grouping field"
                            ),
                            validate: (value) => {
-                              var vGroupValue = $$(ids.vGroupInput).getValue();
+                              const vGroupValue = $$(
+                                 ids.vGroupInput
+                              ).getValue();
                               return (
                                  !vGroupValue || !value || vGroupValue !== value
                               );
@@ -284,27 +277,6 @@ export default function (AB, ibase) {
             result.ownerField = $$(ids.ownerInput).getValue() || null;
 
             return result;
-         }
-
-         fromSettings(data) {
-            for (var v in defaultValues) {
-               this[v] = data[v] || defaultValues[v];
-            }
-
-            this.type = this.type();
-            this.key = this.type();
-         }
-
-         toSettings() {
-            var obj = {};
-
-            for (var v in defaultValues) {
-               obj[v] = this[v] || defaultValues[v];
-            }
-
-            obj.key = this.type();
-            obj.type = this.type();
-            return obj;
          }
       };
    }

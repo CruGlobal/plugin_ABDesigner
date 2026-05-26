@@ -48,8 +48,8 @@ export default function FNAbviewkanbanEditor({ AB, ABViewEditorPlugin }) {
          this.component?.init?.(AB);
       }
 
-      detatch() {
-         this.component?.detatch?.();
+      detach() {
+         this.component?.detach?.();
       }
 
       onShow() {

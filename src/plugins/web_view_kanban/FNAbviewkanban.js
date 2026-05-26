@@ -16,7 +16,7 @@ export default function FNAbviewkanbanProperties({
 
    const LinkPagePropertyClass = ABViewPropertyLinkPage(AB, BASE_ID);
    const ViewKanbanProperties = FABViewKanbanWorkspace(AB, `${BASE_ID}_prop`);
-   var PopupNewDataFieldComponent = null;
+   let PopupNewDataFieldComponent = null;
 
    return class ABAbviewkanbanProperties extends ABViewPropertiesPlugin {
       static getPluginKey() {
@@ -81,9 +81,10 @@ export default function FNAbviewkanbanProperties({
          this.AB = AB;
 
          ViewKanbanProperties.on("new.field", (key) => {
-            let dc = this.AB.datacollectionByID(
+            const dc = this.AB.datacollectionByID(
                this.CurrentView.settings.dataviewID
             );
+            if (!dc) return;
             PopupNewDataFieldComponent.objectLoad(dc.datasource);
             PopupNewDataFieldComponent.resetState();
             PopupNewDataFieldComponent.show(null, key, false);
@@ -112,7 +113,7 @@ export default function FNAbviewkanbanProperties({
       populate(view) {
          super.populate(view);
 
-         var listDC = view.application.datacollectionsIncluded().map((d) => {
+         const listDC = view.application.datacollectionsIncluded().map((d) => {
             return {
                id: d.id,
                value: d.label,
