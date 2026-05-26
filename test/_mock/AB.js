@@ -19,6 +19,10 @@ export default class AB {
       this.Config = new Config();
       this.Multilingual = Multilingual;
    }
+
+   getPluginAPI() {
+      return { AB: this };
+   }
 }
 
 class ClassUI extends EventEmitter {

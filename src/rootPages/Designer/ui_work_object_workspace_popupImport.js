@@ -5,8 +5,8 @@
  *
  */
 
-import UI_Class from "../../rootPages/Designer/ui_class";
-import FNAbviewcsvimporterProperties from "./FNAbviewcsvimporter.js";
+import UI_Class from "./ui_class";
+import FNAbviewcsvimporterProperties from "../../plugins/web_view_csvImporter/FNAbviewcsvimporter.js";
 
 export default function (AB, ibase) {
    ibase = ibase || "ui_work_object_workspace_popupImport";
