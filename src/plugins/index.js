@@ -23,8 +23,10 @@
 // import viewTabEditor from "./web_view_tab/FNAbviewtabEditor.js";
 // import viewTextProperties from "./web_view_text/FNAbviewtext.js";
 // import viewTextEditor from "./web_view_text/FNAbviewtextEditor.js";
+import viewPivotProperties from "./web_view_pivot/FNAbviewpivot.js";
+import viewPivotEditor from "./web_view_pivot/FNAbviewpivotEditor.js";
 
-const AllPlugins = [];
+const AllPlugins = [viewPivotProperties, viewPivotEditor];
 
 export default {
    load: (AB) => {
