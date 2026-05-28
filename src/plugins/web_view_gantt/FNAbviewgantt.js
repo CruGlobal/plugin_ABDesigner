@@ -1,35 +1,38 @@
 // FNAbviewgantt Properties
 // A properties side import for an ABView.
 //
+import FABViewGanttWorkspaceView from "./FNAbviewganttWorkspace.js";
+
 export default function FNAbviewganttProperties({
    AB,
    ABViewPropertiesPlugin,
    // ABUIPlugin,
 }) {
-      const BASE_ID = "properties_abview_gantt";
-
+   const BASE_ID = "properties_abview_gantt";
+   const L = AB.Label();
    const uiConfig = AB.Config.uiSettings();
 
+   const FPopupNewDataField =
+      require("../../rootPages/Designer/ui_work_object_workspace_popupNewDataField").default;
+
+   const ABUIPopupNewDataField = FPopupNewDataField(
+      AB,
+      `${BASE_ID}_popupNewDataField`
+   );
    const ABViewGanttWorkspaceView = FABViewGanttWorkspaceView(
       AB,
       `${BASE_ID}_workspaceView_gantt`
    );
 
-   
-
-return class ABAbviewganttProperties extends ABViewPropertiesPlugin {
-
-static getPluginKey() {
+   return class ABAbviewganttProperties extends ABViewPropertiesPlugin {
+      static getPluginKey() {
          return this.key;
       }
 
-static getPluginType() {
+      static getPluginType() {
          return "properties-view";
          // properties-view : will display in the properties panel of the ABDesigner
       }
-
-
-
 
       constructor() {
          super(BASE_ID, {
@@ -101,11 +104,8 @@ static getPluginType() {
 
       async init(AB) {
          this.AB = AB;
+         this.PopupNewDataFieldComponent = ABUIPopupNewDataField;
 
-         this.PopupNewDataFieldComponent = FPopupNewDataField(
-            AB,
-            `${BASE_ID}_popupNewDataField`
-         );
          await this.PopupNewDataFieldComponent.init(AB);
          this.PopupNewDataFieldComponent.on("save", (...params) => {
             ABViewGanttWorkspaceView.emit("field.added", params[0]);
@@ -215,10 +215,5 @@ static getPluginType() {
       ViewClass() {
          return super._ViewClass("gantt");
       }
-   }
-
-   
-
-
+   };
 }
-
