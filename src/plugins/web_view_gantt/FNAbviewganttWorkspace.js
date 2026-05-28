@@ -40,7 +40,7 @@ const defaultValues = {
    },
 };
 
-import UI_Class from "../../ui_class";
+import UI_Class from "../../rootPages/Designer/ui_class";
 
 export default function (AB, ibase) {
    const UIClass = UI_Class(AB);
@@ -184,7 +184,7 @@ export default function (AB, ibase) {
             $$(ids.endDateFieldID).define(
                "value",
                settings.endDateFieldID ||
-               defaultValues.settings.endDateFieldIDFieldID
+                  defaultValues.settings.endDateFieldIDFieldID
             );
             $$(ids.endDateFieldID).refresh();
             this.syncCommonLists(
@@ -197,7 +197,7 @@ export default function (AB, ibase) {
             $$(ids.durationFieldID).define(
                "value",
                settings.durationFieldID ||
-               defaultValues.settings.durationFieldID
+                  defaultValues.settings.durationFieldID
             );
             $$(ids.durationFieldID).refresh();
             this.syncCommonLists(

@@ -1,3 +1,6 @@
+
+import viewGanttProperties from "./web_view_gantt/FNAbviewgantt.js";
+import viewGanttEditor from "./web_view_gantt/FNAbviewganttEditor.js";
 import viewPivotProperties from "./web_view_pivot/FNAbviewpivot.js";
 import viewPivotEditor from "./web_view_pivot/FNAbviewpivotEditor.js";
 import viewCarouselProperties from "./web_view_carousel/FNAbviewcarousel.js";
@@ -25,12 +28,14 @@ import viewTextProperties from "./web_view_text/FNAbviewtext.js";
 import viewTextEditor from "./web_view_text/FNAbviewtextEditor.js";
 
 const AllPlugins = [
-   viewCarouselProperties,
    viewCarouselEditor,
-   viewCommentProperties,
+   viewCarouselProperties,
    viewCommentEditor,
-   viewDataSelectProperties,
+   viewCommentProperties,
    viewDataSelectEditor,
+   viewDataSelectProperties,
+   viewGanttEditor,
+   viewGanttProperties,
    viewDataviewProperties,
    viewDataviewEditor,
    viewDetailProperties,
