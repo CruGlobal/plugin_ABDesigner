@@ -11,9 +11,7 @@ export default function FNAbviewcsvexporterProperties({
    const uiConfig = AB.Config.uiSettings();
    const L = AB.Label();
 
-
    return class ABAbviewcsvexporterProperties extends ABViewPropertiesPlugin {
-
       static getPluginKey() {
          return this.key;
       }
@@ -22,9 +20,6 @@ export default function FNAbviewcsvexporterProperties({
          return "properties-view";
          // properties-view : will display in the properties panel of the ABDesigner
       }
-
-
-
 
       constructor(baseID) {
          super(baseID ?? BASE_ID, {
@@ -157,8 +152,9 @@ export default function FNAbviewcsvexporterProperties({
                   autoheight: true,
                   select: false,
                   template: (item) => {
-                     return `<span style="min-width: 18px; display: inline-block;"><i class="fa ${item.isHidden ? "fa-square-o" : "fa-check-square-o"
-                        } ab-visible-field-icon"></i>&nbsp;</span> ${item.label}`;
+                     return `<span style="min-width: 18px; display: inline-block;"><i class="fa ${
+                        item.isHidden ? "fa-square-o" : "fa-check-square-o"
+                     } ab-visible-field-icon"></i>&nbsp;</span> ${item.label}`;
                   },
                   on: {
                      onItemClick: (id, e, node) => {
@@ -205,19 +201,19 @@ export default function FNAbviewcsvexporterProperties({
 
          $$(ids.hasHeader).setValue(
             view.settings.hasHeader ??
-            ABViewCSVExporterPropertyComponentDefaults.hasHeader
+               ABViewCSVExporterPropertyComponentDefaults.hasHeader
          );
          $$(ids.buttonLabel).setValue(
             view.settings.buttonLabel ??
-            ABViewCSVExporterPropertyComponentDefaults.buttonLabel
+               ABViewCSVExporterPropertyComponentDefaults.buttonLabel
          );
          $$(ids.filename).setValue(
             view.settings.filename ??
-            ABViewCSVExporterPropertyComponentDefaults.filename
+               ABViewCSVExporterPropertyComponentDefaults.filename
          );
          $$(ids.width).setValue(
             view.settings.width ??
-            ABViewCSVExporterPropertyComponentDefaults.width
+               ABViewCSVExporterPropertyComponentDefaults.width
          );
 
          this.populateFilter();
@@ -353,6 +349,5 @@ export default function FNAbviewcsvexporterProperties({
       ViewClass() {
          return super._ViewClass("csvExporter");
       }
-   }
+   };
 }
-

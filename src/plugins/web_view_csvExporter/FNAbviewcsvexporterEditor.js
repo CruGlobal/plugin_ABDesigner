@@ -8,18 +8,17 @@ export default function FNAbviewcsvexporterEditor({ AB, ABViewEditorPlugin }) {
    // var L = ABViewContainer.L();
 
    return class ABAbviewcsvexporterEditor extends ABViewEditorPlugin {
-
       static getPluginKey() {
          return this.key;
       }
 
-     /**
-      * @method getPluginType
-      * return the plugin type for this editor.
-      * plugin types are how our ClassManager knows how to store
-      * the plugin.
-      * @return {string} plugin type
-      */
+      /**
+       * @method getPluginType
+       * return the plugin type for this editor.
+       * plugin types are how our ClassManager knows how to store
+       * the plugin.
+       * @return {string} plugin type
+       */
       static getPluginType() {
          return "editor-view";
          // editor-view : will display in the editor panel of the ABDesigner
@@ -50,7 +49,6 @@ export default function FNAbviewcsvexporterEditor({ AB, ABViewEditorPlugin }) {
       detatch() {
          this.component?.detatch?.();
          super.detatch();
-
       }
 
       onShow() {
@@ -58,6 +56,4 @@ export default function FNAbviewcsvexporterEditor({ AB, ABViewEditorPlugin }) {
          super.onShow();
       }
    };
-
-
 }

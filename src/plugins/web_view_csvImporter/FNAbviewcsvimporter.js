@@ -6,7 +6,6 @@ import FABViewRuleListFormRecordRules from "../../rootPages/Designer/properties/
 export default function FNAbviewcsvimporterProperties({
    AB,
    ABViewPropertiesPlugin,
-   // ABUIPlugin,
 }) {
    const BASE_ID = "properties_abview_csvimporter";
 
@@ -18,9 +17,7 @@ export default function FNAbviewcsvimporterProperties({
       `${BASE_ID}_popupRecordRule`
    );
 
-
    return class ABAbviewcsvimporterProperties extends ABViewPropertiesPlugin {
-
       static getPluginKey() {
          return this.key;
       }
@@ -29,9 +26,6 @@ export default function FNAbviewcsvimporterProperties({
          return "properties-view";
          // properties-view : will display in the properties panel of the ABDesigner
       }
-
-
-
 
       constructor(baseID) {
          super(baseID ?? BASE_ID, {
@@ -86,8 +80,9 @@ export default function FNAbviewcsvimporterProperties({
                         template: this.listTemplate.bind(this),
                         type: {
                            markCheckbox: function (item) {
-                              return `<span class='check webix_icon fa fa-${item.selected ? "check-" : ""
-                                 }square-o'></span>`;
+                              return `<span class='check webix_icon fa fa-${
+                                 item.selected ? "check-" : ""
+                              }square-o'></span>`;
                            },
                         },
                         onClick: {
@@ -212,7 +207,7 @@ export default function FNAbviewcsvimporterProperties({
             f.selected = options.selectAll
                ? true
                : availableFields.filter((fieldId) => f.id == fieldId).length >
-               0;
+                 0;
 
             return f;
          });
@@ -243,10 +238,13 @@ export default function FNAbviewcsvimporterProperties({
             (v) => v.common().key == componentKey
          )[0];
 
-         return `${$common.markCheckbox(field)} ${field.label
-            } <div class='ab-component-form-fields-component-info'> <i class='fa fa-${formComponent?.common()?.icon ?? "fw"
-            }'></i> ${formComponent ? L(formComponent.common().labelKey ?? "Label") : ""
-            } </div>`;
+         return `${$common.markCheckbox(field)} ${
+            field.label
+         } <div class='ab-component-form-fields-component-info'> <i class='fa fa-${
+            formComponent?.common()?.icon ?? "fw"
+         }'></i> ${
+            formComponent ? L(formComponent.common().labelKey ?? "Label") : ""
+         } </div>`;
       }
 
       check(e, fieldId) {
@@ -368,10 +366,5 @@ export default function FNAbviewcsvimporterProperties({
          base.settings = this.defaultValues();
          return base;
       }
-   }
-
-
-
-
+   };
 }
-

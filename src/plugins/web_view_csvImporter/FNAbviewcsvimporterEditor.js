@@ -5,18 +5,17 @@
 //
 export default function FNAbviewcsvimporterEditor({ AB, ABViewEditorPlugin }) {
    // var L = UIClass.L();
-      // var L = ABViewContainer.L();
+   // var L = ABViewContainer.L();
 
-return class ABAbviewcsvimporterEditor extends ABViewEditorPlugin {
-
-static getPluginKey() {
+   return class ABAbviewcsvimporterEditor extends ABViewEditorPlugin {
+      static getPluginKey() {
          return this.key;
       }
 
-/**
+      /**
        * @method getPluginType
        * return the plugin type for this editor.
-       * plugin types are how our ClassManager knows how to store 
+       * plugin types are how our ClassManager knows how to store
        * the plugin.
        * @return {string} plugin type
        */
@@ -25,40 +24,35 @@ static getPluginKey() {
          // editor-view : will display in the editor panel of the ABDesigner
       }
 
+      static get key() {
+         return "csvImporter";
+      }
 
+      constructor(view, base = "interface_editor_csvImporter") {
+         // base: {string} unique base id reference
 
+         super(view, base);
+      }
 
-         static get key() {
-            return "csvImporter";
-         }
+      ui() {
+         return this.component.ui();
+      }
 
-         constructor(view, base = "interface_editor_csvImporter") {
-            // base: {string} unique base id reference
+      init(AB) {
+         this.AB = AB;
 
-            super(view, base);
-         }
+         this.component.init(this.AB);
 
-         ui() {
-            return this.component.ui();
-         }
+         // this.component.onShow();
+         // in our editor, we provide accessLv = 2
+      }
 
-         init(AB) {
-            this.AB = AB;
+      detatch() {
+         this.component?.detatch?.();
+      }
 
-            this.component.init(this.AB);
-
-            // this.component.onShow();
-            // in our editor, we provide accessLv = 2
-         }
-
-         detatch() {
-            this.component?.detatch?.();
-         }
-
-         onShow() {
-            this.component?.onShow?.();
-         }
-      };
-   
-
+      onShow() {
+         this.component?.onShow?.();
+      }
+   };
 }
