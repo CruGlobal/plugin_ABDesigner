@@ -1,6 +1,6 @@
 import FPopupCountFields from "./popupCountColumns";
-import FPopupFrozenColumns from "../../rootPages/Designer/ui_work_object_workspace_popupFrozenColumns";
-import FPopupHideFields from "../../rootPages/Designer/ui_work_object_workspace_popupHideFields";
+import FPopupFrozenColumns from "./popupFrozenColumns";
+import FPopupHideFields from "./popupHideFields";
 import FPopupSummaryFields from "./popupSummaryColumns";
 
 import FABViewPropertyFilterData from "../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyFilterData";
