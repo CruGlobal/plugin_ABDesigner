@@ -4,11 +4,8 @@
 
 let classABViewKanban = null;
 
-import UI_Class from "../../rootPages/Designer/ui_class";
-
 export default function (AB, ibase) {
-   const UIClass = UI_Class(AB);
-   const L = UIClass.L();
+   const L = AB.Label();
 
    const ABFieldConnect = AB.Class.ABFieldManager.fieldByKey("connectObject");
    const ABFieldList = AB.Class.ABFieldManager.fieldByKey("list");

@@ -9,7 +9,7 @@
  *
  */
 import UI_Class from "./ui_class";
-import FViewKanbanProperties from "../../plugins/web_view_kanban/Abkanbanworkspace.js";
+import FViewKanbanProperties from "./properties/workspaceViews/ABViewKanban";
 
 export default function (AB, ibase) {
    ibase = ibase || "ui_work_object_workspace_view_kanban";

@@ -2,7 +2,6 @@
 // A properties side import for an ABView.
 //
 import FABViewKanbanWorkspace from "./Abkanbanworkspace.js";
-import FPopupNewDataField from "../../rootPages/Designer/ui_work_object_workspace_popupNewDataField";
 
 export default function FNAbviewkanbanProperties({
    AB,
@@ -11,11 +10,13 @@ export default function FNAbviewkanbanProperties({
 }) {
    const BASE_ID = "properties_abview_kanban";
 
+   const FPopupNewDataField = require("../../rootPages/Designer/ui_work_object_workspace_popupNewDataField").default;
+
    const uiConfig = AB.UISettings.config();
    const L = AB.Label();
 
-   const LinkPagePropertyClass = ABViewPropertyLinkPage(AB, BASE_ID);
-   const ViewKanbanProperties = FABViewKanbanWorkspace(AB, `${BASE_ID}_prop`);
+   const LinkPagePropertyClass = new ABViewPropertyLinkPage({ AB, BASE_ID });
+   const ViewKanbanProperties = FABViewKanbanWorkspace(AB, BASE_ID);
    let PopupNewDataFieldComponent = null;
 
    return class ABAbviewkanbanProperties extends ABViewPropertiesPlugin {

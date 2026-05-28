@@ -573,7 +573,7 @@ export default function (AB, ibase) {
        */
       fromSettings(data) {
          for (const key in defaultValues)
-            this[key] = data[key] || defaultValues[key];
+            this[v] = data[key] || defaultValues[key];
 
          this.settings = Object.assign(
             {},
