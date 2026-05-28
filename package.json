@@ -8,6 +8,7 @@
     "build:dev": "webpack-cli --config webpack.dev.js",
     "build:update": "webpack-cli --config webpack.prod.js",
     "test": "mocha --config test/.mocharc.js test/**/*.test.js test/**/**/*.test.js",
+    "act": "act -W .github/workflows/e2e-test_local.yml -j e2e-tests --container-architecture linux/amd64",
     "watch": "webpack-cli --config webpack.dev.js --watch --progress",
     "break": "node --inspect-brk=9229 ./node_modules/.bin/webpack-cli --watch --progress"
   },
