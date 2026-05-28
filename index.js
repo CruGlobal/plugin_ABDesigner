@@ -56,7 +56,7 @@ window.__AB_Plugins.push({
       AB.cssLoadAll(this.stylesheets());
 
       // load any included plugins
-      LocalPlugins.load(AB);
+      LocalPlugins.load(AB, this.pluginResources());
 
       // At this point, the Plugin should already have loaded all it's definitions
       // into the AB Factory

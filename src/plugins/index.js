@@ -29,7 +29,7 @@ import viewPivotEditor from "./web_view_pivot/FNAbviewpivotEditor.js";
 const AllPlugins = [viewPivotProperties, viewPivotEditor];
 
 export default {
-   load: (AB) => {
+   load: (AB, ABDesignerAPI) => {
       AllPlugins.forEach((plugin) => {
          AB.pluginRegister(plugin, ABDesignerAPI);
       });
