@@ -6,16 +6,17 @@ import FABViewKanbanWorkspace from "./Abkanbanworkspace.js";
 export default function FNAbviewkanbanProperties({
    AB,
    ABViewPropertiesPlugin,
-   ABViewPropertyLinkPage,
 }) {
    const BASE_ID = "properties_abview_kanban";
 
    const FPopupNewDataField = require("../../rootPages/Designer/ui_work_object_workspace_popupNewDataField").default;
+   const FABViewPropertyLinkPage =
+      require("../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyLinkPage").default;
+   const LinkPagePropertyClass = FABViewPropertyLinkPage(AB, BASE_ID);
 
    const uiConfig = AB.UISettings.config();
    const L = AB.Label();
 
-   const LinkPagePropertyClass = new ABViewPropertyLinkPage({ AB, BASE_ID });
    const ViewKanbanProperties = FABViewKanbanWorkspace(AB, BASE_ID);
    let PopupNewDataFieldComponent = null;
 

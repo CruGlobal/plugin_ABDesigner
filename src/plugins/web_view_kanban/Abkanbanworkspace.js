@@ -2,10 +2,14 @@
 //
 // Manages the settings for a KanBan View in the Object Workspace
 
+import UI_Class from "../../rootPages/Designer/ui_class";
+
 let classABViewKanban = null;
 
 export default function (AB, ibase) {
    const L = AB.Label();
+
+   const UIClass = UI_Class(AB);
 
    const ABFieldConnect = AB.Class.ABFieldManager.fieldByKey("connectObject");
    const ABFieldList = AB.Class.ABFieldManager.fieldByKey("list");
