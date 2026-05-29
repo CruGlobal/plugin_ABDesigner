@@ -20,6 +20,10 @@ export default class AB {
       this.Multilingual = Multilingual;
    }
 
+   Label() {
+      return (key) => key;
+   }
+
    getPluginAPI() {
       return { AB: this };
    }
