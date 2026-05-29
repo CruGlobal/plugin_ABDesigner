@@ -35,11 +35,11 @@ export default function FNAbviewcsvimporterEditor({ AB, ABViewEditorPlugin }) {
       }
 
       ui() {
-         return this.component.ui();
+         return super.ui();
       }
 
-      init(AB) {
-         this.AB = AB;
+      async init(AB) {
+         await super.init(AB);
 
          this.component.init(this.AB);
 
@@ -49,10 +49,12 @@ export default function FNAbviewcsvimporterEditor({ AB, ABViewEditorPlugin }) {
 
       detatch() {
          this.component?.detatch?.();
+         super.detatch();
       }
 
       onShow() {
          this.component?.onShow?.();
+         super.onShow();
       }
    };
 }

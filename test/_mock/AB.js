@@ -1,4 +1,4 @@
-const EventEmitter = require("events").EventEmitter;
+import { EventEmitter } from "events";
 
 export default class AB {
    constructor(definitions) {
