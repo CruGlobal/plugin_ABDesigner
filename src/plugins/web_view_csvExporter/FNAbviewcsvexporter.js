@@ -1,18 +1,26 @@
-/*
- * ABViewCSVExporter
- * A Property manager for our ABViewCSVExporter widget
- */
-
-import FViewClass from "./ABView";
-
-export default function (AB) {
+// FNAbviewcsvexporter Properties
+// A properties side import for an ABView.
+//
+export default function FNAbviewcsvexporterProperties({
+   AB,
+   ABViewPropertiesPlugin,
+   // ABUIPlugin,
+}) {
    const BASE_ID = "properties_abview_csvexporter";
 
-   const ABViewClassProperty = FViewClass(AB);
    const uiConfig = AB.Config.uiSettings();
-   const L = ABViewClassProperty.L();
+   const L = AB.Label();
 
-   class ABViewCSVExporterProperty extends ABViewClassProperty {
+   return class ABAbviewcsvexporterProperties extends ABViewPropertiesPlugin {
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+         // properties-view : will display in the properties panel of the ABDesigner
+      }
+
       constructor(baseID) {
          super(baseID ?? BASE_ID, {
             datacollection: "",
@@ -22,6 +30,7 @@ export default function (AB) {
             width: "",
             buttonFilter: "",
             fields: "",
+            dataviewID: "",
          });
 
          this.AB = AB;
@@ -340,7 +349,5 @@ export default function (AB) {
       ViewClass() {
          return super._ViewClass("csvExporter");
       }
-   }
-
-   return ABViewCSVExporterProperty;
+   };
 }

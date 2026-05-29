@@ -1,5 +1,9 @@
 import viewPivotProperties from "./web_view_pivot/FNAbviewpivot.js";
 import viewPivotEditor from "./web_view_pivot/FNAbviewpivotEditor.js";
+import CsvExporterEditor from "./web_view_csvExporter/FNAbviewcsvexporterEditor.js";
+import CsvExporterProperties from "./web_view_csvExporter/FNAbviewcsvexporter.js";
+import CsvImporterEditor from "./web_view_csvImporter/FNAbviewcsvimporterEditor.js";
+import CsvImporterProperties from "./web_view_csvImporter/FNAbviewcsvimporter.js";
 import viewCarouselProperties from "./web_view_carousel/FNAbviewcarousel.js";
 import viewCarouselEditor from "./web_view_carousel/FNAbviewcarouselEditor.js";
 import viewCommentProperties from "./web_view_comment/FNAbviewcomment.js";
@@ -50,6 +54,10 @@ const AllPlugins = [
    viewTextEditor,
    viewPivotProperties,
    viewPivotEditor,
+   CsvExporterEditor,
+   CsvExporterProperties,
+   CsvImporterEditor,
+   CsvImporterProperties,
 ];
 
 export default {
