@@ -5,7 +5,7 @@
  *
  */
 import UI_Class from "./ui_class";
-import CSVImporter from "./ui_work_object_workspace_popupImport";
+import CSVImporter from "../../utils/CSVImporter";
 
 export default function (AB) {
    const UIClass = UI_Class(AB);
