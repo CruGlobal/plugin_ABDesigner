@@ -39,21 +39,15 @@ export default function FNAbviewcsvimporterEditor({ AB, ABViewEditorPlugin }) {
       }
 
       async init(AB) {
+         this.AB = AB;
          await super.init(AB);
-
-         this.component.init(this.AB);
-
-         // this.component.onShow();
-         // in our editor, we provide accessLv = 2
       }
 
       detatch() {
-         this.component?.detatch?.();
          super.detatch();
       }
 
       onShow() {
-         this.component?.onShow?.();
          super.onShow();
       }
    };

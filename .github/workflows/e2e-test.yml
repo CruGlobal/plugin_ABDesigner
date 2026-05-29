@@ -38,7 +38,7 @@ jobs:
            id: generate-token
            uses: actions/create-github-app-token@v3
            with:
-              app-id: ${{ inputs.app_id }}
+              client-id: ${{ inputs.app_id }}
               private-key: ${{ secrets.app_secret }}
               repositories: ab_service_web
 
