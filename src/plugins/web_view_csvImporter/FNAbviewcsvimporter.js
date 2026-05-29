@@ -1,7 +1,6 @@
 // FNAbviewcsvimporter Properties
 // A properties side import for an ABView.
 //
-import FABViewRuleListFormRecordRules from "../../rootPages/Designer/properties/rules/ABViewRuleListFormRecordRules.js";
 
 export default function FNAbviewcsvimporterProperties({
    AB,
@@ -11,7 +10,7 @@ export default function FNAbviewcsvimporterProperties({
 
    const uiConfig = AB.Config.uiSettings();
    const L = AB.Label();
-
+   const FABViewRuleListFormRecordRules = require("../../rootPages/Designer/properties/rules/ABViewRuleListFormRecordRules.js").default;
    const PopupRecordRule = FABViewRuleListFormRecordRules(
       AB,
       `${BASE_ID}_popupRecordRule`

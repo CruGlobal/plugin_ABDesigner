@@ -6,12 +6,12 @@
  */
 
 import UI_Class from "./ui_class";
-import FNAbviewcsvimporterProperties from "./plugins/web_view_csvImporter/FNAbviewcsvimporter";
+import FViewProperties from "./properties/views/ABViewCSVImporter";
 
 export default function (AB, ibase) {
    ibase = ibase || "ui_work_object_workspace_popupImport";
    const UIClass = UI_Class(AB);
-   const ViewPropertiesClass = FNAbviewcsvimporterProperties(AB);
+   const ViewPropertiesClass = FViewProperties(AB);
    const viewProperties = new ViewPropertiesClass();
 
    class UI_Work_Object_Workspace_PopupImport extends UIClass {
