@@ -1,5 +1,7 @@
 import viewFormProperties from "./web_view_form/FNAbviewform.js";
 import viewFormEditor from "./web_view_form/FNAbviewformEditor.js";
+import viewGridProperties from "./web_view_grid/FNAbviewgrid.js";
+import viewGridEditor from "./web_view_grid/FNAbviewgridEditor.js";
 import viewPivotProperties from "./web_view_pivot/FNAbviewpivot.js";
 import viewPivotEditor from "./web_view_pivot/FNAbviewpivotEditor.js";
 import viewCarouselProperties from "./web_view_carousel/FNAbviewcarousel.js";
@@ -52,6 +54,8 @@ const AllPlugins = [
    viewTextEditor,
    viewFormProperties,
    viewFormEditor,
+   viewGridProperties,
+   viewGridEditor,
    viewPivotProperties,
    viewPivotEditor,
 ];
