@@ -774,7 +774,7 @@ static getPluginType() {
                })
          );
       }
-   }
+   };
 
    
 
