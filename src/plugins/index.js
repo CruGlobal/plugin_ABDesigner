@@ -4,10 +4,12 @@ import viewCommentEditor from "./web_view_comment/FNAbviewcommentEditor.js";
 import viewCommentProperties from "./web_view_comment/FNAbviewcomment.js";
 import viewDataSelectEditor from "./web_view_data-select/FNAbviewdataselectEditor.js";
 import viewDataSelectProperties from "./web_view_data-select/FNAbviewdataselect.js";
-import viewDataviewProperties from "./web_view_dataview/FNAbviewdataview.js";
 import viewDataviewEditor from "./web_view_dataview/FNAbviewdataviewEditor.js";
-import viewDetailProperties from "./web_view_detail/FNAbviewdetail.js";
+import viewDataviewProperties from "./web_view_dataview/FNAbviewdataview.js";
 import viewDetailEditor from "./web_view_detail/FNAbviewdetailEditor.js";
+import viewDetailProperties from "./web_view_detail/FNAbviewdetail.js";
+import viewGridEditor from "./web_view_grid/FNAbviewgridEditor.js";
+import viewGridProperties from "./web_view_grid/FNAbviewgrid.js";
 import viewImageEditor from "./web_view_image/FNAbviewimageEditor.js";
 import viewImageProperties from "./web_view_image/FNAbviewimage.js";
 import viewKanbanEditor from "./web_view_kanban/FNAbviewkanbanEditor.js";
@@ -19,8 +21,8 @@ import viewLayoutProperties from "./web_view_layout/FNAbviewlayout.js";
 import viewListProperties from "./web_view_list/FNAbviewlist.js";
 import viewPdfImporterEditor from "./web_view_pdfImporter/FNAbviewpdfimporterEditor.js";
 import viewPdfImporterProperties from "./web_view_pdfImporter/FNAbviewpdfimporter.js";
-import viewPivotProperties from "./web_view_pivot/FNAbviewpivot.js";
 import viewPivotEditor from "./web_view_pivot/FNAbviewpivotEditor.js";
+import viewPivotProperties from "./web_view_pivot/FNAbviewpivot.js";
 import viewTabEditor from "./web_view_tab/FNAbviewtabEditor.js";
 import viewTabProperties from "./web_view_tab/FNAbviewtab.js";
 import viewTextEditor from "./web_view_text/FNAbviewtextEditor.js";
@@ -33,10 +35,12 @@ const AllPlugins = [
    viewCommentProperties,
    viewDataSelectEditor,
    viewDataSelectProperties,
-   viewDataviewProperties,
    viewDataviewEditor,
-   viewDetailProperties,
+   viewDataviewProperties,
    viewDetailEditor,
+   viewDetailProperties,
+   viewGridEditor,
+   viewGridProperties,
    viewImageEditor,
    viewImageProperties,
    viewKanbanEditor,
@@ -48,8 +52,8 @@ const AllPlugins = [
    viewListProperties,
    viewPdfImporterEditor,
    viewPdfImporterProperties,
-   viewPivotProperties,
    viewPivotEditor,
+   viewPivotProperties,
    viewTabEditor,
    viewTabProperties,
    viewTextEditor,

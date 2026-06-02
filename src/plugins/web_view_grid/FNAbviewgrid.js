@@ -1,30 +1,35 @@
-/*
- * ABViewGrid
- * A Property manager for our ABViewGrid definitions
- */
+import FPopupCountFields from "./popupCountColumns";
+import FPopupFrozenColumns from "./popupFrozenColumns";
+import FPopupHideFields from "./popupHideFields";
+import FPopupSummaryFields from "./popupSummaryColumns";
 
-import FABView from "./ABView";
+import FABViewPropertyFilterData from "../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyFilterData";
+import FABViewPropertyLinkPage from "../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyLinkPage";
 
-import FPopupCountFields from "../../ui_work_object_workspace_popupCountColumns";
-import FPopupFrozenColumns from "../../ui_work_object_workspace_popupFrozenColumns";
-import FPopupHideFields from "../../ui_work_object_workspace_popupHideFields";
-import FPopupSummaryFields from "../../ui_work_object_workspace_popupSummaryColumns";
-
-import FABViewPropertyFilterData from "./viewProperties/ABViewPropertyFilterData";
-import FABViewPropertyLinkPage from "./viewProperties/ABViewPropertyLinkPage";
-
-export default function (AB) {
-   const ABView = FABView(AB);
+export default function FNAbviewgridProperties({
+   AB,
+   ABViewPropertiesPlugin,
+   // ABUIPlugin,
+}) {
+   const L = AB.Label();
    const uiConfig = AB.Config.uiSettings();
-   const L = ABView.L();
 
    const base = "properties_abview_grid";
    const ABViewPropertyFilterData = FABViewPropertyFilterData(AB, base);
    const PopupFilterMenu = new ABViewPropertyFilterData({ isGrid: true });
 
-   const LinkPageHelper = new FABViewPropertyLinkPage(AB, base);
+   const LinkPageHelper = FABViewPropertyLinkPage(AB, base);
 
-   class ABViewGridProperty extends ABView {
+   return class ABAbviewgridProperties extends ABViewPropertiesPlugin {
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+         // properties-view : will display in the properties panel of the ABDesigner
+      }
+
       constructor() {
          super(base, {
             // Put our ids here
@@ -497,7 +502,7 @@ export default function (AB) {
                      click: this._handler_onCancel,
                      on: {
                         onAfterRender() {
-                           ABView.CYPRESS_REF(this);
+                           ABViewPropertiesPlugin.CYPRESS_REF(this);
                         },
                      },
                   },
@@ -802,7 +807,5 @@ export default function (AB) {
       ViewClass() {
          return super._ViewClass("grid");
       }
-   }
-
-   return ABViewGridProperty;
+   };
 }
