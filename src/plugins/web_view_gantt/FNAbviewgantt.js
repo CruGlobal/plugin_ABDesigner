@@ -6,7 +6,7 @@ import FABViewGanttWorkspaceView from "./FNAbviewganttWorkspace.js";
 export default function FNAbviewganttProperties({
    AB,
    ABViewPropertiesPlugin,
-   // ABUIPlugin,
+   ABUIPlugin,
 }) {
    const BASE_ID = "properties_abview_gantt";
    const L = AB.Label();
@@ -21,6 +21,7 @@ export default function FNAbviewganttProperties({
    );
    const ABViewGanttWorkspaceView = FABViewGanttWorkspaceView(
       AB,
+      ABUIPlugin,
       `${BASE_ID}_workspaceView_gantt`
    );
 
