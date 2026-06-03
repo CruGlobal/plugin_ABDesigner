@@ -8,6 +8,8 @@ import viewDataviewEditor from "./web_view_dataview/FNAbviewdataviewEditor.js";
 import viewDataviewProperties from "./web_view_dataview/FNAbviewdataview.js";
 import viewDetailEditor from "./web_view_detail/FNAbviewdetailEditor.js";
 import viewDetailProperties from "./web_view_detail/FNAbviewdetail.js";
+import viewGanttEditor from "./web_view_gantt/FNAbviewganttEditor.js";
+import viewGanttProperties from "./web_view_gantt/FNAbviewgantt.js";
 import viewGridEditor from "./web_view_grid/FNAbviewgridEditor.js";
 import viewGridProperties from "./web_view_grid/FNAbviewgrid.js";
 import viewImageEditor from "./web_view_image/FNAbviewimageEditor.js";
@@ -39,6 +41,8 @@ const AllPlugins = [
    viewDataviewProperties,
    viewDetailEditor,
    viewDetailProperties,
+   viewGanttEditor,
+   viewGanttProperties,
    viewGridEditor,
    viewGridProperties,
    viewImageEditor,

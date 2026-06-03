@@ -6,6 +6,7 @@ import FABViewKanbanWorkspace from "./Abkanbanworkspace.js";
 export default function FNAbviewkanbanProperties({
    AB,
    ABViewPropertiesPlugin,
+   ABUIPlugin,
 }) {
    const BASE_ID = "properties_abview_kanban";
 
@@ -17,7 +18,7 @@ export default function FNAbviewkanbanProperties({
    const uiConfig = AB.UISettings.config();
    const L = AB.Label();
 
-   const ViewKanbanProperties = FABViewKanbanWorkspace(AB, BASE_ID);
+   const ViewKanbanProperties = FABViewKanbanWorkspace(AB, ABUIPlugin, BASE_ID);
    let PopupNewDataFieldComponent = null;
 
    return class ABAbviewkanbanProperties extends ABViewPropertiesPlugin {

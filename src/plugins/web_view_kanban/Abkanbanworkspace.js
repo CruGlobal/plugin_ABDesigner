@@ -2,21 +2,17 @@
 //
 // Manages the settings for a KanBan View in the Object Workspace
 
-import UI_Class from "../../rootPages/Designer/ui_class";
-
 let classABViewKanban = null;
 
-export default function (AB, ibase) {
+export default function (AB, ABUIPlugin, ibase) {
    const L = AB.Label();
-
-   const UIClass = UI_Class(AB);
 
    const ABFieldConnect = AB.Class.ABFieldManager.fieldByKey("connectObject");
    const ABFieldList = AB.Class.ABFieldManager.fieldByKey("list");
    const ABFieldUser = AB.Class.ABFieldManager.fieldByKey("user");
 
    if (!classABViewKanban) {
-      classABViewKanban = class ABViewKanban extends UIClass {
+      classABViewKanban = class ABViewKanban extends ABUIPlugin {
          constructor(idBase) {
             super(idBase, {
                vGroupInput: "",

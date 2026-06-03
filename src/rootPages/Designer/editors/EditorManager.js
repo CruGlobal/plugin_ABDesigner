@@ -29,7 +29,7 @@ export default function (AB) {
       require("./views/ABViewDocxBuilder"),
       require("./views/ABViewForm"),
       require("./views/ABViewFormUrl"),
-      require("./views/ABViewGantt"),
+      // require("./views/ABViewGantt"),
       // require("./views/ABViewKanban"),
       // require("./views/ABViewGrid"),
       // require("./views/ABViewLabel"),
