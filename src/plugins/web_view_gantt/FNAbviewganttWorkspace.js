@@ -40,18 +40,15 @@ const defaultValues = {
    },
 };
 
-import UI_Class from "../../ui_class";
-
-export default function (AB, ibase) {
-   const UIClass = UI_Class(AB);
-   const L = UIClass.L();
+export default function (AB, ABUIPlugin, ibase) {
+   const L = AB.Label();
 
    const ABFieldDate = AB.Class.ABFieldManager.fieldByKey("date");
    const ABFieldNumber = AB.Class.ABFieldManager.fieldByKey("number");
    const ABFieldString = AB.Class.ABFieldManager.fieldByKey("string");
    const ABFieldLongText = AB.Class.ABFieldManager.fieldByKey("LongText");
 
-   class ABObjectWorkspaceViewGantt extends UIClass {
+   class ABObjectWorkspaceViewGantt extends ABUIPlugin {
       constructor(idBase) {
          super(idBase, {
             titleFieldID: "",
