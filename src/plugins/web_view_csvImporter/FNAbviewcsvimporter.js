@@ -6,13 +6,12 @@ import FABViewRuleListFormRecordRules from "../../rootPages/Designer/properties/
 export default function FNAbviewcsvimporterProperties({
    AB,
    ABViewPropertiesPlugin,
-   ABViewRuleListFormRecordRules = FABViewRuleListFormRecordRules,
 }) {
    const BASE_ID = "properties_abview_csvimporter";
 
    const uiConfig = AB.Config.uiSettings();
    const L = AB.Label();
-   const PopupRecordRule = ABViewRuleListFormRecordRules(
+   const PopupRecordRule = FABViewRuleListFormRecordRules(
       AB,
       `${BASE_ID}_popupRecordRule`
    );

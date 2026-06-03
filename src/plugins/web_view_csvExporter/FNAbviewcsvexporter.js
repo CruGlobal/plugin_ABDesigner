@@ -4,7 +4,6 @@
 export default function FNAbviewcsvexporterProperties({
    AB,
    ABViewPropertiesPlugin,
-   // ABUIPlugin,
 }) {
    const BASE_ID = "properties_abview_csvexporter";
 

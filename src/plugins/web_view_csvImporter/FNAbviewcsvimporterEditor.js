@@ -3,10 +3,7 @@
 // The Editor is displayed in the ABDesigner as a view is worked on.
 // The Editor allows a widget to be moved and placed on the canvas.
 //
-export default function FNAbviewcsvimporterEditor({ AB, ABViewEditorPlugin }) {
-   // var L = UIClass.L();
-   // var L = ABViewContainer.L();
-
+export default function FNAbviewcsvimporterEditor({ ABViewEditorPlugin }) {
    return class ABAbviewcsvimporterEditor extends ABViewEditorPlugin {
       static getPluginKey() {
          return this.key;
