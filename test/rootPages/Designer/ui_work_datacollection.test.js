@@ -4,7 +4,6 @@ import sinon from "sinon";
 import { EventEmitter } from "events";
 
 import AB from "../../_mock/AB.js";
-import { registerApplicationForTarget } from "../../_mock/uiWorkTestHelpers.js";
 import UIDataCollection from "../../../src/rootPages/Designer/ui_work_datacollection";
 
 const base = "ui_work_datacollection";
