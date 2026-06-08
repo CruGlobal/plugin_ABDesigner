@@ -238,9 +238,6 @@ export default function (AB, ibase, init_settings) {
             AB,
             `${base}_import`
          );
-         // this.PopupImportObjectComponent.on("done", () => {
-         //    this.populateObjectWorkspace(this.CurrentObject);
-         // });
 
          this.PopupViewSettingsComponent = FPopupViewSettings(
             AB,

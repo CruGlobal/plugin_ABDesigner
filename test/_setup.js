@@ -1,6 +1,39 @@
+import Module from "module";
 import { JSDOM } from "jsdom";
 import webix from "./_mock/webix";
 import webixElement from "./_mock/webix_element";
+
+const origLoad = Module._load;
+Module._load = function (request, parent, isMain) {
+   if (request.endsWith(".css")) {
+      return {};
+   }
+   if (request === "bpmn-js" || request.startsWith("bpmn-js/")) {
+      return function BpmnMock() {
+         return new Proxy(
+            function () { },
+            {
+               get: () => () => { },
+               apply: () => { },
+            }
+         );
+      };
+   }
+   if (request.includes("ABViewRuleListFormRecordRules")) {
+      const popupStub = {
+         init() { },
+         on() { },
+         toSettings: () => [],
+         fromSettings() { },
+         objectLoad() { },
+         qbFixAfterShow() { },
+      };
+      const factory = () => popupStub;
+      factory.default = factory;
+      return factory;
+   }
+   return origLoad.apply(this, arguments);
+};
 
 // Set web browser environment
 const dom = new JSDOM("<!DOCTYPE html><html><head></head><body></body></html>");
