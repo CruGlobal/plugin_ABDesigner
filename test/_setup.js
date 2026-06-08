@@ -19,6 +19,43 @@ Module._load = function (request, parent, isMain) {
          );
       };
    }
+   if (request.includes("properties/PropertyManager")) {
+      const propertyMgrStub = {
+         fields: () => [],
+         processElements: () => [],
+         views: () => [],
+         mobileViews: () => [],
+      };
+      const factory = () => propertyMgrStub;
+      factory.default = factory;
+      return factory;
+   }
+   if (request.includes("properties/views/ABViewCSVImporter")) {
+      const factory = () => {
+         return class MockCSVImporterProperties {
+            constructor() {
+               this.component = {
+                  ui: () => ({}),
+                  init: () => Promise.resolve(),
+                  detatch: () => { },
+                  onShow: () => { },
+               };
+            }
+            ui() {
+               return {};
+            }
+            init() {
+               return Promise.resolve();
+            }
+
+            toSettings() {
+               return {};
+            }
+         };
+      };
+      factory.default = factory;
+      return factory;
+   }
    if (request.includes("ABViewRuleListFormRecordRules")) {
       const popupStub = {
          init() { },
