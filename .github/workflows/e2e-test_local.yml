@@ -1,0 +1,146 @@
+# Local / act mirror of e2e-test.yml — edit freely here; do not change e2e-test.yml.
+name: E2E Tests (local / act)
+on:
+   workflow_call:
+      inputs:
+         ref:
+            type: string
+            default: ${{ github.ref }}
+         matrix_branch:
+            description: develop | master | both
+            type: string
+            default: both
+   workflow_dispatch:
+      inputs:
+         ref:
+            description: Git ref for plugin_ABDesigner (empty = current branch)
+            type: string
+            default: ""
+         matrix_branch:
+            description: Which ab_service_web branch / webpack mode to run
+            type: choice
+            options:
+               - develop
+               - master
+               - both
+            default: develop
+
+jobs:
+   matrix:
+      name: Matrix
+      runs-on: ubuntu-latest
+      outputs:
+         include: ${{ steps.set-matrix.outputs.include }}
+      steps:
+         - id: set-matrix
+           env:
+              MATRIX_BRANCH: ${{ inputs.matrix_branch || 'both' }}
+           run: |
+              case "$MATRIX_BRANCH" in
+                develop)
+                  echo 'include=[{"branch":"develop","webpack":"dev"}]' >> "$GITHUB_OUTPUT"
+                  ;;
+                master)
+                  echo 'include=[{"branch":"master","webpack":"update"}]' >> "$GITHUB_OUTPUT"
+                  ;;
+                *)
+                  echo 'include=[{"branch":"develop","webpack":"dev"},{"branch":"master","webpack":"update"}]' >> "$GITHUB_OUTPUT"
+                  ;;
+              esac
+
+   e2e-tests:
+      name: Test
+      needs: matrix
+      runs-on: ubuntu-latest
+      defaults:
+         run:
+            working-directory: ${{ github.workspace }}
+      env:
+         CYPRESS_RESPONSE_TIMEOUT: 200000
+         CYPRESS_DEFAULT_COMMAND_TIMEOUT: 30000
+         CYPRESS_RETRIES: 2
+         PLUGIN_REF: ${{ inputs.ref || github.ref }}
+      strategy:
+         fail-fast: false
+         matrix:
+            include: ${{ fromJSON(needs.matrix.outputs.include) }}
+      steps:
+         - uses: actions/checkout@v6
+           if: ${{ !env.ACT }}
+           with:
+              path: plugins/plugin_ABDesigner
+              ref: ${{ env.PLUGIN_REF }}
+
+         - name: Use act workspace for plugin
+           if: ${{ env.ACT }}
+           run: |
+              if [ ! -f package.json ]; then
+                echo "package.json missing in workspace — run act with --bind (npm run act)"
+                exit 1
+              fi
+              mkdir -p plugins
+              rm -rf plugins/plugin_ABDesigner
+              ln -sfn .. plugins/plugin_ABDesigner
+              test -f plugins/plugin_ABDesigner/package.json
+
+         - uses: actions/checkout@v6
+           with:
+              path: web
+              repository: CruGlobal/ab_service_web
+              ref: ${{ matrix.branch }}
+
+         - run: npm i
+           working-directory: plugins/plugin_ABDesigner
+         - name: Webpack
+           run: npm run build:${{ matrix.webpack }}
+           working-directory: plugins/plugin_ABDesigner
+
+         # webpack expects the folder to be called "web" ab-install action expects "ab_service_web"
+         - run: mv web ab_service_web
+         - uses: CruGlobal/ab-install-action@v1
+           if: ${{ !env.ACT }}
+           with:
+              port: 8080
+              folder: ab
+              repository: CruGlobal/ab_service_web
+
+         # ab-install-action always runs `docker swarm init`; Docker Desktop is often already in swarm.
+         - name: AppBuilder install (act)
+           if: ${{ env.ACT }}
+           run: |
+              set -euo pipefail
+              if ! docker info --format '{{.Swarm.LocalNodeState}}' 2>/dev/null | grep -q active; then
+                docker swarm init
+              fi
+              npm i https://github.com/CruGlobal/ab-cli -g
+              appbuilder install ab \
+                --stack=ab \
+                --port=8080 \
+                --dbExpose=false \
+                --dbPassword=root \
+                --tag=latest \
+                --authType=login \
+                --relayEnabled=false \
+                --pwaURL=http://pwa.site.com \
+                --siteURL=http://auth.site.com \
+                --tenant.username=admin \
+                --tenant.password=admin \
+                --tenant.email=neo@thematrix.com \
+                --tenant.url=http://localhost:8080
+              attempt=1
+              while docker network ls | grep -q ab_default; do
+                echo "Waiting for stack network to clear (attempt $attempt)"
+                attempt=$((attempt + 1))
+                sleep 1
+              done
+
+         - name: Check out kitchen-sink tests
+           uses: actions/checkout@v6
+           with:
+              repository: CruGlobal/kitchensink_app
+              path: ab/test/e2e/cypress/e2e/kitchensink_app
+
+         - name: Run Cypress Tests
+           run: npm run test:e2e:ab-designer -- --browser chrome
+           working-directory: ./ab
+

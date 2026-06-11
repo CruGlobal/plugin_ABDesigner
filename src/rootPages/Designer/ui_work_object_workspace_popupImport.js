@@ -4,15 +4,15 @@
  * Manage the Import CSV data to our currently selected ABObject.
  *
  */
+
 import UI_Class from "./ui_class";
 import FViewProperties from "./properties/views/ABViewCSVImporter";
 
 export default function (AB, ibase) {
    ibase = ibase || "ui_work_object_workspace_popupImport";
    const UIClass = UI_Class(AB);
-   // var L = UIClass.L();
-   const ViewProperties = FViewProperties(AB);
-   const viewProperties = new ViewProperties();
+   const ViewPropertiesClass = FViewProperties(AB);
+   const viewProperties = new ViewPropertiesClass();
 
    class UI_Work_Object_Workspace_PopupImport extends UIClass {
       constructor(base) {
