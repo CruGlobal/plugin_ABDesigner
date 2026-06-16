@@ -5,6 +5,37 @@
 //
 export default function FNAbviewdocxbuilderEditor({ ABViewEditorPlugin }) {
    return class ABAbviewdocxbuilderEditor extends ABViewEditorPlugin {
-      // Insert Here //
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "editor-view";
+      }
+
+      static get key() {
+         return "docxBuilder";
+      }
+
+      constructor(view, base = "interface_editor_docxBuilder") {
+         super(view, base);
+      }
+
+      ui() {
+         return super.ui();
+      }
+
+      async init(AB) {
+         this.AB = AB;
+         await super.init(AB);
+      }
+
+      detatch() {
+         super.detatch();
+      }
+
+      onShow() {
+         super.onShow();
+      }
    };
 }
