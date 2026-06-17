@@ -8,26 +8,22 @@ export default function FNAbviewformEditor({ AB, ABViewEditorPlugin }) {
    // var L = UIClass.L();
    // var L = ABViewContainer.L();
 
-   return class ABAbviewformEditor extends ABViewContainer {
-
+   const ABAbviewformEditor = class ABAbviewformEditor extends ABViewContainer {
       static getPluginKey() {
          return this.key;
       }
 
       /**
-             * @method getPluginType
-             * return the plugin type for this editor.
-             * plugin types are how our ClassManager knows how to store 
-             * the plugin.
-             * @return {string} plugin type
-             */
+       * @method getPluginType
+       * return the plugin type for this editor.
+       * plugin types are how our ClassManager knows how to store
+       * the plugin.
+       * @return {string} plugin type
+       */
       static getPluginType() {
          return "editor-view";
          // editor-view : will display in the editor panel of the ABDesigner
       }
-
-
-
 
       static get key() {
          return "form";
@@ -61,8 +57,5 @@ export default function FNAbviewformEditor({ AB, ABViewEditorPlugin }) {
       }
    };
 
-   return [
-      ABAbviewformEditor,
-      FNAbviewFormUrlEditor({ ABViewEditorPlugin })
-   ];
+   return [ABAbviewformEditor, FNAbviewFormUrlEditor({ ABViewEditorPlugin })];
 }

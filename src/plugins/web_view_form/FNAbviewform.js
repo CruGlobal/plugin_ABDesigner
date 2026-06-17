@@ -41,21 +41,15 @@ export default function FNAbviewformProperties({
       `${base}_popupSubmitRule`
    );
 
-   
-
-return class ABAbviewformProperties extends ABViewPropertiesPlugin {
-
-static getPluginKey() {
+   const ABAbviewformProperties = class ABAbviewformProperties extends ABViewPropertiesPlugin {
+      static getPluginKey() {
          return this.key;
       }
 
-static getPluginType() {
+      static getPluginType() {
          return "properties-view";
          // properties-view : will display in the properties panel of the ABDesigner
       }
-
-
-
 
       constructor(b = null, id = null) {
          b = b || base;
@@ -363,8 +357,7 @@ static getPluginType() {
 
          // update properties when a field component is deleted
          view.views().forEach((v) => {
-            if (v.isFormField)
-               v.once("destroyed", () => this.populate(view));
+            if (v.isFormField) v.once("destroyed", () => this.populate(view));
          });
 
          SourceSelector.enable();
@@ -650,8 +643,7 @@ static getPluginType() {
 
       refreshDefaultButton() {
          const ids = this.ids;
-         const ABViewFormButton =
-            this.AB.ClassManager.viewClass("button");
+         const ABViewFormButton = this.AB.ClassManager.viewClass("button");
 
          // If default button is not exists, then skip this
          let defaultButton = this.views(

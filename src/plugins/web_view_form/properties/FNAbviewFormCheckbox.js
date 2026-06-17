@@ -5,8 +5,6 @@ import FNAbviewformItem from "./FNAbviewformItem.js";
  * A Property manager for our ABViewFormCheckbox definitions
  */
 
-
-
 export default function FNAbviewFormCheckboxProperties({
    AB,
    ABViewPropertiesPlugin,
@@ -15,16 +13,14 @@ export default function FNAbviewFormCheckboxProperties({
 
    const BASE_ID = "properties_abview_form_checkbox";
 
-   
-
    class ABViewFormCheckboxProperty extends ABViewFormItem {
-       static getPluginKey() {
-          return this.key;
-       }
- 
-       static getPluginType() {
-          return "properties-view";
-       }
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
       constructor() {
          super(BASE_ID, {});
 

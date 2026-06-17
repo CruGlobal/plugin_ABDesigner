@@ -1,30 +1,24 @@
-
-
 /*
  * ABViewButton
  * A Property manager for our ABViewButton definitions
  */
 
-
-
 export default function FNAbviewFormButtonProperties({
    AB,
    ABViewPropertiesPlugin,
 }) {
-
    const BASE_ID = "properties_abview_button";
 
-   
    const L = AB.Label();
 
    class ABViewButtonProperty extends ABViewPropertiesPlugin {
-       static getPluginKey() {
-          return this.key;
-       }
- 
-       static getPluginType() {
-          return "properties-view";
-       }
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
       constructor() {
          super(BASE_ID, {
             // Put our ids here

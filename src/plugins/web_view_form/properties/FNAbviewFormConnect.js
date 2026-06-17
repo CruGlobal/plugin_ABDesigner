@@ -8,11 +8,6 @@ import ABViewPropertyEditPage from "../../../rootPages/Designer/properties/views
  * A Property manager for our ABViewConnect definitions
  */
 
-
-
-
-
-
 export default function FNAbviewFormConnectProperties({
    AB,
    ABViewPropertiesPlugin,
@@ -21,7 +16,6 @@ export default function FNAbviewFormConnectProperties({
 
    const BASE_ID = "properties_abview_connect";
 
-   
    const ABAddPage = ABViewPropertyAddPage(AB, BASE_ID);
    const ABEditPage = ABViewPropertyEditPage(AB, BASE_ID);
    const L = AB.Label();
@@ -30,13 +24,13 @@ export default function FNAbviewFormConnectProperties({
    let SortComponent = null;
 
    class ABViewConnectProperty extends ABViewFormItem {
-       static getPluginKey() {
-          return this.key;
-       }
- 
-       static getPluginType() {
-          return "properties-view";
-       }
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
       constructor() {
          super(BASE_ID, {
             // Put our ids here
@@ -531,4 +525,3 @@ export default function FNAbviewFormConnectProperties({
 
    return ABViewConnectProperty;
 }
-

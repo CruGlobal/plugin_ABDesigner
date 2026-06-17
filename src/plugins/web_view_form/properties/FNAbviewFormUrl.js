@@ -6,8 +6,6 @@ import FNAbviewformProperties from "../FNAbviewform.js";
  * A Property manager for our ABViewForm definitions
  */
 
-
-
 export default function FNAbviewFormUrlProperties({
    AB,
    ABViewPropertiesPlugin,
@@ -15,19 +13,19 @@ export default function FNAbviewFormUrlProperties({
    const ABViewForm = FNAbviewformProperties({ AB, ABViewPropertiesPlugin });
 
    const UIClassCommonKeyValue = FCommonKeyValue(AB);
-      const uiConfig = AB.Config.uiSettings();
+   const uiConfig = AB.Config.uiSettings();
    const L = AB.Label();
 
    const base = "properties_abview_form_url";
 
    class ABViewFormUrlProperty extends ABViewForm {
-       static getPluginKey() {
-          return this.key;
-       }
- 
-       static getPluginType() {
-          return "properties-view";
-       }
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
       constructor() {
          super(base, {
             method: "",

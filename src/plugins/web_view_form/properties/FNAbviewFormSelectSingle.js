@@ -5,8 +5,6 @@ import FNAbviewformItem from "./FNAbviewformItem.js";
  * A Property manager for our ABViewFormSelectSingle definitions
  */
 
-
-
 export default function FNAbviewFormSelectSingleProperties({
    AB,
    ABViewPropertiesPlugin,
@@ -15,17 +13,16 @@ export default function FNAbviewFormSelectSingleProperties({
 
    const BASE_ID = "properties_abview_form_select_single";
 
-   
    const L = AB.Label();
 
    class ABViewFormSelectSingleProperty extends ABViewFormItem {
-       static getPluginKey() {
-          return this.key;
-       }
- 
-       static getPluginType() {
-          return "properties-view";
-       }
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
       constructor() {
          super(BASE_ID, {
             // Put our ids here

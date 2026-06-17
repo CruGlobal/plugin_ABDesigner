@@ -5,8 +5,6 @@ import FNAbviewformItem from "./FNAbviewformItem.js";
  * A Property manager for our ABViewFormSelectMultiple definitions
  */
 
-
-
 export default function FNAbviewFormSelectMultipleProperties({
    AB,
    ABViewPropertiesPlugin,
@@ -15,17 +13,16 @@ export default function FNAbviewFormSelectMultipleProperties({
 
    const BASE_ID = "properties_abview_form_select_multiple";
 
-   
    const L = AB.Label();
 
    class ABViewFormSelectMultipleProperty extends ABViewFormItem {
-       static getPluginKey() {
-          return this.key;
-       }
- 
-       static getPluginType() {
-          return "properties-view";
-       }
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
       constructor() {
          super(BASE_ID, {
             // Put our ids here

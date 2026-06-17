@@ -1,18 +1,12 @@
-
-
 /*
  * ABViewFormItem
  * A Property manager for our ABViewFormItem definitions
  */
 
-
-
 export default function FNAbviewFormItemProperties({
    AB,
    ABViewPropertiesPlugin,
 }) {
-
-   
    const L = AB.Label();
    const DEFAULT_VALUES = {
       required: 0,

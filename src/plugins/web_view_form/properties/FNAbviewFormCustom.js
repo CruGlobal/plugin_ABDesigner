@@ -5,8 +5,6 @@ import FNAbviewformItem from "./FNAbviewformItem.js";
  * A Property manager for our ABViewFormCustom definitions
  */
 
-
-
 export default function FNAbviewFormCustomProperties({
    AB,
    ABViewPropertiesPlugin,
@@ -15,16 +13,14 @@ export default function FNAbviewFormCustomProperties({
 
    const BASE_ID = "properties_abview_form_custom";
 
-   
-
    class ABViewFormCustomProperty extends ABViewFormItem {
-       static getPluginKey() {
-          return this.key;
-       }
- 
-       static getPluginType() {
-          return "properties-view";
-       }
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
       constructor() {
          super(BASE_ID, {});
 

@@ -10,26 +10,21 @@ var myClass = null;
 // we will want to call this factory fn() repeatedly in our imports,
 // but we only want to define 1 Class reference.
 
-
-
-export default function FNAbviewFormUrlEditor({
-   ABViewEditorPlugin,
-}) {
+export default function FNAbviewFormUrlEditor({ ABViewEditorPlugin }) {
    const ABViewForm = FNAbviewformEditor({ ABViewEditorPlugin });
 
    if (!myClass) {
-      
       // var L = UIClass.L();
       // var L = ABViewContainer.L();
 
       myClass = class ABViewFormEditor extends ABViewForm {
-      static getPluginKey() {
-         return this.key;
-      }
+         static getPluginKey() {
+            return this.key;
+         }
 
-      static getPluginType() {
-         return "editor-view";
-      }
+         static getPluginType() {
+            return "editor-view";
+         }
          static get key() {
             return "form-url";
          }

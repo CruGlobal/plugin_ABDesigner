@@ -5,8 +5,6 @@ import FNAbviewformItem from "./FNAbviewformItem.js";
  * A Property manager for our ABViewFormTextbox definitions
  */
 
-
-
 export default function FNAbviewFormTextboxProperties({
    AB,
    ABViewPropertiesPlugin,
@@ -15,17 +13,16 @@ export default function FNAbviewFormTextboxProperties({
 
    const BASE_ID = "properties_abview_form_textbox";
 
-   
    const L = AB.Label();
 
    class ABViewFormTextboxProperty extends ABViewFormItem {
-       static getPluginKey() {
-          return this.key;
-       }
- 
-       static getPluginType() {
-          return "properties-view";
-       }
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
       constructor() {
          super(BASE_ID, {
             // Put our ids here
