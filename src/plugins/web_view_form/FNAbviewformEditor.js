@@ -1,3 +1,5 @@
+import FNAbviewFormUrlEditor from "./editors/FNAbviewFormUrlEditor.js";
+
 export default function FNAbviewformEditor({ AB, ABViewEditorPlugin }) {
    const FABViewContainer =
       require("../../rootPages/Designer/editors/views/ABViewContainer").default;
@@ -58,4 +60,9 @@ export default function FNAbviewformEditor({ AB, ABViewEditorPlugin }) {
          this.component?.onShow?.();
       }
    };
+
+   return [
+      ABAbviewformEditor,
+      FNAbviewFormUrlEditor({ ABViewEditorPlugin })
+   ];
 }

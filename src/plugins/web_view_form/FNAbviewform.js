@@ -1,3 +1,16 @@
+import FNAbviewFormButtonProperties from "./properties/FNAbviewFormButton.js";
+import FNAbviewFormCheckboxProperties from "./properties/FNAbviewFormCheckbox.js";
+import FNAbviewFormConnectProperties from "./properties/FNAbviewFormConnect.js";
+import FNAbviewFormCustomProperties from "./properties/FNAbviewFormCustom.js";
+import FNAbviewFormDatepickerProperties from "./properties/FNAbviewFormDatepicker.js";
+import FNAbviewFormJsonProperties from "./properties/FNAbviewFormJson.js";
+import FNAbviewFormNumberProperties from "./properties/FNAbviewFormNumber.js";
+import FNAbviewFormSelectMultipleProperties from "./properties/FNAbviewFormSelectMultiple.js";
+import FNAbviewFormSelectSingleProperties from "./properties/FNAbviewFormSelectSingle.js";
+import FNAbviewFormTextboxProperties from "./properties/FNAbviewFormTextbox.js";
+import FNAbviewFormTreeProperties from "./properties/FNAbviewFormTree.js";
+import FNAbviewFormUrlProperties from "./properties/FNAbviewFormUrl.js";
+
 export default function FNAbviewformProperties({
    AB,
    ABViewPropertiesPlugin,
@@ -776,8 +789,19 @@ static getPluginType() {
       }
    };
 
-   
-
-
+   return [
+      ABAbviewformProperties,
+      FNAbviewFormButtonProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormCheckboxProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormConnectProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormCustomProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormDatepickerProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormJsonProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormNumberProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormSelectMultipleProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormSelectSingleProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormTextboxProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormTreeProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormUrlProperties({ AB, ABViewPropertiesPlugin }),
+   ];
 }
-
