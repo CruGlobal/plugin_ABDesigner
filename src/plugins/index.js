@@ -1,3 +1,5 @@
+import viewDocxBuilderProperties from "./web_view_docxBuilder/FNAbviewdocxbuilder.js";
+import viewDocxBuilderEditor from "./web_view_docxBuilder/FNAbviewdocxbuilderEditor.js";
 import CsvExporterEditor from "./web_view_csvExporter/FNAbviewcsvexporterEditor.js";
 import CsvExporterProperties from "./web_view_csvExporter/FNAbviewcsvexporter.js";
 import CsvImporterEditor from "./web_view_csvImporter/FNAbviewcsvimporterEditor.js";
@@ -74,6 +76,8 @@ const AllPlugins = [
    viewTabProperties,
    viewTextEditor,
    viewTextProperties,
+   viewDocxBuilderProperties,
+   viewDocxBuilderEditor
 ];
 
 export default {
