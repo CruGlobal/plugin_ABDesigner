@@ -1,4 +1,4 @@
-import FNAbviewformItem from "./FNAbviewformItem.js";
+import FNAbviewformItem from "./FNAbviewFormItem.js";
 
 /*
  * ABViewFormSelectMultiple

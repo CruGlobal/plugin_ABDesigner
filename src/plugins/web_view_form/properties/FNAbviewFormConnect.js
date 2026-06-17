@@ -1,4 +1,4 @@
-import FNAbviewformItem from "./FNAbviewformItem.js";
+import FNAbviewformItem from "./FNAbviewFormItem.js";
 import ABPopupSort from "../../../rootPages/Designer/ui_work_object_workspace_popupSortFields";
 import ABViewPropertyAddPage from "../../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyAddPage";
 import ABViewPropertyEditPage from "../../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyEditPage";
