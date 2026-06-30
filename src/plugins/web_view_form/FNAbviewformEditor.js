@@ -1,6 +1,8 @@
 import FNAbviewFormUrlEditor from "./editors/FNAbviewFormUrlEditor.js";
 
 export default function FNAbviewformEditor({ AB, ABViewEditorPlugin }) {
+
+   // TODO: In #jh/mcp_server branch, pass this value instead of using a hard reference
    const FABViewContainer =
       require("../../rootPages/Designer/editors/views/ABViewContainer").default;
 

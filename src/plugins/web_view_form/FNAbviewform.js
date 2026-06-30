@@ -363,22 +363,22 @@ export default function FNAbviewformProperties({
          SourceSelector.enable();
          $$(ids.showLabel).setValue(view.settings.showLabel);
          $$(ids.labelPosition).setValue(
-            view.settings.labelPosition ||
+            view.settings.labelPosition ??
                ABViewFormPropertyComponentDefaults.labelPosition
          );
          $$(ids.labelWidth).setValue(
-            view.settings.labelWidth ||
+            view.settings.labelWidth ??
                ABViewFormPropertyComponentDefaults.labelWidth
          );
          $$(ids.height).setValue(
-            view.settings.height || ABViewFormPropertyComponentDefaults.height
+            view.settings.height ?? ABViewFormPropertyComponentDefaults.height
          );
          $$(ids.clearOnLoad).setValue(
-            view.settings.clearOnLoad ||
+            view.settings.clearOnLoad ??
                ABViewFormPropertyComponentDefaults.clearOnLoad
          );
          $$(ids.clearOnSave).setValue(
-            view.settings.clearOnSave ||
+            view.settings.clearOnSave ??
                ABViewFormPropertyComponentDefaults.clearOnSave
          );
 
@@ -428,10 +428,10 @@ export default function FNAbviewformProperties({
          vals.settings.dataviewID = $$(ids.datacollection).getValue();
          vals.settings.showLabel = $$(ids.showLabel).getValue();
          vals.settings.labelPosition =
-            $$(ids.labelPosition).getValue() ||
+            $$(ids.labelPosition).getValue() ??
             ABViewFormPropertyComponentDefaults.labelPosition;
          vals.settings.labelWidth =
-            $$(ids.labelWidth).getValue() ||
+            $$(ids.labelWidth).getValue() ??
             ABViewFormPropertyComponentDefaults.labelWidth;
          vals.settings.height = $$(ids.height).getValue();
          vals.settings.clearOnLoad = $$(ids.clearOnLoad).getValue();
