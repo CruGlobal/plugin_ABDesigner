@@ -1,17 +1,28 @@
+import FNAbviewformItem from "./FNAbviewFormItem.js";
+
 /*
  * ABViewFormJson
  * A Property manager for our ABViewFormJson definitions
  */
 
-import FABViewFormItem from "./ABViewFormItem";
+export default function FNAbviewFormJsonProperties({
+   AB,
+   ABViewPropertiesPlugin,
+}) {
+   const ABViewFormItem = FNAbviewformItem({ AB, ABViewPropertiesPlugin });
 
-export default function (AB) {
    const BASE_ID = "properties_abview_form_json";
 
-   const ABViewFormItem = FABViewFormItem(AB);
-   const L = ABViewFormItem.L();
+   const L = AB.Label();
 
    class ABViewFormJsonProperty extends ABViewFormItem {
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
       constructor() {
          super(BASE_ID, {
             // Put our ids here

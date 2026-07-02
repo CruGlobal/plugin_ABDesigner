@@ -1,16 +1,26 @@
+import FNAbviewformItem from "./FNAbviewFormItem.js";
+
 /*
  * ABViewFormCheckbox
  * A Property manager for our ABViewFormCheckbox definitions
  */
 
-import FABViewFormItem from "./ABViewFormItem";
+export default function FNAbviewFormCheckboxProperties({
+   AB,
+   ABViewPropertiesPlugin,
+}) {
+   const ABViewFormItem = FNAbviewformItem({ AB, ABViewPropertiesPlugin });
 
-export default function (AB) {
    const BASE_ID = "properties_abview_form_checkbox";
 
-   const ABViewFormItem = FABViewFormItem(AB);
-
    class ABViewFormCheckboxProperty extends ABViewFormItem {
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
       constructor() {
          super(BASE_ID, {});
 

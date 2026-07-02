@@ -1,16 +1,26 @@
+import FNAbviewformItem from "./FNAbviewFormItem.js";
+
 /*
  * ABViewFormCustom
  * A Property manager for our ABViewFormCustom definitions
  */
 
-import FABViewFormItem from "./ABViewFormItem";
+export default function FNAbviewFormCustomProperties({
+   AB,
+   ABViewPropertiesPlugin,
+}) {
+   const ABViewFormItem = FNAbviewformItem({ AB, ABViewPropertiesPlugin });
 
-export default function (AB) {
    const BASE_ID = "properties_abview_form_custom";
 
-   const ABViewFormItem = FABViewFormItem(AB);
-
    class ABViewFormCustomProperty extends ABViewFormItem {
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
       constructor() {
          super(BASE_ID, {});
 

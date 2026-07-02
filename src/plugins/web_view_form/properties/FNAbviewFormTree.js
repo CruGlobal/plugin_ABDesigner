@@ -1,16 +1,26 @@
+import FNAbviewformItem from "./FNAbviewFormItem.js";
+
 /*
  * ABViewFormTree
  * A Property manager for our ABViewFormTree definitions
  */
 
-import FABViewFormItem from "./ABViewFormItem";
+export default function FNAbviewFormTreeProperties({
+   AB,
+   ABViewPropertiesPlugin,
+}) {
+   const ABViewFormItem = FNAbviewformItem({ AB, ABViewPropertiesPlugin });
 
-export default function (AB) {
    const BASE_ID = "properties_abview_form_tree";
 
-   const ABViewFormItem = FABViewFormItem(AB);
-
    class ABViewFormTreeProperty extends ABViewFormItem {
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
       constructor() {
          super(BASE_ID, {});
 

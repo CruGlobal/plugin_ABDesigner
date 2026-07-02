@@ -3,17 +3,17 @@
  * A Property manager for our ABViewFormItem definitions
  */
 
-import FABView from "./ABView";
-
-export default function (AB) {
-   const ABView = FABView(AB);
-   const L = ABView.L();
+export default function FNAbviewFormItemProperties({
+   AB,
+   ABViewPropertiesPlugin,
+}) {
+   const L = AB.Label();
    const DEFAULT_VALUES = {
       required: 0,
       disable: 0,
    };
 
-   class ABViewFormItemProperty extends ABView {
+   class ABViewFormItemProperty extends ABViewPropertiesPlugin {
       constructor(BASE_ID, ids = {}) {
          super(
             BASE_ID,

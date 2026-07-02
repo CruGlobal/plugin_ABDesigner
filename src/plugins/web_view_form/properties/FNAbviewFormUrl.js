@@ -1,19 +1,29 @@
+import FCommonKeyValue from "../../../rootPages/Designer/ui_common_key_value";
+
 /*
  * ABViewForm
  * A Property manager for our ABViewForm definitions
  */
-import FCommonKeyValue from "../../ui_common_key_value";
-import FABViewForm from "./ABViewForm";
 
-export default function (AB) {
+export default function FNAbviewFormUrlProperties({
+   AB,
+   ABViewForm,
+}) {
+
    const UIClassCommonKeyValue = FCommonKeyValue(AB);
-   const ABViewForm = FABViewForm(AB);
    const uiConfig = AB.Config.uiSettings();
-   const L = ABViewForm.L();
+   const L = AB.Label();
 
    const base = "properties_abview_form_url";
 
    class ABViewFormUrlProperty extends ABViewForm {
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
       constructor() {
          super(base, {
             method: "",

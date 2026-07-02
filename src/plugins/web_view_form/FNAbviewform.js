@@ -1,13 +1,28 @@
-/*
- * ABViewForm
- * A Property manager for our ABViewForm definitions
- */
+import FNAbviewFormButtonProperties from "./properties/FNAbviewFormButton.js";
+import FNAbviewFormCheckboxProperties from "./properties/FNAbviewFormCheckbox.js";
+import FNAbviewFormConnectProperties from "./properties/FNAbviewFormConnect.js";
+import FNAbviewFormCustomProperties from "./properties/FNAbviewFormCustom.js";
+import FNAbviewFormDatepickerProperties from "./properties/FNAbviewFormDatepicker.js";
+import FNAbviewFormJsonProperties from "./properties/FNAbviewFormJson.js";
+import FNAbviewFormNumberProperties from "./properties/FNAbviewFormNumber.js";
+import FNAbviewFormSelectMultipleProperties from "./properties/FNAbviewFormSelectMultiple.js";
+import FNAbviewFormSelectSingleProperties from "./properties/FNAbviewFormSelectSingle.js";
+import FNAbviewFormTextboxProperties from "./properties/FNAbviewFormTextbox.js";
+import FNAbviewFormTreeProperties from "./properties/FNAbviewFormTree.js";
+import FNAbviewFormUrlProperties from "./properties/FNAbviewFormUrl.js";
 
-import FABViewContainer from "./ABViewContainer";
-import FABViewRuleListFormRecordRules from "../rules/ABViewRuleListFormRecordRules";
-import FABViewRuleListFormSubmitRules from "../rules/ABViewRuleListFormSubmitRules";
+export default function FNAbviewformProperties({
+   AB,
+   ABViewPropertiesPlugin,
+   // ABUIPlugin,
+}) {
+   const FABViewContainer =
+      require("../../rootPages/Designer/properties/views/ABViewContainer").default;
+   const FABViewRuleListFormRecordRules =
+      require("../../rootPages/Designer/properties/rules/ABViewRuleListFormRecordRules").default;
+   const FABViewRuleListFormSubmitRules =
+      require("../../rootPages/Designer/properties/rules/ABViewRuleListFormSubmitRules").default;
 
-export default function (AB) {
    const ABViewContainer = FABViewContainer(AB);
    const uiConfig = AB.Config.uiSettings();
    const L = ABViewContainer.L();
@@ -26,7 +41,16 @@ export default function (AB) {
       `${base}_popupSubmitRule`
    );
 
-   class ABViewFormProperty extends ABViewContainer {
+   const ABAbviewformProperties = class ABAbviewformProperties extends ABViewPropertiesPlugin {
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+         // properties-view : will display in the properties panel of the ABDesigner
+      }
+
       constructor(b = null, id = null) {
          b = b || base;
          id = Object.assign(id || {}, {
@@ -333,29 +357,28 @@ export default function (AB) {
 
          // update properties when a field component is deleted
          view.views().forEach((v) => {
-            if (v instanceof this.AB.Class.ABViewFormItem)
-               v.once("destroyed", () => this.populate(view));
+            if (v.isFormField) v.once("destroyed", () => this.populate(view));
          });
 
          SourceSelector.enable();
          $$(ids.showLabel).setValue(view.settings.showLabel);
          $$(ids.labelPosition).setValue(
-            view.settings.labelPosition ||
+            view.settings.labelPosition ??
                ABViewFormPropertyComponentDefaults.labelPosition
          );
          $$(ids.labelWidth).setValue(
-            view.settings.labelWidth ||
+            view.settings.labelWidth ??
                ABViewFormPropertyComponentDefaults.labelWidth
          );
          $$(ids.height).setValue(
-            view.settings.height || ABViewFormPropertyComponentDefaults.height
+            view.settings.height ?? ABViewFormPropertyComponentDefaults.height
          );
          $$(ids.clearOnLoad).setValue(
-            view.settings.clearOnLoad ||
+            view.settings.clearOnLoad ??
                ABViewFormPropertyComponentDefaults.clearOnLoad
          );
          $$(ids.clearOnSave).setValue(
-            view.settings.clearOnSave ||
+            view.settings.clearOnSave ??
                ABViewFormPropertyComponentDefaults.clearOnSave
          );
 
@@ -405,10 +428,10 @@ export default function (AB) {
          vals.settings.dataviewID = $$(ids.datacollection).getValue();
          vals.settings.showLabel = $$(ids.showLabel).getValue();
          vals.settings.labelPosition =
-            $$(ids.labelPosition).getValue() ||
+            $$(ids.labelPosition).getValue() ??
             ABViewFormPropertyComponentDefaults.labelPosition;
          vals.settings.labelWidth =
-            $$(ids.labelWidth).getValue() ||
+            $$(ids.labelWidth).getValue() ??
             ABViewFormPropertyComponentDefaults.labelWidth;
          vals.settings.height = $$(ids.height).getValue();
          vals.settings.clearOnLoad = $$(ids.clearOnLoad).getValue();
@@ -425,7 +448,7 @@ export default function (AB) {
        * NOTE: Must be overwritten by the Child Class
        */
       ViewClass() {
-         return super._ViewClass("carousel");
+         return super._ViewClass("form");
       }
 
       //
@@ -437,6 +460,9 @@ export default function (AB) {
       }
 
       check(e, fieldId) {
+         if (this._isBusy) return;
+         this._isBusy = true;
+         this.busy();
          const ids = this.ids;
          let currView = this.CurrentView;
          let formView = currView.parentFormComponent();
@@ -447,6 +473,7 @@ export default function (AB) {
          $$(ids.fields).updateItem(fieldId, item);
 
          let doneFn = () => {
+            this._isBusy = false;
             formView
                .refreshDefaultButton(ids)
                .save()
@@ -454,6 +481,7 @@ export default function (AB) {
                   // refresh UI
                   currView.emit("properties.updated", currView);
                   this.onChange();
+                  this.ready();
                });
 
             // // trigger a save()
@@ -462,14 +490,27 @@ export default function (AB) {
 
          // add a field to the form
          if (item.selected) {
-            let fieldView = currView.addFieldToForm(item);
+            // Check for duplication
+            let exists = formView
+               .fieldComponents()
+               .find((c) => c.settings.fieldId == fieldId);
+            if (exists) {
+               this._isBusy = false;
+               this.ready();
+               return;
+            }
+
+            let fieldView = formView.addFieldToForm(item);
             if (fieldView) {
                fieldView.save().then(() => {
                   fieldView.once("destroyed", () => this.populate(currView));
-                  currView.viewInsert(fieldView).then(() => {
+                  formView.viewInsert(fieldView).then(() => {
                      doneFn();
                   });
                });
+            } else {
+               this._isBusy = false;
+               this.ready();
             }
          }
          // remove field in the form
@@ -482,9 +523,12 @@ export default function (AB) {
                // formView._views = remainingViews;
 
                fieldView.destroy();
-               currView.viewRemove(fieldView).then(() => {
+               formView.viewRemove(fieldView).then(() => {
                   doneFn();
                });
+            } else {
+               this._isBusy = false;
+               this.ready();
             }
          }
       }
@@ -599,8 +643,7 @@ export default function (AB) {
 
       refreshDefaultButton() {
          const ids = this.ids;
-         const ABViewFormButton =
-            this.AB.ClassManager.viewClass("button");
+         const ABViewFormButton = this.AB.ClassManager.viewClass("button");
 
          // If default button is not exists, then skip this
          let defaultButton = this.views(
@@ -736,7 +779,21 @@ export default function (AB) {
                })
          );
       }
-   }
+   };
 
-   return ABViewFormProperty;
+   return [
+      ABAbviewformProperties,
+      FNAbviewFormButtonProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormCheckboxProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormConnectProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormCustomProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormDatepickerProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormJsonProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormNumberProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormSelectMultipleProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormSelectSingleProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormTextboxProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormTreeProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormUrlProperties({ AB, ABViewForm: ABAbviewformProperties }),
+   ];
 }

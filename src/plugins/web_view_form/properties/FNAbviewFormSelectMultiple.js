@@ -1,17 +1,28 @@
+import FNAbviewformItem from "./FNAbviewFormItem.js";
+
 /*
- * ABViewFormTextbox
- * A Property manager for our ABViewFormTextbox definitions
+ * ABViewFormSelectMultiple
+ * A Property manager for our ABViewFormSelectMultiple definitions
  */
 
-import FABViewFormItem from "./ABViewFormItem";
+export default function FNAbviewFormSelectMultipleProperties({
+   AB,
+   ABViewPropertiesPlugin,
+}) {
+   const ABViewFormItem = FNAbviewformItem({ AB, ABViewPropertiesPlugin });
 
-export default function (AB) {
-   const BASE_ID = "properties_abview_form_textbox";
+   const BASE_ID = "properties_abview_form_select_multiple";
 
-   const ABViewFormItem = FABViewFormItem(AB);
-   const L = ABViewFormItem.L();
+   const L = AB.Label();
 
-   class ABViewFormTextboxProperty extends ABViewFormItem {
+   class ABViewFormSelectMultipleProperty extends ABViewFormItem {
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
       constructor() {
          super(BASE_ID, {
             // Put our ids here
@@ -22,7 +33,7 @@ export default function (AB) {
       }
 
       static get key() {
-         return "textbox";
+         return "selectmultiple";
       }
 
       ui() {
@@ -32,21 +43,16 @@ export default function (AB) {
             {
                id: ids.type,
                name: "type",
-               view: "radio",
+               view: "richselect",
                label: L("Type"),
-               vertical: true,
                options: [
                   {
-                     id: "single",
-                     value: L("Single line"),
+                     id: "multicombo",
+                     value: L("Multi Combo"),
                   },
                   {
-                     id: "multiple",
-                     value: L("Multiple lines"),
-                  },
-                  {
-                     id: "rich",
-                     value: L("Rich editor"),
+                     id: "checkbox",
+                     value: L("Checkboxes"),
                   },
                ],
                on: {
@@ -66,12 +72,12 @@ export default function (AB) {
          super.populate(view);
 
          const ids = this.ids;
-         const ABViewFormTextboxPropertyComponentDefaults =
+         const ABViewFormSelectMultiplePropertyComponentDefaults =
             this.defaultValues();
 
          $$(ids.type).setValue(
             view.settings.type ||
-               ABViewFormTextboxPropertyComponentDefaults.type
+               ABViewFormSelectMultiplePropertyComponentDefaults.type
          );
       }
 
@@ -98,9 +104,9 @@ export default function (AB) {
        * NOTE: Must be overwritten by the Child Class
        */
       ViewClass() {
-         return super._ViewClass("textbox");
+         return super._ViewClass("selectmultiple");
       }
    }
 
-   return ABViewFormTextboxProperty;
+   return ABViewFormSelectMultipleProperty;
 }

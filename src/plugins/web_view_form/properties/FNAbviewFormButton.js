@@ -3,15 +3,22 @@
  * A Property manager for our ABViewButton definitions
  */
 
-import FABView from "./ABView";
-
-export default function (AB) {
+export default function FNAbviewFormButtonProperties({
+   AB,
+   ABViewPropertiesPlugin,
+}) {
    const BASE_ID = "properties_abview_button";
 
-   const ABView = FABView(AB);
-   const L = ABView.L();
+   const L = AB.Label();
 
-   class ABViewButtonProperty extends ABView {
+   class ABViewButtonProperty extends ABViewPropertiesPlugin {
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
       constructor() {
          super(BASE_ID, {
             // Put our ids here

@@ -14,6 +14,8 @@ import viewDataviewEditor from "./web_view_dataview/FNAbviewdataviewEditor.js";
 import viewDataviewProperties from "./web_view_dataview/FNAbviewdataview.js";
 import viewDetailEditor from "./web_view_detail/FNAbviewdetailEditor.js";
 import viewDetailProperties from "./web_view_detail/FNAbviewdetail.js";
+import viewFormEditor from "./web_view_form/FNAbviewformEditor.js";
+import viewFormProperties from "./web_view_form/FNAbviewform.js";
 import viewGanttEditor from "./web_view_gantt/FNAbviewganttEditor.js";
 import viewGanttProperties from "./web_view_gantt/FNAbviewgantt.js";
 import viewGridEditor from "./web_view_grid/FNAbviewgridEditor.js";
@@ -51,6 +53,8 @@ const AllPlugins = [
    viewDataviewProperties,
    viewDetailEditor,
    viewDetailProperties,
+   viewFormEditor,
+   viewFormProperties,
    viewGanttEditor,
    viewGanttProperties,
    viewGridEditor,

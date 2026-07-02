@@ -1,3 +1,4 @@
+
 /**
  * ABViewFormEditor
  * The widget that displays the UI Editor Component on the screen
@@ -8,15 +9,20 @@ var myClass = null;
 // we will want to call this factory fn() repeatedly in our imports,
 // but we only want to define 1 Class reference.
 
-import FABViewForm from "./ABViewForm";
+export default function FNAbviewFormUrlEditor({ ABViewForm }) {
 
-export default function (AB) {
    if (!myClass) {
-      const ABViewForm = FABViewForm(AB);
       // var L = UIClass.L();
       // var L = ABViewContainer.L();
 
       myClass = class ABViewFormEditor extends ABViewForm {
+         static getPluginKey() {
+            return this.key;
+         }
+
+         static getPluginType() {
+            return "editor-view";
+         }
          static get key() {
             return "form-url";
          }

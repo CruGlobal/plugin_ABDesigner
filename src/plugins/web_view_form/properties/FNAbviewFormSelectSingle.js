@@ -1,17 +1,28 @@
+import FNAbviewformItem from "./FNAbviewFormItem.js";
+
 /*
  * ABViewFormSelectSingle
  * A Property manager for our ABViewFormSelectSingle definitions
  */
 
-import FABViewFormItem from "./ABViewFormItem";
+export default function FNAbviewFormSelectSingleProperties({
+   AB,
+   ABViewPropertiesPlugin,
+}) {
+   const ABViewFormItem = FNAbviewformItem({ AB, ABViewPropertiesPlugin });
 
-export default function (AB) {
    const BASE_ID = "properties_abview_form_select_single";
 
-   const ABViewFormItem = FABViewFormItem(AB);
-   const L = ABViewFormItem.L();
+   const L = AB.Label();
 
    class ABViewFormSelectSingleProperty extends ABViewFormItem {
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
       constructor() {
          super(BASE_ID, {
             // Put our ids here

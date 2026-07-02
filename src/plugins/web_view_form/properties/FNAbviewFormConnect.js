@@ -1,25 +1,36 @@
+import FNAbviewformItem from "./FNAbviewFormItem.js";
+import ABPopupSort from "../../../rootPages/Designer/ui_work_object_workspace_popupSortFields";
+import ABViewPropertyAddPage from "../../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyAddPage";
+import ABViewPropertyEditPage from "../../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyEditPage";
+
 /*
  * ABViewConnect
  * A Property manager for our ABViewConnect definitions
  */
 
-import FABViewFormItem from "./ABViewFormItem";
-import ABPopupSort from "../../ui_work_object_workspace_popupSortFields";
-import ABViewPropertyAddPage from "./viewProperties/ABViewPropertyAddPage";
-import ABViewPropertyEditPage from "./viewProperties/ABViewPropertyEditPage";
+export default function FNAbviewFormConnectProperties({
+   AB,
+   ABViewPropertiesPlugin,
+}) {
+   const ABViewFormItem = FNAbviewformItem({ AB, ABViewPropertiesPlugin });
 
-export default function (AB) {
    const BASE_ID = "properties_abview_connect";
 
-   const ABViewFormItem = FABViewFormItem(AB);
    const ABAddPage = ABViewPropertyAddPage(AB, BASE_ID);
    const ABEditPage = ABViewPropertyEditPage(AB, BASE_ID);
-   const L = ABViewFormItem.L();
+   const L = AB.Label();
 
    let FilterComponent = null;
    let SortComponent = null;
 
    class ABViewConnectProperty extends ABViewFormItem {
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
       constructor() {
          super(BASE_ID, {
             // Put our ids here
@@ -514,4 +525,3 @@ export default function (AB) {
 
    return ABViewConnectProperty;
 }
-
