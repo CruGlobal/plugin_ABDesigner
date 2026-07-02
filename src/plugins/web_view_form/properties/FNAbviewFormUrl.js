@@ -1,5 +1,4 @@
 import FCommonKeyValue from "../../../rootPages/Designer/ui_common_key_value";
-import FNAbviewformProperties from "../FNAbviewform.js";
 
 /*
  * ABViewForm
@@ -8,9 +7,8 @@ import FNAbviewformProperties from "../FNAbviewform.js";
 
 export default function FNAbviewFormUrlProperties({
    AB,
-   ABViewPropertiesPlugin,
+   ABViewForm,
 }) {
-   const ABViewForm = FNAbviewformProperties({ AB, ABViewPropertiesPlugin });
 
    const UIClassCommonKeyValue = FCommonKeyValue(AB);
    const uiConfig = AB.Config.uiSettings();

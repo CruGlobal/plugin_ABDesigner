@@ -1,4 +1,3 @@
-import FNAbviewformEditor from "../FNAbviewformEditor.js";
 
 /**
  * ABViewFormEditor
@@ -10,8 +9,7 @@ var myClass = null;
 // we will want to call this factory fn() repeatedly in our imports,
 // but we only want to define 1 Class reference.
 
-export default function FNAbviewFormUrlEditor({ ABViewEditorPlugin }) {
-   const ABViewForm = FNAbviewformEditor({ ABViewEditorPlugin });
+export default function FNAbviewFormUrlEditor({ ABViewForm }) {
 
    if (!myClass) {
       // var L = UIClass.L();

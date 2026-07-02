@@ -59,5 +59,8 @@ export default function FNAbviewformEditor({ AB, ABViewEditorPlugin }) {
       }
    };
 
-   return [ABAbviewformEditor, FNAbviewFormUrlEditor({ ABViewEditorPlugin })];
+   return [
+      ABAbviewformEditor,
+      FNAbviewFormUrlEditor({ ABViewForm: ABAbviewformEditor }),
+   ];
 }

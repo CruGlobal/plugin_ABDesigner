@@ -794,6 +794,6 @@ export default function FNAbviewformProperties({
       FNAbviewFormSelectSingleProperties({ AB, ABViewPropertiesPlugin }),
       FNAbviewFormTextboxProperties({ AB, ABViewPropertiesPlugin }),
       FNAbviewFormTreeProperties({ AB, ABViewPropertiesPlugin }),
-      FNAbviewFormUrlProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewFormUrlProperties({ AB, ABViewForm: ABAbviewformProperties }),
    ];
 }
