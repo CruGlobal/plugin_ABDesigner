@@ -10,10 +10,7 @@ const base = "ui_work_query_list_newQuery_blank";
 
 function getTarget(ab = null) {
    if (!ab) ab = new AB();
-   const UI_Query_Blank = UIQueryBlank(ab);
-   const target = new UI_Query_Blank();
-
-   return target;
+   return UIQueryBlank(ab);
 }
 
 describe("ui_work_query_list_newQuery_blank", function () {
@@ -21,9 +18,9 @@ describe("ui_work_query_list_newQuery_blank", function () {
       const target = getTarget();
 
       assert.equal(base, target.ids.component);
-      assert.equal(`${base}_blank`, target.ids.form);
-      assert.equal(`${base}_save`, target.ids.buttonSave);
-      assert.equal(`${base}_cancel`, target.ids.buttonCancel);
+      assert.equal(`${base}_form`, target.ids.form);
+      assert.equal(`${base}_buttonSave`, target.ids.buttonSave);
+      assert.equal(`${base}_buttonCancel`, target.ids.buttonCancel);
       assert.equal(`${base}_object`, target.ids.object);
    });
 

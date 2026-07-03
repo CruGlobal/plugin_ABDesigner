@@ -4,16 +4,14 @@ import sinon from "sinon";
 import { EventEmitter } from "events";
 
 import AB from "../../_mock/AB.js";
+import { registerApplicationForTarget } from "../../_mock/uiWorkTestHelpers.js";
 import UINewDataCollection from "../../../src/rootPages/Designer/ui_work_datacollection_list_newDatacollection";
 
-const base = "ab_work_datacollection_list_newDataCollection";
+const base = "ui_work_datacollection_list_newDataCollection";
 
 function getTarget(ab = null) {
    if (!ab) ab = new AB();
-   const UI_New_DataCollection = UINewDataCollection(ab);
-   const target = new UI_New_DataCollection();
-
-   return target;
+   return UINewDataCollection(ab);
 }
 
 describe("ab_work_datacollection_list_newDataCollection", function () {
@@ -60,11 +58,13 @@ describe("ab_work_datacollection_list_newDataCollection", function () {
    });
 
    it(".applicationLoad - should store application", function () {
-      const target = getTarget();
+      const ab = new AB();
+      const target = getTarget(ab);
       const application = sinon.createStubInstance(EventEmitter);
+      registerApplicationForTarget(target, application);
 
       target.applicationLoad(application);
 
-      assert.equal(application, target.currentApplication);
+      assert.equal(application, target.CurrentApplication);
    });
 });
