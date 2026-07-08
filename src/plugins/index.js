@@ -37,6 +37,8 @@ import viewTabEditor from "./web_view_tab/FNAbviewtabEditor.js";
 import viewTabProperties from "./web_view_tab/FNAbviewtab.js";
 import viewTextEditor from "./web_view_text/FNAbviewtextEditor.js";
 import viewTextProperties from "./web_view_text/FNAbviewtext.js";
+import viewChartProperties from "./web_view_chart/properties/FNAbviewchart.js";
+import viewChartEditor from "./web_view_chart/editors/FNAbviewchartEditor.js";
 
 const AllPlugins = [
    CsvExporterEditor,
@@ -77,7 +79,9 @@ const AllPlugins = [
    viewTextEditor,
    viewTextProperties,
    viewDocxBuilderProperties,
-   viewDocxBuilderEditor
+   viewDocxBuilderEditor,
+   viewChartProperties,
+   viewChartEditor,
 ];
 
 export default {
