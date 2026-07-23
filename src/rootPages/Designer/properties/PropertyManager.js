@@ -176,11 +176,23 @@ export default function (AB) {
          },
 
          processElements: function (f = () => true) {
-            return Plugins.concat(Processes).filter(f);
+            const dynamicPlugins = [];
+            if (AB.ClassManager && AB.ClassManager.viewPropertiesAll) {
+               AB.ClassManager.viewPropertiesAll().forEach((ViewPropertyClass) => {
+                  dynamicPlugins.push(ViewPropertyClass);
+               });
+            }
+            return dynamicPlugins.concat(Processes).filter(f);
          },
 
          views: function (v = () => true) {
-            return Plugins.concat(Views).filter(v);
+            const dynamicPlugins = [];
+            if (AB.ClassManager && AB.ClassManager.viewPropertiesAll) {
+               AB.ClassManager.viewPropertiesAll().forEach((ViewPropertyClass) => {
+                  dynamicPlugins.push(ViewPropertyClass);
+               });
+            }
+            return dynamicPlugins.concat(Views).filter(v);
          },
 
          mobileViews: function (v = () => true) {
