@@ -3,13 +3,15 @@ import FNAbviewchartbarEditor from "./FNAbviewchartbarEditor.js";
 import FNAbviewchartlineEditor from "./FNAbviewchartlineEditor.js";
 import FNAbviewchartpieEditor from "./FNAbviewchartpieEditor.js";
 
-export default function FNAbviewchartEditor({ AB, ABViewEditorPlugin }) {
-   const FABViewContainer =
-      require("../../../rootPages/Designer/editors/views/ABViewContainer").default;
-   const ABViewContainer = FABViewContainer(AB);
+export default function FNAbviewchartEditor({
+   AB,
+   ABViewEditorPlugin,
+   FABViewContainerEditor,
+}) {
+   const ABViewContainer = FABViewContainerEditor(AB);
    const BASE_ID = "interface_editor_viewchart";
 
-   const ABAbviewchartEditor = class ABAbviewchartEditor extends ABViewContainer {
+   class ABAbviewchartEditor extends ABViewContainer {
       static getPluginKey() {
          return "chart";
       }
@@ -42,7 +44,7 @@ export default function FNAbviewchartEditor({ AB, ABViewEditorPlugin }) {
       onShow() {
          super.onShow();
       }
-   };
+   }
 
    return [
       ABAbviewchartEditor,

@@ -40,6 +40,14 @@ import viewTextProperties from "./web_view_text/FNAbviewtext.js";
 import viewChartProperties from "./web_view_chart/properties/FNAbviewchart.js";
 import viewChartEditor from "./web_view_chart/editors/FNAbviewchartEditor.js";
 
+import FABViewContainer from "../rootPages/Designer/properties/views/ABViewContainer.js";
+import FABViewContainerEditor from "../rootPages/Designer/editors/views/ABViewContainer.js";
+
+const ABDesignResources = {
+   FABViewContainer,
+   FABViewContainerEditor,
+};
+
 const AllPlugins = [
    CsvExporterEditor,
    CsvExporterProperties,
@@ -87,7 +95,7 @@ const AllPlugins = [
 export default {
    load: (AB) => {
       AllPlugins.forEach((plugin) => {
-         AB.pluginRegister(plugin);
+         AB.pluginRegister((api) => plugin({ ...api, ...ABDesignResources }));
       });
    },
 };

@@ -6,16 +6,15 @@ import FNAbviewchartpieProperties from "./FNAbviewchartpie.js";
 export default function FNAbviewchartProperties({
    AB,
    ABViewPropertiesPlugin,
+   FABViewContainer,
 }) {
-   const FABViewContainer =
-      require("../../../rootPages/Designer/properties/views/ABViewContainer").default;
    const ABViewContainer = FABViewContainer(AB);
    const uiConfig = AB.Config.uiSettings();
    const L = AB.Label();
 
    const BASE_ID = "properties_abview_chart";
 
-   const ABAbviewchartProperties = class ABAbviewchartProperties extends ABViewContainer {
+   class ABAbviewchartProperties extends ABViewContainer {
       static getPluginKey() {
          return "chart";
       }
@@ -366,7 +365,7 @@ export default function FNAbviewchartProperties({
       ViewClass() {
          return super._ViewClass("chart");
       }
-   };
+   }
 
    return [
       ABAbviewchartProperties,
