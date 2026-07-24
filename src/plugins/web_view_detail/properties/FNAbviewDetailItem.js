@@ -1,18 +1,25 @@
-/*
- * ABViewDetailItem
- * A Property manager for our ABViewDetailItem definitions
- */
+export default function FNAbviewDetailItemProperties({
+   AB,
+   ABViewPropertiesPlugin,
+}) {
+   const L = AB.Label();
 
-import FABView from "./ABView";
+   class ABViewDetailItemProperty extends ABViewPropertiesPlugin {
+      static getPluginKey() {
+         return this.key;
+      }
 
-export default function (AB) {
-   const ABView = FABView(AB);
-   const L = ABView.L();
+      static getPluginType() {
+         return "properties-view";
+      }
 
-   class ABViewDetailItemProperty extends ABView {
+      static get key() {
+         return "detailitem";
+      }
+
       constructor(BASE_ID, ids = {}) {
          super(
-            BASE_ID,
+            BASE_ID ?? "properties_abview_detail_item",
             Object.assign(ids, {
                // Put our ids here
                field: "",
@@ -44,7 +51,7 @@ export default function (AB) {
             (f) => f.id == view.settings.fieldId
          );
 
-         $$(this.ids.field).setValue(field.label);
+         $$(this.ids.field).setValue(field ? field.label : "");
       }
 
       defaultValues() {

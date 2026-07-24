@@ -236,6 +236,7 @@ export default function (AB) {
 
             if (_editor) {
                let newPanel = new _editor();
+               newPanel.AB = this.AB;
                newPanel.applicationLoad(this.CurrentApplication);
 
                let ui = [newPanel.ui()];

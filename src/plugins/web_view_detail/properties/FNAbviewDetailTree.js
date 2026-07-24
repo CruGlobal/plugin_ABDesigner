@@ -1,14 +1,15 @@
-/**
- * ABViewDetailTree
- * A Property manager for our ABViewDetailTree definitions
- */
+import FNAbviewDetailItemProperties from "./FNAbviewDetailItem.js";
 
-import FABViewDetailItem from "./ABViewDetailItem";
+export default function FNAbviewDetailTreeProperties({
+   AB,
+   ABViewPropertiesPlugin,
+}) {
+   const ABViewDetailItem = FNAbviewDetailItemProperties({
+      AB,
+      ABViewPropertiesPlugin,
+   });
 
-export default function (AB) {
    const BASE_ID = "properties_abview_detail_tree";
-
-   const ABViewDetailItem = FABViewDetailItem(AB);
 
    class ABViewDetailTreeProperty extends ABViewDetailItem {
       constructor() {
@@ -19,15 +20,18 @@ export default function (AB) {
          this.AB = AB;
       }
 
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
+
       static get key() {
          return "detailtree";
       }
 
-      /**
-       * @method FieldClass()
-       * A method to return the proper ABViewXXX Definition.
-       * NOTE: Must be overwritten by the Child Class
-       */
       ViewClass() {
          return super._ViewClass("detailtree");
       }

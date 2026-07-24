@@ -452,22 +452,6 @@ export default function FNAbviewgridProperties({
       async init(AB) {
          super.init(AB);
 
-         // Load in all the Available Datacollections:
-         var listDC = this.CurrentApplication.datacollectionsIncluded().map(
-            (d) => {
-               return {
-                  id: d.id,
-                  value: d.label,
-                  icon:
-                     d.sourceType == "query"
-                        ? "fa fa-filter"
-                        : "fa fa-database",
-               };
-            }
-         );
-         $$(this.ids.datacollection).define("options", listDC);
-         $$(this.ids.datacollection).refresh();
-
          /// Filter Data Helper:
 
          this._handler_onCancel = () => {
@@ -601,25 +585,32 @@ export default function FNAbviewgridProperties({
 
          if (!view) return;
 
+         // Load in all the Available Datacollections (done here so view.application is used directly):
+         var listDC = view.application.datacollectionsIncluded().map(
+            (d) => {
+               return {
+                  id: d.id,
+                  value: d.label,
+                  icon:
+                     d.sourceType == "query"
+                        ? "fa fa-filter"
+                        : "fa fa-database",
+               };
+            }
+         );
+         $$(ids.datacollection).define("options", listDC);
+         $$(ids.datacollection).refresh();
+
          // this.viewEditing = view;
          let $dataCollection = $$(ids.datacollection);
          $dataCollection.blockEvent();
-         $dataCollection.setValue(view.settings.dataviewID);
+         $dataCollection.setValue(view.settings.dataviewID || "");
          $dataCollection.unblockEvent();
          $$(ids.isEditable).setValue(view.settings.isEditable);
          $$(ids.massUpdate).setValue(view.settings.massUpdate);
          $$(ids.allowDelete).setValue(view.settings.allowDelete);
          $$(ids.isSortable).setValue(view.settings.isSortable);
          $$(ids.isExportable).setValue(view.settings.isExportable);
-
-         // populate the Datacollection chooser
-         if (view.settings.datacollection != "") {
-            $$(ids.datacollection).setValue(view.settings.dataviewID);
-            // $$(ids.linkedObject).show();
-         } else {
-            $$(ids.datacollection).setValue("");
-            // $$(ids.linkedObject).hide();
-         }
 
          $$(ids.height).setValue(view.settings.height);
          $$(ids.hideHeader).setValue(view.settings.hideHeader);
