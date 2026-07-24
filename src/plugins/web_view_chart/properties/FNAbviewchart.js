@@ -1,18 +1,28 @@
-/*
- * ABViewChart
- * A Property manager for our ABViewChart definitions
- */
+import FNAbviewchartareaProperties from "./FNAbviewchartarea.js";
+import FNAbviewchartbarProperties from "./FNAbviewchartbar.js";
+import FNAbviewchartlineProperties from "./FNAbviewchartline.js";
+import FNAbviewchartpieProperties from "./FNAbviewchartpie.js";
 
-import FABViewContainer from "./ABViewContainer";
-
-export default function (AB) {
-   const BASE_ID = "properties_abview_chart";
-
+export default function FNAbviewchartProperties({
+   AB,
+   ABViewPropertiesPlugin,
+   FABViewContainer,
+}) {
    const ABViewContainer = FABViewContainer(AB);
    const uiConfig = AB.Config.uiSettings();
-   const L = ABViewContainer.L();
+   const L = AB.Label();
 
-   class ABViewChartProperty extends ABViewContainer {
+   const BASE_ID = "properties_abview_chart";
+
+   class ABAbviewchartProperties extends ABViewContainer {
+      static getPluginKey() {
+         return "chart";
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
+
       constructor() {
          super(BASE_ID, {
             dataviewID: "",
@@ -190,10 +200,6 @@ export default function (AB) {
       updateCharts() {
          // UPDATE charts when parent properties are changed
          this.CurrentView.refreshData();
-
-         // baseView.views().forEach((e) => {
-         //    e.parent.refreshData();
-         // });
       }
 
       populateDataview() {
@@ -361,5 +367,11 @@ export default function (AB) {
       }
    }
 
-   return ABViewChartProperty;
+   return [
+      ABAbviewchartProperties,
+      FNAbviewchartareaProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewchartbarProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewchartlineProperties({ AB, ABViewPropertiesPlugin }),
+      FNAbviewchartpieProperties({ AB, ABViewPropertiesPlugin }),
+   ];
 }
