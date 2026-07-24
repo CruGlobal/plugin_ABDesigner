@@ -2,18 +2,13 @@
 // A properties side import for an ABView.
 //
 
-import FABViewDetail from "../web_view_detail/FNAbviewdetail";
+import FABViewDetail from "../../rootPages/Designer/properties/views/ABViewDetail";
 import ABViewPropertyLinkPage from "../../rootPages/Designer/properties/views/viewProperties/ABViewPropertyLinkPage";
 
-export default function FNAbviewdataviewProperties({
-   AB,
-   // ABViewPropertiesPlugin,
-   // ABUIPlugin,
-}) {
+export default function FNAbviewdataviewProperties({ AB }) {
    const base = "properties_abview_dataview";
 
-   const ABViewDetail = FABViewDetail({ AB });
-   // NOTE: this is another plugin, so pass in { AB }
+   const ABViewDetail = FABViewDetail(AB);
 
    const LinkPageProperty = ABViewPropertyLinkPage(AB, base);
    const uiConfig = AB.Config.uiSettings();
@@ -87,7 +82,7 @@ export default function FNAbviewdataviewProperties({
 
          $$(ids.xCount).setValue(
             view.settings.xCount ||
-               ABViewDataviewPropertyComponentDefaults.xCount
+            ABViewDataviewPropertyComponentDefaults.xCount
          );
 
          this.linkPageComponent.viewLoad(view);

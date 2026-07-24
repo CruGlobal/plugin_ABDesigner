@@ -1,18 +1,19 @@
-/**
- * ABViewDetailImage
- * A Property manager for our ABViewDetailImage definitions
- */
+import FNAbviewDetailItemProperties from "./FNAbviewDetailItem.js";
 
-import FABViewDetailItem from "./ABViewDetailItem";
+export default function FNAbviewDetailImageProperties({
+   AB,
+   ABViewPropertiesPlugin,
+}) {
+   const ABViewDetailItem = FNAbviewDetailItemProperties({
+      AB,
+      ABViewPropertiesPlugin,
+   });
 
-export default function (AB) {
    const BASE_ID = "properties_abview_detail_image";
    const DEFAULT_VALUES = {
       height: 0,
       width: 0,
    };
-
-   const ABViewDetailItem = FABViewDetailItem(AB);
 
    class ABViewDetailImageProperty extends ABViewDetailItem {
       constructor() {
@@ -22,6 +23,14 @@ export default function (AB) {
          });
 
          this.AB = AB;
+      }
+
+      static getPluginKey() {
+         return this.key;
+      }
+
+      static getPluginType() {
+         return "properties-view";
       }
 
       static get key() {
@@ -51,11 +60,6 @@ export default function (AB) {
          ]);
       }
 
-      /**
-       * @method FieldClass()
-       * A method to return the proper ABViewXXX Definition.
-       * NOTE: Must be overwritten by the Child Class
-       */
       ViewClass() {
          return super._ViewClass("detailimage");
       }
@@ -74,11 +78,6 @@ export default function (AB) {
          return Object.assign(DEFAULT_VALUES, values);
       }
 
-      /**
-       * @method values
-       * return the values for this form.
-       * @return {obj}
-       */
       values() {
          const values = super.values() ?? {};
          values.settings = values.settings ?? {};

@@ -1,24 +1,27 @@
-// FNAbviewdetail Properties
-// A properties side import for an ABView.
-//
+import FNAbviewDetailCheckboxProperties from "./properties/FNAbviewDetailCheckbox.js";
+import FNAbviewDetailCustomProperties from "./properties/FNAbviewDetailCustom.js";
+import FNAbviewDetailImageProperties from "./properties/FNAbviewDetailImage.js";
+import FNAbviewDetailItemProperties from "./properties/FNAbviewDetailItem.js";
+import FNAbviewDetailTextProperties from "./properties/FNAbviewDetailText.js";
+import FNAbviewDetailTreeProperties from "./properties/FNAbviewDetailTree.js";
 
 import FABViewContainer from "../../rootPages/Designer/properties/views/ABViewContainer";
 
-export default function FNAbviewdetailProperties({ AB }) {
+export default function FNAbviewdetailProperties(API) {
+   const { AB } = API;
    const ABViewContainer = FABViewContainer(AB);
    const uiConfig = AB.Config.uiSettings();
    const L = ABViewContainer.L();
 
    let ABViewDetailPropertyComponentDefaults = {};
 
-   return class ABAbviewdetailProperties extends ABViewContainer {
+   const ABAbviewdetailProperties = class ABAbviewdetailProperties extends ABViewContainer {
       static getPluginKey() {
          return this.key;
       }
 
       static getPluginType() {
          return "properties-view";
-         // properties-view : will display in the properties panel of the ABDesigner
       }
 
       constructor(base, ids = {}) {
@@ -371,4 +374,14 @@ export default function FNAbviewdetailProperties({ AB }) {
          }
       }
    };
+
+   return [
+      ABAbviewdetailProperties,
+      FNAbviewDetailItemProperties(API),
+      FNAbviewDetailCheckboxProperties(API),
+      FNAbviewDetailCustomProperties(API),
+      FNAbviewDetailImageProperties(API),
+      FNAbviewDetailTextProperties(API),
+      FNAbviewDetailTreeProperties(API),
+   ];
 }
