@@ -1,18 +1,21 @@
-/*
- * ABViewChartArea
- * A Property manager for our ABViewChartArea definitions
- */
-
-import FABView from "./ABView";
-
-export default function (AB) {
-   const BASE_ID = "properties_abview_chart_area";
-
-   const ABView = FABView(AB);
+export default function FNAbviewchartbarProperties({
+   AB,
+   ABViewPropertiesPlugin,
+}) {
    const uiConfig = AB.Config.uiSettings();
-   const L = ABView.L();
+   const L = AB.Label();
 
-   class ABViewChartAreaProperty extends ABView {
+   const BASE_ID = "properties_abview_chart_bar";
+
+   return class ABAbviewchartbarProperties extends ABViewPropertiesPlugin {
+      static getPluginKey() {
+         return "bar";
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
+
       constructor() {
          super(BASE_ID, {});
 
@@ -20,24 +23,24 @@ export default function (AB) {
       }
 
       static get key() {
-         return "area";
+         return "bar";
       }
 
       ui() {
          return super.ui([
             {
-               name: "areaType",
+               name: "barType",
                view: "richselect",
                label: L("Chart Type"),
                labelWidth: uiConfig.labelWidthLarge,
                options: [
                   {
-                     id: "area",
-                     value: L("Area"),
+                     id: "bar",
+                     value: L("Vertical"),
                   },
                   {
-                     id: "stackedArea",
-                     value: L("Stacked Area"),
+                     id: "barH",
+                     value: L("Horizontal"),
                   },
                ],
                on: {
@@ -46,14 +49,33 @@ export default function (AB) {
                   },
                },
             },
-            // {
-            // 	name: 'chartWidth',
-            // 	view: 'counter',
-            // 	min: 1,
-            // 	label: L('ab.component.chart.area.chartWidth', '*Width')
-            // },
             {
-               name: "chartHeight",
+               name: "barPreset",
+               view: "richselect",
+               label: L("Chart Preset"),
+               labelWidth: uiConfig.labelWidthLarge,
+               options: [
+                  {
+                     id: "column",
+                     value: L("Column"),
+                  },
+                  {
+                     id: "stick",
+                     value: L("Stick"),
+                  },
+                  {
+                     id: "alpha",
+                     value: L("Alpha"),
+                  },
+               ],
+               on: {
+                  onChange: () => {
+                     this.onChange();
+                  },
+               },
+            },
+            {
+               name: "height",
                view: "counter",
                min: 1,
                label: L("Height"),
@@ -164,9 +186,7 @@ export default function (AB) {
        * NOTE: Must be overwritten by the Child Class
        */
       ViewClass() {
-         return super._ViewClass("area");
+         return super._ViewClass("bar");
       }
-   }
-
-   return ABViewChartAreaProperty;
+   };
 }

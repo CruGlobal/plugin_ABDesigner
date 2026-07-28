@@ -1,18 +1,21 @@
-/*
- * ABViewChartline
- * A Property manager for our ABViewChartLine definitions
- */
-
-import FABView from "./ABView";
-
-export default function (AB) {
-   const BASE_ID = "properties_abview_chart_pie";
-
-   const ABView = FABView(AB);
+export default function FNAbviewchartlineProperties({
+   AB,
+   ABViewPropertiesPlugin,
+}) {
    const uiConfig = AB.Config.uiSettings();
-   const L = ABView.L();
+   const L = AB.Label();
 
-   class ABViewChartPieProperty extends ABView {
+   const BASE_ID = "properties_abview_chart_line";
+
+   return class ABAbviewchartlineProperties extends ABViewPropertiesPlugin {
+      static getPluginKey() {
+         return "line";
+      }
+
+      static getPluginType() {
+         return "properties-view";
+      }
+
       constructor() {
          super(BASE_ID, {});
 
@@ -20,28 +23,24 @@ export default function (AB) {
       }
 
       static get key() {
-         return "pie";
+         return "line";
       }
 
       ui() {
          return super.ui([
             {
-               name: "pieType",
+               name: "lineType",
                view: "richselect",
                label: L("Chart Type"),
                labelWidth: uiConfig.labelWidthLarge,
                options: [
                   {
-                     id: "pie",
-                     value: L("Standard"),
+                     id: "line",
+                     value: L("Line"),
                   },
                   {
-                     id: "pie3D",
-                     value: L("Pie3D"),
-                  },
-                  {
-                     id: "donut",
-                     value: L("Donut"),
+                     id: "spline",
+                     value: L("Spline"),
                   },
                ],
                on: {
@@ -50,14 +49,33 @@ export default function (AB) {
                   },
                },
             },
-            // {
-            // 	name: 'chartWidth',
-            // 	view: 'counter',
-            // 	min: 1,
-            // 	label: L('ab.component.chart.pie.chartWidth', '*Width')
-            // },
             {
-               name: "height",
+               name: "linePreset",
+               view: "richselect",
+               label: L("Chart Preset"),
+               labelWidth: uiConfig.labelWidthLarge,
+               options: [
+                  {
+                     id: "plot",
+                     value: L("Plot"),
+                  },
+                  {
+                     id: "diamond",
+                     value: L("Diamond"),
+                  },
+                  {
+                     id: "simple",
+                     value: L("Simple"),
+                  },
+               ],
+               on: {
+                  onChange: () => {
+                     this.onChange();
+                  },
+               },
+            },
+            {
+               name: "chartHeight",
                view: "counter",
                min: 1,
                label: L("Height"),
@@ -68,11 +86,21 @@ export default function (AB) {
                },
             },
             {
-               name: "innerFontSize",
+               name: "stepValue",
                view: "counter",
                min: 1,
-               label: L("Inner Font Size"),
-               labelWidth: uiConfig.labelWidthXLarge,
+               label: L("Step"),
+               on: {
+                  onChange: () => {
+                     this.onChange();
+                  },
+               },
+            },
+            {
+               name: "maxValue",
+               view: "counter",
+               min: 1,
+               label: L("Max Value"),
                on: {
                   onChange: () => {
                      this.onChange();
@@ -158,9 +186,7 @@ export default function (AB) {
        * NOTE: Must be overwritten by the Child Class
        */
       ViewClass() {
-         return super._ViewClass("pie");
+         return super._ViewClass("line");
       }
-   }
-
-   return ABViewChartPieProperty;
+   };
 }
