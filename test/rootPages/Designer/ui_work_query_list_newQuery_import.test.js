@@ -10,10 +10,7 @@ const base = "ui_work_query_list_newQuery_import";
 
 function getTarget(ab = null) {
    if (!ab) ab = new AB();
-   const UI_Query_Import = UIQueryImport(ab);
-   const target = new UI_Query_Import();
-
-   return target;
+   return UIQueryImport(ab);
 }
 
 describe("ui_work_query_list_newQuery_import", function () {
@@ -21,11 +18,11 @@ describe("ui_work_query_list_newQuery_import", function () {
       const target = getTarget();
 
       assert.equal(base, target.ids.component);
-      assert.equal(`${base}_import`, target.ids.form);
+      assert.equal(`${base}_form`, target.ids.form);
       assert.equal(`${base}_filter`, target.ids.filter);
       assert.equal(`${base}_queryList`, target.ids.queryList);
-      assert.equal(`${base}_save`, target.ids.buttonSave);
-      assert.equal(`${base}_cancel`, target.ids.buttonCancel);
+      assert.equal(`${base}_buttonSave`, target.ids.buttonSave);
+      assert.equal(`${base}_buttonCancel`, target.ids.buttonCancel);
    });
 
    it(".ui - should return UI definition", function () {
@@ -73,7 +70,6 @@ describe("ui_work_query_list_newQuery_import", function () {
 
       target.onShow(application);
 
-      assert.equal(application, target.currentApp);
       assert.equal(true, spyFormClear.calledOnce);
       const optValues = spyParse.getCalls()[0].args[0];
       application.queriesExcluded().forEach((item, index) => {

@@ -28,6 +28,7 @@ export default function webixElement(id) {
       setValues: () => {},
       show: () => {},
       showProgress: () => {},
+      unselectAll: () => { },
       unblockEvent: () => {},
       validate: () => {},
    };

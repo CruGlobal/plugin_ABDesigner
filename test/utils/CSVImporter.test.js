@@ -3,7 +3,7 @@ import assert from "assert";
 import sinon from "sinon";
 
 import AB from "../_mock/AB.js";
-import CSVImporter from "../../src/utils/CSVImporter.js";
+import FCSVImporter from "../../src/plugins/web_view_csvImporter/CSVImporter.js";
 
 function getMockAB() {
    return new AB();
@@ -11,20 +11,23 @@ function getMockAB() {
 
 function getTarget() {
    const ab = getMockAB();
-   return new CSVImporter(ab);
+   const CSVImporter = FCSVImporter(ab.getPluginAPI());
+   return new CSVImporter();
 }
 
 describe("CSVImporter", function () {
    it(".constructor - should store AB to a local variable", function () {
       const ab = getMockAB();
-      const target = new CSVImporter(ab);
+      const CSVImporter = FCSVImporter(ab.getPluginAPI());
+      const target = new CSVImporter();
 
       assert.equal(ab, target._AB);
    });
 
    it(".L - should pass valid parameters and return result of .labelPlugin function", function () {
       const ab = getMockAB();
-      const target = new CSVImporter(ab);
+      const CSVImporter = FCSVImporter(ab.getPluginAPI());
+      const target = new CSVImporter();
       const pluginKey = "ABDesigner";
       const expectParams = ["A", "B", "C"];
       const expectResult = "RESULT";

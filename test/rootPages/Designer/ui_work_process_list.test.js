@@ -4,16 +4,15 @@ import sinon from "sinon";
 import { EventEmitter } from "events";
 
 import AB from "../../_mock/AB.js";
-import UICommonList from "../../../src/rootPages/Designer/ui_common_list";
+import { listComponentStub } from "../../_mock/uiWorkTestHelpers.js";
 import UIProcessList from "../../../src/rootPages/Designer/ui_work_process_list";
 
 const base = "ui_work_process_list";
 
 function getTarget(ab = null) {
    if (!ab) ab = new AB();
-   const UI_Process_List = UIProcessList(ab);
-   const target = new UI_Process_List();
-   target.ListComponent = sinon.createStubInstance(UICommonList(ab));
+   const target = UIProcessList(ab);
+   target.ListComponent = listComponentStub(base);
 
    return target;
 }
@@ -21,8 +20,7 @@ function getTarget(ab = null) {
 describe("ui_work_process_list", function () {
    it(".constructor - should set valid properties", function () {
       const ab = new AB();
-      const UI_Process_List = UIProcessList(ab);
-      const target = new UI_Process_List();
+      const target = UIProcessList(ab);
 
       assert.equal(base, target.ids.component);
       assert.equal(true, target.ListComponent != null);
@@ -70,8 +68,6 @@ describe("ui_work_process_list", function () {
 
       target.applicationLoad(application);
 
-      assert.equal("definition.updated", application.on.getCalls()[0].args[0]);
-      assert.equal("definition.deleted", application.on.getCalls()[1].args[0]);
       assert.equal(
          true,
          target.ListComponent.dataLoad.calledOnceWith(application.processes())

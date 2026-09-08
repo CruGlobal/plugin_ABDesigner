@@ -195,10 +195,11 @@ export default function (AB) {
          if (view.id != this.CurrentViewID) {
             super.viewLoad(view);
 
-            let _editor = this._editorsByType[view.key];
+            let _editor = PropertyManager.views((V) => V.key == view.key)[0];
 
             if (_editor) {
                let newPanel = new _editor();
+               newPanel.AB = this.AB;
                newPanel.applicationLoad(this.CurrentApplication);
 
                let ui = [newPanel.ui()];
@@ -211,8 +212,12 @@ export default function (AB) {
                this.currentPanel = newPanel;
                // newPanel.show();
             }
+         } else if (this.currentPanel) {
+            // Same view re-selected: re-populate so properties stay in sync
+            this.currentPanel.populate(view);
          }
       }
+
 
       ready() {
          const $component = $$(this.ids.component);

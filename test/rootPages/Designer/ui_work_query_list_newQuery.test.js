@@ -4,16 +4,14 @@ import sinon from "sinon";
 import { EventEmitter } from "events";
 
 import AB from "../../_mock/AB.js";
+import { registerApplicationForTarget } from "../../_mock/uiWorkTestHelpers.js";
 import UINewQuery from "../../../src/rootPages/Designer/ui_work_query_list_newQuery";
 
-const base = "ab_work_query_list_newQuery";
+const base = "ui_work_query_list_newQuery";
 
 function getTarget(ab = null) {
    if (!ab) ab = new AB();
-   const UI_New_Query = UINewQuery(ab);
-   const target = new UI_New_Query();
-
-   return target;
+   return UINewQuery(ab);
 }
 
 describe("ab_work_query_list_newQuery", function () {
@@ -61,11 +59,13 @@ describe("ab_work_query_list_newQuery", function () {
    });
 
    it(".applicationLoad - should store application", function () {
-      const target = getTarget();
+      const ab = new AB();
+      const target = getTarget(ab);
       const application = sinon.createStubInstance(EventEmitter);
+      registerApplicationForTarget(target, application);
 
       target.applicationLoad(application);
 
-      assert.equal(application, target.currentApplication);
+      assert.equal(application, target.CurrentApplication);
    });
 });

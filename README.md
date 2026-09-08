@@ -1,6 +1,16 @@
-[![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/CruGlobal/plugin_ABDesigner/pr-merge-release.yml?logo=github&label=Build%20%26%20Test)](https://github.com/CruGlobal/plugin_ABDesigner/actions/workflows/pr-merge-release.yml)
-[![GitHub tag (with filter)](https://img.shields.io/github/v/tag/CruGlobal/plugin_ABDesigner?logo=github&label=Latest%20Version)
-](https://github.com/CruGlobal/plugin_ABDesigner/releases)
+<p align="center">
+  <a href="https://github.com/CruGlobal/plugin_ABDesigner/actions/workflows/merging-rules.yml">
+     <img src="https://img.shields.io/github/actions/workflow/status/CruGlobal/plugin_ABDesigner/merging-rules.yml?branch=master&logo=github&label=Tests">
+  </a>
+  <a href="https://github.com/CruGlobal/plugin_ABDesigner/actions/workflows/pr-merge-release.yml">
+    <img src="https://img.shields.io/github/actions/workflow/status/CruGlobal/plugin_ABDesigner/pr-merge-release.yml?logo=github&
+label=Build%20%26%20Test">
+  </a>
+  <a href="https://github.com/CruGlobal/plugin_ABDesigner/releases">
+    <img src="https://img.shields.io/github/v/tag/CruGlobal/plugin_ABDesigner?logo=github&label=Latest%20Version">
+  </a>
+</p>
+
 
 # AppBuilder Designer
 A plugin for the AppBuilder platform that enables creating AB resources.

@@ -2,19 +2,13 @@
 // A properties side import for an ABView.
 //
 
-import FNAbviewdetailProperties from "../view_detail/FNAbviewdetail.js";
+import FNAbviewdetailProperties from "../web_view_detail/FNAbviewdetail.js";
 
-export default function FNAbviewdataviewProperties({
-   AB,
-   FABViewContainer,
-   FABViewPropertyLinkPage,
-}) {
+export default function FNAbviewdataviewProperties(API) {
+   const { AB, FABViewPropertyLinkPage } = API;
    const base = "properties_abview_dataview";
 
-   const ABViewDetailProperties = FNAbviewdetailProperties({
-      AB,
-      FABViewContainer,
-   });
+   const [ABViewDetailProperties] = FNAbviewdetailProperties(API);
 
    const LinkPageHelper = FABViewPropertyLinkPage(AB, base);
    const uiConfig = AB.Config.uiSettings();

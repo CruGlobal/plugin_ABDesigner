@@ -4,21 +4,20 @@ import sinon from "sinon";
 import { EventEmitter } from "events";
 
 import AB from "../../_mock/AB.js";
+import { registerApplicationForTarget } from "../../_mock/uiWorkTestHelpers.js";
 import UINewProcess from "../../../src/rootPages/Designer/ui_work_process_list_newProcess";
 
-const base = "ab_work_process_list_newProcess";
+const base = "ui_work_process_list_newProcess";
 
 function getTarget(ab = null) {
    if (!ab) ab = new AB();
-   const UI_New_Process = UINewProcess(ab);
-   const target = new UI_New_Process();
-
-   return target;
+   return UINewProcess(ab);
 }
 
 function getMockApplication() {
    const application = sinon.createStubInstance(EventEmitter);
    application.processCreate = () => {};
+   application.processInsert = () => Promise.resolve();
    return application;
 }
 
@@ -61,8 +60,10 @@ describe("ui_work_process_list_newProcess", function () {
    });
 
    it(".applicationLoad - should store application", function () {
-      const target = getTarget();
-      const application = sinon.createStubInstance(EventEmitter);
+      const ab = new AB();
+      const target = getTarget(ab);
+      const application = getMockApplication();
+      registerApplicationForTarget(target, application);
 
       target.applicationLoad(application);
 
@@ -85,13 +86,17 @@ describe("ui_work_process_list_newProcess", function () {
    });
 
    it(".save - should call .processCreate when .CurrentApplication has value", async function () {
-      const target = getTarget();
-      target.CurrentApplication = getMockApplication();
+      const ab = new AB();
+      const target = getTarget(ab);
+      const application = getMockApplication();
+      registerApplicationForTarget(target, application);
+      target.applicationLoad(application);
 
-      const newProcess = {};
-      const spyProcessCreate = sinon
-         .stub(target.CurrentApplication, "processCreate")
-         .callsFake(() => newProcess);
+      const newProcess = { save: sinon.stub().resolves() };
+      const spyProcessNew = sinon.stub(target.AB, "processNew").resolves(newProcess);
+      const spyProcessInsert = sinon
+         .stub(application, "processInsert")
+         .resolves();
       const spyBusy = sinon.spy(target, "busy");
       const spyEmit = sinon.spy(target, "emit");
       const spyClear = sinon.stub(target, "clear");
@@ -103,7 +108,8 @@ describe("ui_work_process_list_newProcess", function () {
 
       assert.equal(true, result);
       assert.equal(true, spyBusy.calledOnce);
-      assert.equal(true, spyProcessCreate.calledOnceWith(expectedValues));
+      assert.equal(true, spyProcessNew.calledOnceWith(expectedValues));
+      assert.equal(true, spyProcessInsert.calledOnceWith(newProcess));
       assert.equal(true, spyEmit.calledOnceWith("save", newProcess));
       assert.equal(true, spyClear.calledOnce);
       assert.equal(true, spyHide.calledOnce);

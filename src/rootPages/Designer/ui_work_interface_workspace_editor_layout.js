@@ -287,7 +287,8 @@ export default function (AB) {
          }
          if (idDashboard) {
             const $dashboard = $$(idDashboard);
-            if ($dashboard) $dashboard.clearAll();
+            if ($dashboard && typeof $dashboard.clearAll === "function")
+               $dashboard.clearAll();
          }
 
          // add the editorUI if it is not already added

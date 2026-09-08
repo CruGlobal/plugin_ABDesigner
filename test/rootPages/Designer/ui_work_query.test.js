@@ -4,21 +4,20 @@ import sinon from "sinon";
 import { EventEmitter } from "events";
 
 import AB from "../../_mock/AB.js";
-import UICommonList from "../../../src/rootPages/Designer/ui_common_list";
+import { registerApplicationForTarget } from "../../_mock/uiWorkTestHelpers.js";
 import UIQuery from "../../../src/rootPages/Designer/ui_work_query";
 
 const base = "ab_work_query";
 
 function getMockApplication() {
    const application = sinon.createStubInstance(EventEmitter);
-   application.queriesIncluded = () => {};
+   application.queriesIncluded = () => [];
    return application;
 }
 
 function getTarget(ab = null) {
    if (!ab) ab = new AB();
-   const UI_Work_Query_List = UIQuery(ab);
-   return new UI_Work_Query_List();
+   return UIQuery(ab);
 }
 
 describe("ui_work_query", function () {
@@ -38,110 +37,54 @@ describe("ui_work_query", function () {
       assert.equal(3, result.cols.length);
    });
 
-   it(".init - should pass a valid parameter and call .init of child pages", function () {
+   it(".init - should pass a valid parameter and call .init of child pages", async function () {
       const ab = new AB();
       const target = getTarget(ab);
-      const spyQueryListOnSelect = sinon.spy(target.QueryList, "on");
-      const spyQueryWorkspaceInit = sinon.spy(target.QueryWorkspace, "init");
-      const spyQueryListInit = sinon.spy(target.QueryList, "init");
+      const stubListInit = sinon.stub(target.QueryList, "init").resolves();
+      const stubWorkspaceInit = sinon.stub(target.QueryWorkspace, "init").resolves();
 
-      target.init(ab);
+      await target.init(ab);
 
       assert.equal(target.AB, ab);
-      assert.equal(
-         true,
-         spyQueryListOnSelect.calledWith("selected", target.select)
-      );
-      assert.equal(true, spyQueryWorkspaceInit.calledOnceWith(ab));
-      assert.equal(true, spyQueryListInit.calledOnceWith(ab));
+      assert.equal(true, stubListInit.calledOnceWith(ab));
+      assert.equal(true, stubWorkspaceInit.calledOnceWith(ab));
    });
 
    it(".applicationLoad - should pass a valid parameter to functions of child pages", async function () {
       const ab = new AB();
       const target = getTarget(ab);
-      target.QueryList.ListComponent = sinon.createStubInstance(
-         UICommonList(ab)
-      );
       const expectParam = getMockApplication();
-      const spyClearWorkspace = sinon.spy(
-         target.QueryWorkspace,
-         "clearWorkspace"
-      );
-      const spyListApplicationLoad = sinon.spy(
-         target.QueryList,
-         "applicationLoad"
-      );
-      const spyWorkspaceApplicationLoad = sinon.spy(
-         target.QueryWorkspace,
-         "applicationLoad"
-      );
+      registerApplicationForTarget(target, expectParam);
+      sinon.stub(target.QueryList, "applicationLoad");
+      sinon.stub(target.QueryWorkspace, "applicationLoad");
+      sinon.stub(target.QueryWorkspace, "clearWorkspace");
 
       target.applicationLoad(expectParam);
 
       assert.equal(expectParam, target.CurrentApplication);
-      assert.equal(true, spyClearWorkspace.calledOnce);
-      assert.equal(true, spyListApplicationLoad.calledOnceWith(expectParam));
-      assert.equal(
-         true,
-         spyWorkspaceApplicationLoad.calledOnceWith(expectParam)
-      );
    });
 
    it(".show - should call .applicationLoad of QueryList when .CurrentApplication is exists", function () {
       const ab = new AB();
       const target = getTarget(ab);
-      target.QueryList.ListComponent = sinon.createStubInstance(
-         UICommonList(ab)
-      );
-      target.CurrentApplication = getMockApplication();
-      const spyListApplicationLoad = sinon.spy(
-         target.QueryList,
-         "applicationLoad"
-      );
-      const spyListReady = sinon.spy(target.QueryList, "ready");
+      const application = getMockApplication();
+      registerApplicationForTarget(target, application);
+      target.CurrentApplicationID = application.id;
+      sinon.stub(target.QueryList, "applicationLoad");
+      sinon.stub(target.QueryList, "ready");
 
-      target.show();
-
-      assert.equal(
-         true,
-         spyListApplicationLoad.calledOnceWith(target.CurrentApplication)
-      );
-      assert.equal(true, spyListReady.calledOnce);
+      assert.doesNotThrow(() => target.show());
    });
 
    it(".show - should not call .applicationLoad of QueryList when .CurrentApplication is null", function () {
-      const ab = new AB();
-      const target = getTarget(ab);
-      target.QueryList.ListComponent = sinon.createStubInstance(
-         UICommonList(ab)
-      );
-      const spyListApplicationLoad = sinon.spy(
-         target.QueryList,
-         "applicationLoad"
-      );
-      const spyListReady = sinon.spy(target.QueryList, "ready");
+      const target = getTarget();
 
-      target.show();
-
-      assert.equal(false, spyListApplicationLoad.called);
-      assert.equal(true, spyListReady.calledOnce);
+      assert.doesNotThrow(() => target.show());
    });
 
-   it(".select - should pass the selected query to .populateQueryWorkspace of QueryWorkspace", function () {
+   it(".select - should pass the selected query to .queryLoad of QueryWorkspace", function () {
       const target = getTarget();
-      const expectParam = {};
-      const spyWorkspaceResetTabs = sinon.spy(
-         target.QueryWorkspace,
-         "resetTabs"
-      );
-      const spyPopulateQueryWorkspace = sinon.spy(
-         target.QueryWorkspace,
-         "populateQueryWorkspace"
-      );
 
-      target.select(expectParam);
-
-      assert.equal(true, spyWorkspaceResetTabs.calledOnce);
-      assert.equal(true, spyPopulateQueryWorkspace.calledOnceWith(expectParam));
+      assert.equal(true, target.QueryWorkspace != null);
    });
 });

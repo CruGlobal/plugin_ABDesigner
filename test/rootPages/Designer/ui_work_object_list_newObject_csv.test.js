@@ -10,7 +10,7 @@ const getStaticIds = () => {
 
    return {
       base: base,
-      form: `${base}_csvForm`,
+      form: `${base}_form`,
       uploadFileList: `${base}_uploadFileList`,
       separatedBy: `${base}_separatedBy`,
       headerOnFirstLine: `${base}_headerOnFirstLine`,

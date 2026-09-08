@@ -25,10 +25,12 @@ import LocalPlugins from "./src/plugins/index.js";
 import FABViewPropertyLinkPage from "./src/rootPages/Designer/properties/views/viewProperties/ABViewPropertyLinkPage";
 import FABViewPropertyFilterData from "./src/rootPages/Designer/properties/views/viewProperties/ABViewPropertyFilterData";
 import FABViewContainer from "./src/rootPages/Designer/properties/views/ABViewContainer";
+import FABViewContainerEditor from "./src/rootPages/Designer/editors/views/ABViewContainer";
 import FABViewRuleListFormSubmitRules from "./src/rootPages/Designer/properties/rules/ABViewRuleListFormSubmitRules";
 import FTabPopup from "./src/rootPages/Designer/interface_common/ui_tab_form_popup";
 const ABDesignerResources = {
    FABViewContainer,
+   FABViewContainerEditor,
    FABViewPropertyLinkPage,
    FABViewPropertyFilterData,
    FABViewRuleListFormSubmitRules,

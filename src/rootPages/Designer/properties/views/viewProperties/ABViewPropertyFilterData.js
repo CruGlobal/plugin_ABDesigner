@@ -371,7 +371,7 @@ export default function (AB, idBase) {
             $$(ids.filterOptionRadio).setValue(option);
             $$(ids.filterUser).setValue(
                settings.userFilterPosition ||
-                  ABViewPropertyFilterData.default.userFilterPosition
+               ABViewPropertyFilterData.default.userFilterPosition
             );
             $$(ids.globalToolbar).setValue(
                typeof settings.isGlobalToolbar != "undefined"
@@ -381,7 +381,7 @@ export default function (AB, idBase) {
 
             $$(ids.filterGlobal).setValue(
                settings.globalFilterPosition ||
-                  ABViewPropertyFilterData.default.globalFilterPosition
+               ABViewPropertyFilterData.default.globalFilterPosition
             );
 
             // clear any existing Rules:

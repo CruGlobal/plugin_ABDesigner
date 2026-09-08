@@ -71,44 +71,42 @@ export default function (AB) {
       // All the ABViewXXX Property Interfaces Available.
       [
          // require("./views/ABViewCarousel"),
-         require("./views/ABViewChart"),
-         require("./views/ABViewChartArea"),
-         require("./views/ABViewChartBar"),
-         require("./views/ABViewChartLine"),
-         require("./views/ABViewChartPie"),
+         // require("./views/ABViewChart"),
+         // require("./views/ABViewChartArea"),
+         // require("./views/ABViewChartBar"),
+         // require("./views/ABViewChartLine"),
+         // require("./views/ABViewChartPie"),
          // require("./views/ABViewComment"),
          require("./views/ABViewConditionalContainer"),
-         // require("./views/ABViewContainer"),
-         require("./views/ABViewCSVExporter"),
-         require("./views/ABViewCSVImporter"),
+         require("./views/ABViewContainer"),
          require("./views/ABViewDataFilter"),
          // require("./views/ABViewDataSelect"),
          // require("./views/ABViewDataview"),
          // require("./views/ABViewDetail"),
-         require("./views/ABViewDetailCheckbox"),
-         require("./views/ABViewDetailCustom"),
-         require("./views/ABViewDetailImage"),
-         require("./views/ABViewDetailItem"),
-         require("./views/ABViewDetailText"),
-         require("./views/ABViewDetailTree"),
-         require("./views/ABViewDocxBuilder"),
-         require("./views/ABViewForm"),
-         require("./views/ABViewFormButton"),
-         require("./views/ABViewFormCheckbox"),
-         require("./views/ABViewFormConnect"),
-         require("./views/ABViewFormCustom"),
-         require("./views/ABViewFormDatepicker"),
-         require("./views/ABViewFormJson"),
-         require("./views/ABViewFormNumber"),
-         require("./views/ABViewFormSelectMultiple"),
-         require("./views/ABViewFormSelectSingle"),
-         require("./views/ABViewFormTextbox"),
-         require("./views/ABViewFormTree"),
-         require("./views/ABViewFormUrl"),
-         require("./views/ABViewGantt"),
-         require("./views/ABViewGrid"),
+         // require("./views/ABViewDetailCheckbox"),
+         // require("./views/ABViewDetailCustom"),
+         // require("./views/ABViewDetailImage"),
+         // require("./views/ABViewDetailItem"),
+         // require("./views/ABViewDetailText"),
+         // require("./views/ABViewDetailTree"),
+         // require("./views/ABViewDocxBuilder"),
+         // require("./views/ABViewForm"),
+         // require("./views/ABViewFormButton"),
+         // require("./views/ABViewFormCheckbox"),
+         // require("./views/ABViewFormConnect"),
+         // require("./views/ABViewFormCustom"),
+         // require("./views/ABViewFormDatepicker"),
+         // require("./views/ABViewFormJson"),
+         // require("./views/ABViewFormNumber"),
+         // require("./views/ABViewFormSelectMultiple"),
+         // require("./views/ABViewFormSelectSingle"),
+         // require("./views/ABViewFormTextbox"),
+         // require("./views/ABViewFormTree"),
+         // require("./views/ABViewFormUrl"),
+         // require("./views/ABViewGantt"),
+         // require("./views/ABViewGrid"),
          // require("./views/ABViewImage"),
-         require("./views/ABViewKanban"),
+         // require("./views/ABViewKanban"),
          // require("./views/ABViewLabel"),
          // require("./views/ABViewLayout"),
          // require("./views/ABViewList"),
@@ -178,11 +176,23 @@ export default function (AB) {
          },
 
          processElements: function (f = () => true) {
-            return Plugins.concat(Processes).filter(f);
+            const dynamicPlugins = [];
+            if (AB.ClassManager && AB.ClassManager.viewPropertiesAll) {
+               AB.ClassManager.viewPropertiesAll().forEach((ViewPropertyClass) => {
+                  dynamicPlugins.push(ViewPropertyClass);
+               });
+            }
+            return dynamicPlugins.concat(Processes).filter(f);
          },
 
          views: function (v = () => true) {
-            return Plugins.concat(Views).filter(v);
+            const dynamicPlugins = [];
+            if (AB.ClassManager && AB.ClassManager.viewPropertiesAll) {
+               AB.ClassManager.viewPropertiesAll().forEach((ViewPropertyClass) => {
+                  dynamicPlugins.push(ViewPropertyClass);
+               });
+            }
+            return dynamicPlugins.concat(Views).filter(v);
          },
 
          mobileViews: function (v = () => true) {
