@@ -24,17 +24,31 @@ import LocalPlugins from "./src/plugins/index.js";
 // build our plugin resources
 import FABViewPropertyLinkPage from "./src/rootPages/Designer/properties/views/viewProperties/ABViewPropertyLinkPage";
 import FABViewPropertyFilterData from "./src/rootPages/Designer/properties/views/viewProperties/ABViewPropertyFilterData";
+import FABViewPropertyAddPage from "./src/rootPages/Designer/properties/views/viewProperties/ABViewPropertyAddPage";
+import FABViewPropertyEditPage from "./src/rootPages/Designer/properties/views/viewProperties/ABViewPropertyEditPage";
 import FABViewContainer from "./src/rootPages/Designer/properties/views/ABViewContainer";
 import FABViewContainerEditor from "./src/rootPages/Designer/editors/views/ABViewContainer";
 import FABViewRuleListFormSubmitRules from "./src/rootPages/Designer/properties/rules/ABViewRuleListFormSubmitRules";
+import FABViewRuleListFormRecordRules from "./src/rootPages/Designer/properties/rules/ABViewRuleListFormRecordRules";
 import FTabPopup from "./src/rootPages/Designer/interface_common/ui_tab_form_popup";
+import FUIClass from "./src/rootPages/Designer/ui_class";
+import FPopupNewDataField from "./src/rootPages/Designer/ui_work_object_workspace_popupNewDataField";
+import FPopupSortFields from "./src/rootPages/Designer/ui_work_object_workspace_popupSortFields";
+import FCommonKeyValue from "./src/rootPages/Designer/ui_common_key_value";
 const ABDesignerResources = {
    FABViewContainer,
    FABViewContainerEditor,
    FABViewPropertyLinkPage,
    FABViewPropertyFilterData,
+   FABViewPropertyAddPage,
+   FABViewPropertyEditPage,
    FABViewRuleListFormSubmitRules,
+   FABViewRuleListFormRecordRules,
    FTabPopup,
+   FUIClass,
+   FPopupNewDataField,
+   FPopupSortFields,
+   FCommonKeyValue,
 };
 
 // pull in our css we defined for our plugin
