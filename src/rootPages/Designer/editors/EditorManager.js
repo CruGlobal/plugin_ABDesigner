@@ -19,7 +19,7 @@ export default function (AB) {
       // require("./views/ABViewChartLine"),
       // require("./views/ABViewChartPie"),
       // require("./views/ABViewComment"),
-      require("./views/ABViewConditionalContainer"),
+      // require("./views/ABViewConditionalContainer"),
       require("./views/ABViewContainer"),
       // require("./views/ABViewDataSelect"),
       // require("./views/ABViewDataview"),
@@ -31,12 +31,13 @@ export default function (AB) {
       // require("./views/ABViewGrid"),
       // require("./views/ABViewLabel"),
       // require("./views/ABViewLayout"),
-      require("./views/ABViewMenu"),
+      // require("./views/ABViewMenu"),
       require("./views/ABViewPage"),
       // require("./views/ABViewPDFImporter"),
       // require("./views/ABViewPivot"),
       require("./views/ABViewTab"),
       // require("./views/ABViewText"),
+      // require("./views/ABViewDataFilter"),
    ].forEach((E) => {
       const Klass = E.default(AB);
 
