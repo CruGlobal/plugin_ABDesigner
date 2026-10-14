@@ -1,12 +1,12 @@
 // FNAbviewpdfimporter Properties
 // A properties side import for an ABView.
 //
-import FABViewRuleListFormSubmitRules from "../../rootPages/Designer/properties/rules/ABViewRuleListFormSubmitRules";
+// import FABViewRuleListFormSubmitRules from "../../rootPages/Designer/properties/rules/ABViewRuleListFormSubmitRules";
 
 export default function FNAbviewpdfimporterProperties({
    AB,
    ABViewPropertiesPlugin,
-   // ABUIPlugin,
+   FABViewRuleListFormSubmitRules,
 }) {
    const BASE_ID = "properties_abview_pdfImporter";
 
@@ -15,7 +15,7 @@ export default function FNAbviewpdfimporterProperties({
 
    const PopupSubmitRule = FABViewRuleListFormSubmitRules(
       AB,
-      `${BASE_ID}_popupSubmitRule`
+      `${BASE_ID}_popupSubmitRule`,
    );
 
    return class ABAbviewpdfimporterProperties extends ABViewPropertiesPlugin {
@@ -145,7 +145,7 @@ export default function FNAbviewpdfimporterProperties({
          const dcOptions = view.application
             .datacollectionsIncluded()
             .filter(
-               (d) => d.sourceType == "object" && !d?.datasource?.isReadOnly
+               (d) => d.sourceType == "object" && !d?.datasource?.isReadOnly,
             )
             .map((d) => {
                return {
@@ -172,7 +172,7 @@ export default function FNAbviewpdfimporterProperties({
          const $field = $$(this.ids.field);
          const fieldID = view.settings.fieldID;
          const obj = this.AB.datacollections(
-            (dc) => dc.id == $dc.getValue()
+            (dc) => dc.id == $dc.getValue(),
          )[0];
          const fieldOptions =
             obj?.datasource
@@ -197,7 +197,7 @@ export default function FNAbviewpdfimporterProperties({
 
          $$(ids.buttonSubmitRules).define(
             "badge",
-            view?.settings?.submitRules?.length || null
+            view?.settings?.submitRules?.length || null,
          );
          $$(ids.buttonSubmitRules).refresh();
       }

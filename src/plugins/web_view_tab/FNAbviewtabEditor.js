@@ -4,9 +4,13 @@
 // The Editor allows a widget to be moved and placed on the canvas.
 //
 
-import FTabPopup from "../../rootPages/Designer/interface_common/ui_tab_form_popup";
+// import FTabPopup from "../../rootPages/Designer/interface_common/ui_tab_form_popup";
 
-export default function FNAbviewtabEditor({ AB, ABViewEditorPlugin }) {
+export default function FNAbviewtabEditor({
+   AB,
+   ABViewEditorPlugin,
+   FTabPopup,
+}) {
    const BASE_ID = "interface_editor_viewtab";
 
    const L = AB.Label();
@@ -63,7 +67,7 @@ export default function FNAbviewtabEditor({ AB, ABViewEditorPlugin }) {
                      const tabID = $$(ids.component).getValue();
                      const tab = baseView.views((view) => view.id === tabID)[0];
                      const currIndex = baseView._views.findIndex(
-                        (view) => view.id === tabID
+                        (view) => view.id === tabID,
                      );
 
                      // Rename
@@ -129,7 +133,7 @@ export default function FNAbviewtabEditor({ AB, ABViewEditorPlugin }) {
                   const tabID = id.replace("_menu", "");
                   const tab = baseView.views((view) => view.id == tabID)[0];
                   const currIndex = baseView._views.findIndex(
-                     (view) => view.id === tabID
+                     (view) => view.id === tabID,
                   );
 
                   component.onShow(tabID);
