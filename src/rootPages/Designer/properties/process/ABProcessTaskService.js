@@ -75,6 +75,13 @@ export default function (AB) {
                      },
                      {
                         view: "button",
+                        label: L("Accounting: Email Team Leader Reports"),
+                        click: () => {
+                           this.switchTo("TLReportsEmail");
+                        },
+                     },
+                     {
+                        view: "button",
                         label: L("Api Request"),
                         click: () => this.switchTo("Api"),
                      },
