@@ -5,10 +5,8 @@ import FNAbviewDetailItemProperties from "./properties/FNAbviewDetailItem.js";
 import FNAbviewDetailTextProperties from "./properties/FNAbviewDetailText.js";
 import FNAbviewDetailTreeProperties from "./properties/FNAbviewDetailTree.js";
 
-import FABViewContainer from "../../rootPages/Designer/properties/views/ABViewContainer";
-
 export default function FNAbviewdetailProperties(API) {
-   const { AB } = API;
+   const { AB, FABViewContainer } = API;
    const ABViewContainer = FABViewContainer(AB);
    const uiConfig = AB.Config.uiSettings();
    const L = ABViewContainer.L();

@@ -63,9 +63,9 @@ export default function (AB) {
          childSettings = childSettings || {};
          childSettings.labels = childSettings.labels || {};
          childSettings.labels.header =
-            childSettings.labels.header || L("Rule List");
+            childSettings.labels.header || "Rule List";
          childSettings.labels.headerDefault =
-            childSettings.labels.headerDefault || L("Rule List");
+            childSettings.labels.headerDefault || "Rule List";
          this.childSettings = childSettings;
       }
 
@@ -100,7 +100,7 @@ export default function (AB) {
                         this.addRule();
                         $$(ids.rulesScrollview).scrollTo(
                            0,
-                           $$(ids.rules).$height
+                           $$(ids.rules).$height,
                         );
                      },
                   },
@@ -172,6 +172,9 @@ export default function (AB) {
 
       init(AB) {
          this.AB = AB;
+         Object.keys(this.childSettings.labels).forEach((key) => {
+            this.childSettings.labels[key] = L(this.childSettings.labels[key]);
+         });
          webix.ui(this.ui());
          return Promise.resolve();
       }
@@ -376,7 +379,7 @@ export default function (AB) {
 
       getRule() {
          console.error(
-            "!!! ABViewRuleList.getRule() should be overridded by a child object."
+            "!!! ABViewRuleList.getRule() should be overridded by a child object.",
          );
          return null;
       }

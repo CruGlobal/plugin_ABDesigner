@@ -21,6 +21,36 @@ import ApplicationFactory from "./src/application.js";
 import Labels from "./src/labels/labels.js";
 import LocalPlugins from "./src/plugins/index.js";
 
+// build our plugin resources
+import FABViewPropertyLinkPage from "./src/rootPages/Designer/properties/views/viewProperties/ABViewPropertyLinkPage";
+import FABViewPropertyFilterData from "./src/rootPages/Designer/properties/views/viewProperties/ABViewPropertyFilterData";
+import FABViewPropertyAddPage from "./src/rootPages/Designer/properties/views/viewProperties/ABViewPropertyAddPage";
+import FABViewPropertyEditPage from "./src/rootPages/Designer/properties/views/viewProperties/ABViewPropertyEditPage";
+import FABViewContainer from "./src/rootPages/Designer/properties/views/ABViewContainer";
+import FABViewContainerEditor from "./src/rootPages/Designer/editors/views/ABViewContainer";
+import FABViewRuleListFormSubmitRules from "./src/rootPages/Designer/properties/rules/ABViewRuleListFormSubmitRules";
+import FABViewRuleListFormRecordRules from "./src/rootPages/Designer/properties/rules/ABViewRuleListFormRecordRules";
+import FTabPopup from "./src/rootPages/Designer/interface_common/ui_tab_form_popup";
+import FUIClass from "./src/rootPages/Designer/ui_class";
+import FPopupNewDataField from "./src/rootPages/Designer/ui_work_object_workspace_popupNewDataField";
+import FPopupSortFields from "./src/rootPages/Designer/ui_work_object_workspace_popupSortFields";
+import FCommonKeyValue from "./src/rootPages/Designer/ui_common_key_value";
+const ABDesignerResources = {
+   FABViewContainer,
+   FABViewContainerEditor,
+   FABViewPropertyLinkPage,
+   FABViewPropertyFilterData,
+   FABViewPropertyAddPage,
+   FABViewPropertyEditPage,
+   FABViewRuleListFormSubmitRules,
+   FABViewRuleListFormRecordRules,
+   FTabPopup,
+   FUIClass,
+   FPopupNewDataField,
+   FPopupSortFields,
+   FCommonKeyValue,
+};
+
 // pull in our css we defined for our plugin
 // eslint-disable-next-line no-unused-vars
 import designerCSS from "./styles/Designer.css";
@@ -42,7 +72,7 @@ window.__AB_Plugins.push({
       AB.cssLoadAll(this.stylesheets());
 
       // load any included plugins
-      LocalPlugins.load(AB);
+      LocalPlugins.load(AB, this.pluginResources());
 
       // At this point, the Plugin should already have loaded all it's definitions
       // into the AB Factory
@@ -74,6 +104,15 @@ window.__AB_Plugins.push({
     */
    labels: function (lang) {
       return Labels[lang] || Labels.en;
+   },
+
+   /**
+    * @function pluginResources
+    * @description Returns the resources for the ABDesigner plugin.
+    * @returns {Object} The resources object.
+    */
+   pluginResources: function () {
+      return ABDesignerResources;
    },
 
    /**
